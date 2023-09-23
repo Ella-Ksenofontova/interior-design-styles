@@ -1,0 +1,276 @@
+/* General */
+
+body {
+    display: grid;
+    grid-template-rows: max-content auto auto;
+    margin: 0;
+
+    font-family: Roboto;
+    font-weight: 500;
+
+    background: url("./bg.jpg");
+    background-size: cover;
+}
+
+::selection {
+    background-color: brown;
+    color: white;
+}
+
+/* Header */
+
+header {
+    display: grid;
+    grid-template-columns: auto 200px 10px 30px;
+    column-gap: 15px;
+
+    align-items: center;
+
+    margin: 0 auto;
+    width: calc(80% + 5px);
+
+    padding-top: 20px;
+    padding-left: 15px;
+    padding-bottom: 5px;
+    padding-right: 20px;
+
+    background-color: #E9C590;
+}
+
+header h1 {
+    font-family: Pacifico;
+    color: #FDEDD4
+}
+
+input[type="text"] {
+    align-self: end;
+    height: calc(1rem + 10px);
+
+    border-radius: 10px;
+    border: 1px solid #D0AB73;
+
+    background-color: #F5E1C5;
+    color: #D0AB73;
+}
+
+::placeholder { 
+    color: #D0AB73;
+    opacity: 1; 
+  }
+  
+:-ms-input-placeholder {
+    color: #D0AB73;
+  }
+  
+::-ms-input-placeholder {
+    color:#D0AB73;
+  }
+
+input[type="text"]:focus {
+    border: 3px solid #a68758;  
+    outline: none;
+}
+
+.input-and-tooltip {
+    display: grid;
+    grid-template-columns: 200px 30px;
+    grid-template-rows: 50%;
+    row-gap: 5px;
+    align-self: end;
+
+    height: 70%;
+}
+
+.tooltip {
+    align-self: start;
+    justify-self: center;
+
+    width: 200px;
+
+    background-color: #bf9a64;
+    border-radius: 20px;
+}
+
+#search-icon {
+    align-self: end;
+    margin-bottom: 5px;
+
+    transform: translateX(-25px);
+}
+
+header a#copyright {
+    width: 45px;
+
+    border: 1px solid rgb(169, 102, 35);
+    border-radius: 15px;
+    background-color: #FDEDD4;
+    text-align: center;
+}
+
+#copyright {
+    margin-top: 3px;
+}
+
+/* Main content */
+
+.image-container {
+    margin: 0 auto;
+    padding: 20px; 
+
+    width: 80%;
+    height: 20vw;
+
+    background-image: url("./main_img.png");
+    background-size: cover;
+}
+
+main {
+    margin: 0 auto;
+    width: 80%;
+
+    padding: 20px;
+
+    background-color: #FFEBCC;
+}
+
+p, .related-styles-list {
+    border-radius: 40px;
+    background-color: #c7a065;
+    color: #FDEDD4;
+}
+
+p {
+    width: 60%;
+    max-width: 300px;
+
+    padding: 20px;
+}
+
+p.style-description {
+    margin-top: 5px;
+    padding: 0;
+
+    width: 70%;
+    max-width: max-content;
+
+    background-color: transparent;
+    color: #a58f6d;
+}
+
+a {
+    color: rgb(126, 76, 45);
+}
+
+a:visited {
+    color: #472a1f;
+}
+
+span#info-header, span#related-styles-header, h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* List of styles */
+
+h2, ol, label {
+    color: #D0AB73;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+label {
+    padding-left: 5px;
+}
+
+.checkbox {
+    display: inline-block;
+
+    width: 15px;
+    height: 15px;
+    background-color: #D0AB73;
+    border: 1px solid rgb(169, 102, 35);
+}
+
+input[type="checkbox"]:checked + .checkbox {
+    background-image: url("./task.png");
+    background-size: cover;
+}
+
+h2, form {
+    padding-left: 20px;
+}
+
+ol {
+    margin-left: 30px;
+}
+
+li img {
+    margin-bottom: -5px;
+    margin-top: 5px;
+    padding-left: 5px;
+}
+
+/* Styles pages */
+.home-page-link {
+    display: grid;
+    grid-template-columns: 30px auto;
+    grid-column-gap: 10px;
+
+    align-items: center;
+
+    color: #D0AB73;
+}
+
+.style-image {
+    display: grid;
+    grid-template-columns: 100%;
+    align-items: center;
+
+    margin-top: 20px;
+
+    width: 85%;
+    max-width: 500px;
+    min-width: 400px;
+    height: 45vh;
+    min-height: 300px;
+
+    background-color: #F3DAB3;
+    background-size: cover;
+    border-radius: 50px;
+}
+
+.style-name {
+    width: 67%;
+    margin: auto;
+
+    background-color: #E9C590;
+    border-radius: 30px;
+
+    text-align: center;
+}
+
+.style-name h2 {
+    color: rgb(192, 114, 65);
+}
+
+#description {
+    color: rgb(126, 76, 45);
+    margin-left: 20px;
+}
+
+.related-styles-list {
+    margin-top: 20px;
+    width: 350px;
+    padding: 15px;
+
+    color: #FDEDD4;
+}
+
+.related-styles-list h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #FDEDD4;
+}
