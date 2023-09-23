@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/interior-design-styles/static/js/main.fa9c3b30.js",
+    "main.js": "/interior-design-styles/static/js/main.c75d8d66.js",
     "index.html": "/interior-design-styles/index.html",
-    "main.fa9c3b30.js.map": "/interior-design-styles/static/js/main.fa9c3b30.js.map"
+    "main.c75d8d66.js.map": "/interior-design-styles/static/js/main.c75d8d66.js.map"
   },
   "entrypoints": [
-    "static/js/main.fa9c3b30.js"
+    "static/js/main.c75d8d66.js"
   ]
 }
