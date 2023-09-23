@@ -85,8 +85,7 @@ input[type="text"]:focus {
 }
 
 .tooltip {
-    align-self: start;
-    justify-self: center;
+    position: absolute;
 
     width: 200px;
 
