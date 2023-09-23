@@ -98,7 +98,7 @@ input[type="text"]:focus {
     transform: translateX(-25px);
 }
 
-header a#copyright {
+Link#copyright {
     width: 45px;
 
     border: 1px solid rgb(169, 102, 35);
