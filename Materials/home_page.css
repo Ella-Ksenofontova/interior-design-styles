@@ -46,10 +46,10 @@ header {
 
 @media screen and (min-width: 500px) {
     header{
-        grid-template-columns: auto 200px 10px auto 30px;
+        grid-template-columns: auto 200px 10px 20px 30px;
     }
 
-    #search-mobile {
+    #search-mobile, #search-mobile img  {
         visibility: hidden;
     }
 
