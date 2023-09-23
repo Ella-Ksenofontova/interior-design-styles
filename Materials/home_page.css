@@ -3,6 +3,7 @@
 body {
     display: grid;
     grid-template-rows: max-content auto auto;
+    justify-content: center;
     margin: 0;
 
     font-family: Roboto;
@@ -20,14 +21,16 @@ body {
 /* Header */
 
 header {
+    width: calc(80% + 5px);
+    min-width: 500px;
+
+    margin: 0 auto;
+
     display: grid;
     grid-template-columns: auto 200px 10px 30px;
     column-gap: 15px;
 
     align-items: center;
-
-    margin: 0 auto;
-    width: calc(80% + 5px);
 
     padding-top: 20px;
     padding-left: 15px;
@@ -74,7 +77,7 @@ input[type="text"]:focus {
 .input-and-tooltip {
     display: grid;
     grid-template-columns: 200px 30px;
-    grid-template-rows: 50%;
+    grid-template-rows: 50% 50%;
     row-gap: 5px;
     align-self: end;
 
@@ -98,7 +101,7 @@ input[type="text"]:focus {
     transform: translateX(-25px);
 }
 
-Link#copyright {
+a[href=""] {
     width: 45px;
 
     border: 1px solid rgb(169, 102, 35);
@@ -118,6 +121,7 @@ Link#copyright {
     padding: 20px; 
 
     width: 80%;
+    min-width: 500px;
     height: 20vw;
 
     background-image: url("./main_img.png");
@@ -127,6 +131,7 @@ Link#copyright {
 main {
     margin: 0 auto;
     width: 80%;
+    min-width: 500px;
 
     padding: 20px;
 
