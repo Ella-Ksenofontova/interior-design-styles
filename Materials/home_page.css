@@ -27,7 +27,7 @@ header {
     margin: 0 auto;
 
     display: grid;
-    grid-template-columns: auto 200px 10px 30px;
+    
     column-gap: 15px;
 
     align-items: center;
@@ -38,6 +38,24 @@ header {
     padding-right: 20px;
 
     background-color: #E9C590;
+}
+
+#search-icon, .input-and-tooltip {
+    visibility: hidden;
+}
+
+@media screen and (min-width: 500px) {
+    header{
+        grid-template-columns: auto 200px 10px auto 30px;
+    }
+
+    #search-mobile {
+        visibility: hidden;
+    }
+
+    #search-icon, .input-and-tooltip {
+        visibility: visible;
+    }
 }
 
 header h1 {
