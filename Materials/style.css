@@ -97,7 +97,7 @@ input[type="text"]:focus {
 .input-and-tooltip {
     display: grid;
     grid-template-columns: 200px 30px;
-    grid-template-rows: 90% 10%;
+    grid-template-rows: 100% 10%;
     row-gap: 5px;
 
     align-items: center;
@@ -174,7 +174,7 @@ p.style-description {
     margin-top: 5px;
     padding: 0;
 
-    width: 70%;
+    width: 100%;
     max-width: max-content;
 
     background-color: transparent;
