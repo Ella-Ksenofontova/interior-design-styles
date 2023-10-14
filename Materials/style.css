@@ -301,6 +301,7 @@ li img {
     margin-top: 20px;
 
     width: 85%;
+    min-width: 1px;
     max-width: 500px;
     height: 45vh;
     min-height: 300px;
