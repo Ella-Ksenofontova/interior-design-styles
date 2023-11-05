@@ -54,7 +54,16 @@ header {
 
 #search-mobile {
     width: 30px;
+    height: 30px;
+
+    padding: 10px;
+
     background-color: #FFEBCC;
+    background-image: url("./magnifier.png");
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+
     border-color: transparent;
     border-radius: 40%;
 }
@@ -148,7 +157,12 @@ a[href=""] {
 }
 
 #copyright {
-    margin-top: 3px;
+    height: 45px;
+    width: 45px;
+
+    background-image: url("./copyright.png");
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 dialog {
@@ -282,6 +296,43 @@ li img {
     padding-left: 5px;
 }
 
+.classic, .modern, .ethnic {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+
+    margin-top: 3px;
+    margin-left: 3px;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.classic {
+    background-image: url("./chandelier.png");
+}
+
+.modern {
+    background-image: url("./light-bulb.png");
+}
+
+.ethnic {
+    background-image: url("./ethnic.png");
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+}
+
 /* Styles pages */
 .home-page-link {
     display: grid;
@@ -291,6 +342,15 @@ li img {
     align-items: center;
 
     color: #D0AB73;
+}
+
+.homepage-img {
+    width: 30px;
+    height: 30px;
+
+    background-image: url("./home.png");
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .style-image {
