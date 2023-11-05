@@ -190,7 +190,15 @@ dialog h2 {
 #close-mobile-dialog {
     float: right;
 
+    height: 30px;
+    width: 30px;
+
+    background-image: url("./close.png");
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
     background-color: transparent;
+
     border: 0;
 }
 
