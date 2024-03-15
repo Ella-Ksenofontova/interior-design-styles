@@ -12,7 +12,7 @@ body {
     font-weight: 500;
 
     background: url("https://ella-ksenofontova.github.io/interior-design-styles/Materials/bg.jpg");
-    background-size: cover;
+    background-size: contain;
 }
 
 ::selection {
