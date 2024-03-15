@@ -12,7 +12,7 @@ body {
     font-family: Roboto;
     font-weight: 500;
 
-    background: url("./bg.jpg");
+    background: url("https://ella-ksenofontova.github.io/interior-design-styles/Materials/bg.jpg");
     background-size: cover;
 }
 
@@ -51,7 +51,7 @@ header {
     min-width: 125px;
     min-height: 50px;
 
-    background-image: url("./logo.jpg");
+    background-image: url("https://ella-ksenofontova.github.io/interior-design-styles/Materials/logo.jpg");
     background-size: cover;
 }
 
@@ -70,7 +70,7 @@ header {
     padding: 10px;
 
     background-color: #FFEBCC;
-    background-image: url("./magnifier.png");
+    background-image: url("https://ella-ksenofontova.github.io/interior-design-styles/Materials/magnifier.png");
     background-size: 80%;
     background-repeat: no-repeat;
     background-position: center;
@@ -171,7 +171,7 @@ a[href=""] {
     height: 45px;
     width: 45px;
 
-    background-image: url("./copyright.png");
+    background-image: url("https://ella-ksenofontova.github.io/interior-design-styles/Materials/copyright.png");
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -204,7 +204,7 @@ dialog h2 {
     height: 30px;
     width: 30px;
 
-    background-image: url("./close.png");
+    background-image: url("https://ella-ksenofontova.github.io/interior-design-styles/Materials/close.png");
     background-size: 80%;
     background-repeat: no-repeat;
     background-position: center;
@@ -222,7 +222,7 @@ dialog h2 {
     width: 100%;
     height: 20vw;
 
-    background-image: url("./main_img.png");
+    background-image: url("https://ella-ksenofontova.github.io/interior-design-styles/Materials/main_img.png");
     background-size: cover;
 }
 
@@ -297,7 +297,7 @@ label {
 }
 
 input[type="checkbox"]:checked + .checkbox {
-    background-image: url("./task.png");
+    background-image: url("https://ella-ksenofontova.github.io/interior-design-styles/Materials/task.png");
     background-size: cover;
 }
 
@@ -328,15 +328,15 @@ li img {
 }
 
 .classic {
-    background-image: url("./chandelier.png");
+    background-image: url("https://ella-ksenofontova.github.io/interior-design-styles/Materials/chandelier.png");
 }
 
 .modern {
-    background-image: url("./light-bulb.png");
+    background-image: url("https://ella-ksenofontova.github.io/interior-design-styles/Materials/light-bulb.png");
 }
 
 .ethnic {
-    background-image: url("./ethnic.png");
+    background-image: url("https://ella-ksenofontova.github.io/interior-design-styles/Materials/ethnic.png");
 }
 
 .visually-hidden {
@@ -367,7 +367,7 @@ li img {
     width: 30px;
     height: 30px;
 
-    background-image: url("./home.png");
+    background-image: url("https://ella-ksenofontova.github.io/interior-design-styles/Materials/home.png");
     background-size: contain;
     background-repeat: no-repeat;
 }
