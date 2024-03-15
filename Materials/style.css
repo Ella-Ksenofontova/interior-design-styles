@@ -2,7 +2,6 @@
 
 body {
     width: 100%;
-    min-width: 300px;
     display: grid;
     grid-template-rows: auto auto auto;
     grid-template-columns: max(100vw, 300px);
@@ -24,7 +23,7 @@ body {
 /* Header */
 
 header {
-    width: calc(100% + 5px);
+    width: calc(100vw + 5px);
 
     margin: 0;
 
@@ -58,6 +57,10 @@ header {
 #search-icon, .input-and-tooltip {
     visibility: hidden;
 } 
+
+.input-and-tooltip input {
+    width: 0;
+}
 
 #search-mobile-dialog .input-and-tooltip {
     visibility: visible;
@@ -118,7 +121,7 @@ input[type="text"]:focus {
     outline: none;
 }
 
-.input-and-tooltip, .input-and-tooltip-mobile {
+.input-and-tooltip-mobile {
     display: grid;
     grid-template-columns: 200px 30px;
     row-gap: 5px;
@@ -136,10 +139,6 @@ input[type="text"]:focus {
     text-align: left;
 }
 
-.input-and-tooltip {
-    grid-template-rows: 100% 10%;
-    height: 100%;
-}
 
 .tooltip {
     position: absolute;
@@ -228,7 +227,7 @@ dialog h2 {
 
 main {
     margin: 0;
-    width: 100%;
+    width: 100vw;
 
     padding: 20px;
 
@@ -401,6 +400,7 @@ li img {
 }
 
 .style-name h2 {
+    padding-left: 0;
     color: rgb(192, 114, 65);
 }
 
@@ -411,7 +411,7 @@ li img {
 
 .related-styles-list {
     margin-top: 20px;
-    width: 350px;
+    width: 250px;
     padding: 15px;
 
     color: #FDEDD4;
@@ -426,10 +426,6 @@ li img {
 /*Media queries*/
 
 @media screen and (min-device-width: 500px) {
-    body {
-        margin: 0;
-    }
-
     header{
         width: calc(80vw + 5px);
         min-width: 500px;
@@ -450,6 +446,18 @@ li img {
 
     #search-icon, .input-and-tooltip {
         visibility: visible;
+    }
+
+    .input-and-tooltip {
+        display: grid;
+        grid-template-columns: 200px 30px;
+        row-gap: 5px;
+
+        align-items: center;   
+    }
+
+    .input-and-tooltip input {
+        width: unset;
     }
 
     .image-container, main {
