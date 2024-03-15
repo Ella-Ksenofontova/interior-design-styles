@@ -24,5 +24,11 @@
   <body>
     <noscript>JavaScript не поддерживается</noscript>
     <div id="router"></div>
+    <script>
+      let location = window.location.href;
+      if (location.startsWith("https://ella-ksenofontova.github.io/interior-design-styles")) {
+        document.documentElement.querySelector("base").remove();
+      }
+    </script>
   </body>
 </html>
