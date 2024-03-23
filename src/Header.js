@@ -75,7 +75,8 @@ function InputWithTooltip({mobile=false}) {
                 onInput={handleInput}
                 onFocus={handleFocus}
                 onMouseEnter={handleFocus}/>
-                <img src="./Materials/magnifier.png" height="20" width="20" id={mobile ? "search-icon-mobile-dialog" : "search-icon"} aria-hidden alt=""/>
+                <div className="magnifier-decorative" id={mobile ? "search-icon-mobile-dialog" : "search-icon"}>
+                </div>
                 <div className={mobile ? "tooltip-mobile" : "tooltip"} hidden={!appropriateLinks.length}
                 onMouseLeave={mobile ? event => {
                     if (!event.target.className === "input-and-tooltip") {
