@@ -11,7 +11,7 @@ body {
     font-family: Roboto;
     font-weight: 500;
 
-    background: url("https://ella-ksenofontova.github.io/interior-design-styles/Materials/bg.jpg");
+    background: url("./bg.jpg");
     background-size: contain;
 }
 
@@ -23,7 +23,7 @@ body {
 /* Header */
 
 header {
-    width: calc(100vw + 5px);
+    width: calc(100% + 5px);
 
     margin: 0;
 
@@ -50,7 +50,7 @@ header {
     min-width: 125px;
     min-height: 50px;
 
-    background-image: url("https://ella-ksenofontova.github.io/interior-design-styles/Materials/logo.jpg");
+    background-image: url("./logo.jpg");
     background-size: cover;
 }
 
@@ -73,7 +73,7 @@ header {
     padding: 10px;
 
     background-color: #FFEBCC;
-    background-image: url("https://ella-ksenofontova.github.io/interior-design-styles/Materials/magnifier.png");
+    background-image: url("./magnifier.png");
     background-size: 80%;
     background-repeat: no-repeat;
     background-position: center;
@@ -170,13 +170,18 @@ a[href=""] {
     height: 45px;
     width: 45px;
 
-    background-image: url("https://ella-ksenofontova.github.io/interior-design-styles/Materials/copyright.png");
+    background-image: url("./copyright.png");
     background-size: contain;
     background-repeat: no-repeat;
 }
 
 dialog {
     text-align: center;
+    position: fixed;
+    margin: 0;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
 
     background-color: #a68758;
     border: 1px solid #472a1f;
@@ -197,13 +202,14 @@ dialog h2 {
     color: #F5E1C5;
 }
 
-#close-mobile-dialog {
+.close-mobile-dialog {
     float: right;
+    clear: left;
 
     height: 30px;
     width: 30px;
 
-    background-image: url("https://ella-ksenofontova.github.io/interior-design-styles/Materials/close.png");
+    background-image: url("./close.png");
     background-size: 80%;
     background-repeat: no-repeat;
     background-position: center;
@@ -221,13 +227,13 @@ dialog h2 {
     width: 100%;
     height: 20vw;
 
-    background-image: url("https://ella-ksenofontova.github.io/interior-design-styles/Materials/main_img.png");
+    background-image: url("./main_img.png");
     background-size: cover;
 }
 
 main {
     margin: 0;
-    width: 100vw;
+    width: 100%;
 
     padding: 20px;
 
@@ -251,7 +257,7 @@ p.style-description {
     margin-top: 5px;
     padding: 0;
 
-    width: 100%;
+    width: 90vw;
     max-width: max-content;
 
     background-color: transparent;
@@ -296,7 +302,7 @@ label {
 }
 
 input[type="checkbox"]:checked + .checkbox {
-    background-image: url("https://ella-ksenofontova.github.io/interior-design-styles/Materials/task.png");
+    background-image: url("./task.png");
     background-size: cover;
 }
 
@@ -327,15 +333,15 @@ li img {
 }
 
 .classic {
-    background-image: url("https://ella-ksenofontova.github.io/interior-design-styles/Materials/chandelier.png");
+    background-image: url("./chandelier.png");
 }
 
 .modern {
-    background-image: url("https://ella-ksenofontova.github.io/interior-design-styles/Materials/light-bulb.png");
+    background-image: url("./light-bulb.png");
 }
 
 .ethnic {
-    background-image: url("https://ella-ksenofontova.github.io/interior-design-styles/Materials/ethnic.png");
+    background-image: url("./ethnic.png");
 }
 
 .visually-hidden {
@@ -366,7 +372,7 @@ li img {
     width: 30px;
     height: 30px;
 
-    background-image: url("https://ella-ksenofontova.github.io/interior-design-styles/Materials/home.png");
+    background-image: url("./home.png");
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -407,6 +413,72 @@ li img {
 #description {
     color: rgb(126, 76, 45);
     margin-left: 20px;
+}
+
+mark {
+    background-color: #E9C590;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+}
+
+.describing-image {
+    float: left;
+    border-radius: 10px;
+}
+
+.describing-block {
+    margin: 0;
+    display: grid;
+    grid-template-columns: min-content;
+
+    padding: 5px;
+
+    color: white;
+    text-align: center;
+    font-size: 0.8em;
+    
+    background-color: saddlebrown;
+    border-radius: 10px;
+}
+
+.describing-block.hidden, .describing-block.hidden * {
+    visibility: hidden;
+}
+
+.describing-block-mobile {
+    position: fixed;
+    top: unset;
+    left:0;
+    right: 0;
+    z-index: 0;
+    bottom: 0;
+    margin: 0;
+
+    width: 100%;
+    max-width: 100%;
+
+    transform: none;
+    background-color: #a68758;
+    border: 0;
+    border-radius: 0;
+    text-align: left;
+    color: #F5E1C5;
+    box-sizing: border-box;
+}
+
+.describing-block-mobile .describing-image {
+    margin-right: 10px;
+}
+
+.describing-block-mobile span {
+    display: block;
+    margin-right: 45px;
+}
+
+.describing-block-mobile .close-mobile-dialog {
+    position: absolute;
+    top: 10px;
+    right: 7px;
 }
 
 .related-styles-list {
@@ -472,5 +544,9 @@ li img {
 
     .style-image {
         min-width: 400px;
+    }
+
+    p.style-description {
+        width: 100%;
     }
 }

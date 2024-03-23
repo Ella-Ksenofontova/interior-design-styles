@@ -23,7 +23,7 @@ function InputWithTooltip({mobile=false}) {
     const [appropriateLinks, setAppropriateLinks] = useState([]);
 
     function handleInput(event) {
-        let tooltip = document.querySelector(".tooltip");
+        let tooltip = mobile ? document.querySelector(".tooltip-mobile") : document.querySelector(".tooltip");
         let linkInfos = [];
 
         for (let style of DATA) {
@@ -34,12 +34,17 @@ function InputWithTooltip({mobile=false}) {
         }
 
         if(linkInfos.length > 0) {
-            tooltip.hidden = false;
-            tooltip.style.top = event.target.getBoundingClientRect().bottom + 10 + "px";
-            tooltip.style.left = event.target.getBoundingClientRect().left + "px";
+            if (!mobile) {
+                tooltip.style.top = event.target.getBoundingClientRect().bottom + 10 + "px";
+                tooltip.style.left = event.target.getBoundingClientRect().left + "px";
+            }
 
             let links = linkInfos.map(item => 
-                <li key={item.name}><Link to={`/${item.path}`}>{item.name}</Link></li>);
+                <li key={item.name} onClick={mobile ? () => {
+                    setAppropriateLinks([]);
+                    document.querySelector(".input-and-tooltip-mobile").firstElementChild.value = "";
+                    document.getElementById("search-mobile-dialog").close();
+                } : () => {}}><Link to={`/${item.path}`}>{item.name}</Link></li>);
             setAppropriateLinks(links);
         } else {
             tooltip.hidden = true;
@@ -48,13 +53,15 @@ function InputWithTooltip({mobile=false}) {
     }
 
     function handleFocus(event) {
-        let tooltip = document.querySelector(".tooltip");
+        let tooltip = mobile ? document.querySelector(".tooltip-mobile") : document.querySelector(".tooltip");
 
         for (let style of DATA) {
-            if (style.name.toLowerCase().startsWith(event.target.value.toLowerCase()) && event.target.value.length > 0) {
+            if (style.name.toLowerCase().startsWith(event.target.value.toLowerCase()) && event.target.value.length > 0 && !mobile) {
                 tooltip.hidden = false;
-                tooltip.style.top = event.target.getBoundingClientRect().bottom + 10 + "px";
-                tooltip.style.left = event.target.getBoundingClientRect().left + "px";
+                if (!mobile) {
+                    tooltip.style.top = event.target.getBoundingClientRect().bottom + 10 + "px";
+                    tooltip.style.left = event.target.getBoundingClientRect().left + "px";
+                }
                 break;
             }
         }
@@ -68,10 +75,10 @@ function InputWithTooltip({mobile=false}) {
                 onInput={handleInput}
                 onFocus={handleFocus}
                 onMouseEnter={handleFocus}/>
-                <img src="https://ella-ksenofontova.github.io/interior-design-styles/Materials/magnifier.png" height="20" width="20" id={mobile ? "search-icon-mobile-dialog" : "search-icon"} aria-hidden alt=""/>
-                <div className={mobile ? "tooltip-mobile" : "tooltip"} hidden={!mobile || !appropriateLinks.length}
+                <img src="./Materials/magnifier.png" height="20" width="20" id={mobile ? "search-icon-mobile-dialog" : "search-icon"} aria-hidden alt=""/>
+                <div className={mobile ? "tooltip-mobile" : "tooltip"} hidden={!appropriateLinks.length}
                 onMouseLeave={mobile ? event => {
-                    if (!event.target.className == "input-and-tooltip") {
+                    if (!event.target.className === "input-and-tooltip") {
                         document.querySelector(".tooltip").hidden = true;
                     }
                 } : null}>
@@ -88,7 +95,11 @@ function MobileInputWithTooltip() {
         <dialog id="search-mobile-dialog">
             <div className="dialog-items-container">
                 <h2>Найти стиль</h2>
-                <button id="close-mobile-dialog" onClick={() => document.getElementById("search-mobile-dialog").close()}>
+                <button className="close-mobile-dialog" onClick={() => {
+                    document.getElementById("search-mobile-dialog").close();
+                    document.querySelector(".input-and-tooltip-mobile").firstElementChild.value = ""
+                    document.querySelector(".input-and-tooltip-mobile ul").innerHTML = "";
+                    }}>
                 </button>
                 <InputWithTooltip mobile={true}/>
             </div>
