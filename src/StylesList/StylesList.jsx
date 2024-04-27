@@ -1,6 +1,6 @@
-//TODO: Добавить ссылки на стили
-import DATA from "./styles_data.js"
+import DATA from "../styles_data.js"
 import {Link} from "react-router-dom";
+import {arrayOf, bool} from "prop-types"
 
 export default function StylesList({statesOfCheckboxes}) {
     let [classicStylesAreShown, modernStylesAreShown, ethnicStylesAreShown] = statesOfCheckboxes;
@@ -56,3 +56,7 @@ export default function StylesList({statesOfCheckboxes}) {
         </ol>
     );
 }
+
+StylesList.propTypes = {
+    statesOfCheckboxes: arrayOf(bool)
+};

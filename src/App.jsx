@@ -1,8 +1,8 @@
-import Header from './Header';
-import ControlledStylesList from "./ControlledStylesList";
+import Header from './Header/Header';
+import ControlledStylesList from "./ControlledStylesList/ControlledStylesList";
 import StylePage from "./StylePage/StylePage";
 import CopyrightPage from "./CopyrightPage/CopyrightPage";
-import DATA from "./styles_data";
+import DATA from "./styles_data.js";
 
 import {Routes, Route } from 'react-router-dom';
 

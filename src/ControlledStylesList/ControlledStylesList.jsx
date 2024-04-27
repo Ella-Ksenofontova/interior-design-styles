@@ -1,7 +1,7 @@
 import {useState} from "react";
 
-import StylesDisplayController from "./StylesDisplayController";
-import StylesList from "./StylesList";
+import StylesDisplayController from "../StylesDisplayController/StylesDisplayController";
+import StylesList from "../StylesList/StylesList";
 
 export default function ControlledStylesList() {
     const [classicStylesAreShown, setClassicStylesAreShown] = useState(true);

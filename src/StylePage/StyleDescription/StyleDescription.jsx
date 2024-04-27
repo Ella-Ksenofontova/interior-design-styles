@@ -1,7 +1,8 @@
 import {useFloating, offset, autoPlacement, autoUpdate} from '@floating-ui/react';
+import {number, string} from "prop-types"
 
 function getAttributes(attributesString) {
-    let attributesEntries = attributesString.split("' ");
+    let attributesEntries = attributesString.split(" ");
     let attributesObject = {};
     
     for (let attributeEntry of attributesEntries) {
@@ -10,7 +11,7 @@ function getAttributes(attributesString) {
         if (dataIndex >= 0) {
             if (assigningIndex >= 0) {
                 let attributeName = attributeEntry.slice(dataIndex + 5, assigningIndex).trim().toLowerCase();
-                let attributeValue = attributeEntry.slice(assigningIndex + 1).trim().replace(/'/g, "");
+                let attributeValue = attributeEntry.slice(assigningIndex + 1).trim().replace(/'/g, "").replace(/&nbsp;/g, " ");
 
                 attributesObject[attributeName] = attributeValue;
             } else {
@@ -83,7 +84,7 @@ export default function StyleDescription({description}) {
                                                     onPointerOut={() => document.getElementById(`describing-block-${index + 1}`).classList.toggle("hidden")}>{textInMark}</mark>
                                                     <figure className='describing-block hidden' id={`describing-block-${index + 1}`} 
                                                     key={`describing-block-${index + 1}`} ref={refs.setFloating} style={floatingStyles}>
-                                                        <img src={`./Materials/Images/${document.title}/${image}`} 
+                                                        <img src={`/src/assets/Images/${document.title}/${image}`} 
                                                         className='describing-image'
                                                         id={`image-${index + 1}`}
                                                         key={`image-${index + 1}`}
@@ -120,6 +121,10 @@ export default function StyleDescription({description}) {
         </section>);
 }
 
+StyleDescription.propTypes = {
+    description: string
+};
+
 function DescribingMobileDialog({index = 0, image="", orientation="vertical", descriptionOfImage="Нет описания картинки"}) {
     return (
             <dialog className='describing-block-mobile' key={`describing-block-mobile-${index + 1}`}>
@@ -136,3 +141,10 @@ function DescribingMobileDialog({index = 0, image="", orientation="vertical", de
                 onClick={() => document.querySelector(".describing-block-mobile").close()}></button>
             </dialog>);
 }
+
+DescribingMobileDialog.propTypes = {
+    index: number,
+    image: string,
+    orientation: string,
+    descriptionOfImage: string
+};

@@ -1,25 +1,30 @@
 import { useState } from "react";
-import DATA from "./styles_data";
+import DATA from "../styles_data";
 import { Link } from "react-router-dom";
+import {bool} from "prop-types"
 
 export default function Header() {
     return(
         <>
         <header>
             <div id="logo"></div>
-            <InputWithTooltip />
+            <InputWithTooltip mobile={false}/>
             <button id="search-mobile"
             onClick={() => document.getElementById("search-mobile-dialog").showModal()}>
             </button>
             <Link to="/copyright"><div id="copyright"></div></Link>
         </header>
 
-        <MobileInputWithTooltip />
+        <MobileInputWithTooltip/>
         </>
     );
 }
 
-function InputWithTooltip({mobile=false}) {
+InputWithTooltip.propTypes = {
+    mobile: bool
+}
+
+function InputWithTooltip({mobile}) {
     const [appropriateLinks, setAppropriateLinks] = useState([]);
 
     function handleInput(event) {

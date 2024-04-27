@@ -1,5 +1,5 @@
-import Header from "../Header";
-import HomePageLink from "../StylePage/HomePageLink";
+import Header from "../Header/Header";
+import HomePageLink from "../StylePage/HomePageLink/HomePageLink";
 import LINKS from "./links";
 
 export default function CopyrightPage() {
@@ -20,7 +20,7 @@ export default function CopyrightPage() {
                     <li><a href="https://www.flaticon.com/authors/ultimatearm">Ссылка на автора иконки люстры</a></li>
                     <li><a href="https://www.flaticon.com/authors/iconixar">Ссылка на автора иконки лампочки</a></li>
                     <li><a href="https://www.flaticon.com/authors/freepik">Ссылка на автора иконки африканской маски и веера</a></li>
-                    <li><a href="https://www.flaticon.com/authors/vectaicon">Ссылка на автора иконки "На главную"</a></li>
+                    <li><a href="https://www.flaticon.com/authors/vectaicon">Ссылка на автора иконки &quot;На главную&quot;</a></li>
                     <li><a href="https://www.flaticon.com/authors/cap-cool">Ссылка на автора иконки в виде знака авторского права</a></li>
                     <li><a href="https://www.flaticon.com/authors/muhammad-usman">Ссылка на автора иконки галочки</a></li>
                 </ul>
