@@ -1,0 +1,15 @@
+.related-styles-list {
+    margin-top: 20px;
+    width: 250px;
+    padding: 15px;
+
+    border-radius: 40px;
+    background-color: #c7a065;
+    color: #FDEDD4;
+}
+
+.related-styles-list h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #FDEDD4;
+}

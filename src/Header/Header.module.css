@@ -1,0 +1,238 @@
+header {
+    width: 100%;
+
+    margin: 0;
+
+    display: grid;
+    grid-template-columns: auto 0 auto auto;
+    
+    column-gap: 15px;
+    
+    justify-content: center;
+    align-items: center;
+
+    padding-top: 20px;
+    padding-left: 15px;
+    padding-bottom: 5px;
+    padding-right: 20px;
+
+    background-color: #E9C590;
+}
+
+#logo {
+    width: 25vw;
+    height: 10vw;
+
+    min-width: 125px;
+    min-height: 65px;
+
+    background-image: url("/src/assets/logo.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+#search-icon, .input-and-tooltip {
+    visibility: hidden;
+} 
+
+.magnifier-decorative {
+    background-size: contain;
+    background-image: url("/src/assets/magnifier.png");
+    width: 20px;
+    height: 20px;
+}
+
+.input-and-tooltip input {
+    width: 0;
+}
+
+#search-mobile-dialog .input-and-tooltip {
+    visibility: visible;
+}
+
+#search-mobile {
+    width: 30px;
+    height: 30px;
+
+    padding: 10px;
+
+    background-color: #FFEBCC;
+    background-image: url("/src/assets/magnifier.png");
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    border-color: transparent;
+    border-radius: 40%;
+}
+
+#search-mobile:hover, #search-mobile:active {
+    background-color: #c7a065;
+}
+
+
+header h1 {
+    font-size: 24px;
+    font-family: Pacifico;
+    color: #FDEDD4
+}
+
+input[type="text"] {
+    height: calc(1rem + 10px);
+
+    border-radius: 10px;
+    border: 1px solid #D0AB73;
+
+    background-color: #F5E1C5;
+    color: #D0AB73;
+}
+
+::placeholder { 
+    color: #D0AB73;
+    opacity: 1; 
+  }
+  
+:-ms-input-placeholder {
+    color: #D0AB73;
+  }
+  
+::-ms-input-placeholder {
+    color:#D0AB73;
+  }
+
+input[type="text"]:focus {
+    border: 3px solid #a68758;  
+    outline: none;
+}
+
+.input-and-tooltip-mobile {
+    display: flex;
+    gap: 5px;
+
+    align-items: center;
+    grid-column: span 2;   
+}
+
+.tooltip-mobile {
+    justify-self: left;
+    text-align: left;
+}
+
+
+.tooltip {
+    position: absolute;
+
+    width: 200px;
+
+    background-color: #bf9a64;
+    border-radius: 20px;
+}
+
+#search-icon {
+    transform: translateX(-25px);
+}
+
+#search-icon-mobile-dialog {
+    transform: translateX(-30px);
+}
+
+#search-mobile {
+   padding: 3px 7px 0 3px;
+}
+
+a[href=""] {
+    width: 45px;
+
+    border: 1px solid rgb(169, 102, 35);
+    border-radius: 15px;
+    background-color: #FDEDD4;
+    text-align: center;
+}
+
+#copyright {
+    height: 45px;
+    width: 45px;
+
+    background-image: url("/src/assets/copyright.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+dialog {
+    text-align: center;
+    position: fixed;
+    margin: 0;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+
+    background-color: #a68758;
+    border: 1px solid #472a1f;
+    border-radius: 30px;
+}
+
+.dialog-items-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-auto-columns: 100% 0;
+
+    align-items: center;
+    justify-content: center;
+}
+
+dialog h2 {
+    padding-left: 0;
+    color: #F5E1C5;
+}
+
+.close-mobile-dialog {
+    float: right;
+    clear: left;
+
+    height: 30px;
+    width: 30px;
+
+    background-image: url("/src/assets/close.png");
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+
+    border: 0;
+}
+
+@media screen and (min-width: 576px) {
+     header{
+        width: 80vw;
+        min-width: 500px;
+
+        margin: 0 auto;
+        grid-template-columns: auto 200px 0 auto;
+        column-gap: 20px;
+    }
+
+    #logo {
+        max-width: 255px;
+        max-height: 100px;
+    }
+
+    #search-mobile, #search-icon-mobile  {
+        visibility: hidden;
+    }
+
+    #search-icon, .input-and-tooltip {
+        visibility: visible;
+    }
+
+    .input-and-tooltip {
+        display: flex;
+        height: 100%;
+        row-gap: 5px;
+
+        align-items: center;   
+    }
+
+    .input-and-tooltip input {
+        width: unset;
+    }
+}

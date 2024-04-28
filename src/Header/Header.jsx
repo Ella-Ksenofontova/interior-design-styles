@@ -1,18 +1,20 @@
 import { useState } from "react";
-import DATA from "../styles_data";
 import { Link } from "react-router-dom";
 import {bool} from "prop-types"
+import styles from "./Header.module.css";
+
+import DATA from "../styles_data";
 
 export default function Header() {
     return(
         <>
         <header>
-            <div id="logo"></div>
+            <div id={styles.logo}></div>
             <InputWithTooltip mobile={false}/>
-            <button id="search-mobile"
-            onClick={() => document.getElementById("search-mobile-dialog").showModal()}>
+            <button id={styles["search-mobile"]}
+            onClick={() => document.getElementById(styles["search-mobile-dialog"]).showModal()}>
             </button>
-            <Link to="/copyright"><div id="copyright"></div></Link>
+            <Link to="/copyright"><div id={styles.copyright}></div></Link>
         </header>
 
         <MobileInputWithTooltip/>
@@ -28,7 +30,7 @@ function InputWithTooltip({mobile}) {
     const [appropriateLinks, setAppropriateLinks] = useState([]);
 
     function handleInput(event) {
-        let tooltip = mobile ? document.querySelector(".tooltip-mobile") : document.querySelector(".tooltip");
+        let tooltip = mobile ? document.querySelector(`.${styles["tooltip-mobile"]}`) : document.querySelector(`.${styles.tooltip}`);
         let linkInfos = [];
 
         for (let style of DATA) {
@@ -47,8 +49,8 @@ function InputWithTooltip({mobile}) {
             let links = linkInfos.map(item => 
                 <li key={item.name} onClick={mobile ? () => {
                     setAppropriateLinks([]);
-                    document.querySelector(".input-and-tooltip-mobile").firstElementChild.value = "";
-                    document.getElementById("search-mobile-dialog").close();
+                    document.querySelector(`.${styles["input-and-tooltip-mobile"]}`).firstElementChild.value = "";
+                    document.getElementById(styles["search-mobile-dialog"]).close();
                 } : () => {}}><Link to={`/${item.path}`}>{item.name}</Link></li>);
             setAppropriateLinks(links);
         } else {
@@ -58,7 +60,7 @@ function InputWithTooltip({mobile}) {
     }
 
     function handleFocus(event) {
-        let tooltip = mobile ? document.querySelector(".tooltip-mobile") : document.querySelector(".tooltip");
+        let tooltip = mobile ? document.querySelector(`.${styles["tooltip-mobile"]}`) : document.querySelector(`.${styles["tooltip"]}`);
 
         for (let style of DATA) {
             if (style.name.toLowerCase().startsWith(event.target.value.toLowerCase()) && event.target.value.length > 0 && !mobile) {
@@ -74,18 +76,18 @@ function InputWithTooltip({mobile}) {
 
 
     return (
-        <div className={mobile ? "input-and-tooltip-mobile" : "input-and-tooltip"} 
-            onMouseLeave={() => document.querySelector(".tooltip").hidden = true}>
+        <div className={mobile ? styles["input-and-tooltip-mobile"] : styles["input-and-tooltip"]} 
+            onMouseLeave={() => document.querySelector(`.${styles.tooltip}`).hidden = true}>
                 <input type="text" placeholder="Поиск по сайту"
                 onInput={handleInput}
                 onFocus={handleFocus}
                 onMouseEnter={handleFocus}/>
-                <div className="magnifier-decorative" id={mobile ? "search-icon-mobile-dialog" : "search-icon"}>
+                <div className={styles["magnifier-decorative"]} id={mobile ? styles["search-icon-mobile-dialog"] : styles["search-icon"]}>
                 </div>
-                <div className={mobile ? "tooltip-mobile" : "tooltip"} hidden={!appropriateLinks.length}
+                <div className={mobile ? styles["tooltip-mobile"] : styles["tooltip"]} hidden={!appropriateLinks.length}
                 onMouseLeave={mobile ? event => {
-                    if (!event.target.className === "input-and-tooltip") {
-                        document.querySelector(".tooltip").hidden = true;
+                    if (!event.target.className === styles["input-and-tooltip"]) {
+                        document.querySelector(`.${styles["tooltip"]}`).hidden = true;
                     }
                 } : null}>
                     <ul>
@@ -98,13 +100,13 @@ function InputWithTooltip({mobile}) {
 
 function MobileInputWithTooltip() {
     return(
-        <dialog id="search-mobile-dialog">
-            <div className="dialog-items-container">
+        <dialog id={styles["search-mobile-dialog"]}>
+            <div className={styles["dialog-items-container"]}>
                 <h2>Найти стиль</h2>
-                <button className="close-mobile-dialog" onClick={() => {
-                    document.getElementById("search-mobile-dialog").close();
-                    document.querySelector(".input-and-tooltip-mobile").firstElementChild.value = ""
-                    document.querySelector(".input-and-tooltip-mobile ul").innerHTML = "";
+                <button className={styles["close-mobile-dialog"]} onClick={() => {
+                    document.getElementById(styles["search-mobile-dialog"]).close();
+                    document.querySelector(`.${styles["input-and-tooltip-mobile"]}`).firstElementChild.value = ""
+                    document.querySelector(`.${styles["input-and-tooltip-mobile"]} ul`).innerHTML = "";
                     }}>
                 </button>
                 <InputWithTooltip mobile={true}/>

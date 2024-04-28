@@ -1,6 +1,8 @@
 import {useFloating, offset, autoPlacement, autoUpdate} from '@floating-ui/react';
 import {number, string} from "prop-types"
 
+import styles from "./StyleDescription.module.css"
+
 function getAttributes(attributesString) {
     let attributesEntries = attributesString.split(" ");
     let attributesObject = {};
@@ -48,11 +50,19 @@ export default function StyleDescription({description}) {
         whileElementsMounted: autoUpdate
     });    
 
+    let title;
+    let indexOfStyleWord = document.title.indexOf(" стиль");
+    if (indexOfStyleWord > -1) {
+        title = document.title.slice(0, indexOfStyleWord);
+    } else {
+        title = document.title;
+    }
+
     return (<section>
             <h2>Описание стиля</h2>
-            <div id="description">
+            <div id={styles["description"]}>
                 {description.map((paragraph, index) => {
-                    return (<div className="style-description" key={index + 1}> 
+                    return (<div className={styles["style-description"]} key={index + 1}> 
                         {paragraph.split("<mark").map((paragraphPart, paragraphIndex) => {
                                     if (paragraphIndex === 0) {
                                         return (<span key={`paragraph-part-${paragraphIndex + 1}`}>
@@ -80,12 +90,12 @@ export default function StyleDescription({description}) {
                                                 <span key={`paragraph-part-${index + 1}`}>
                                                     <mark ref={refs.setReference} 
                                                     key={`mark-${index + 1}`}
-                                                    onPointerOver={() => document.getElementById(`describing-block-${index + 1}`).classList.toggle("hidden")}
-                                                    onPointerOut={() => document.getElementById(`describing-block-${index + 1}`).classList.toggle("hidden")}>{textInMark}</mark>
-                                                    <figure className='describing-block hidden' id={`describing-block-${index + 1}`} 
+                                                    onPointerOver={() => document.getElementById(`describing-block-${index + 1}`).classList.toggle(styles["hidden"])}
+                                                    onPointerOut={() => document.getElementById(`describing-block-${index + 1}`).classList.toggle(styles["hidden"])}>{textInMark}</mark>
+                                                    <figure className={`${styles["describing-block"]} ${styles["hidden"]}`} id={`describing-block-${index + 1}`} 
                                                     key={`describing-block-${index + 1}`} ref={refs.setFloating} style={floatingStyles}>
-                                                        <img src={`/src/assets/Images/${document.title}/${image}`} 
-                                                        className='describing-image'
+                                                        <img src={`/src/assets/Images/${title}/${image}`} 
+                                                        className={styles['describing-image']}
                                                         id={`image-${index + 1}`}
                                                         key={`image-${index + 1}`}
                                                         alt={image.substring(0, image.indexOf("."))}
@@ -102,7 +112,7 @@ export default function StyleDescription({description}) {
                                                     <mark 
                                                     key={`mark-${index + 1}`}
                                                     onPointerDown={() => {
-                                                        document.querySelector(".describing-block-mobile").showModal();
+                                                        document.querySelector(`.${styles["describing-block-mobile"]}`).showModal();
                                                     }}
                                                     >{textInMark}</mark>
                                                     <DescribingMobileDialog
@@ -126,10 +136,18 @@ StyleDescription.propTypes = {
 };
 
 function DescribingMobileDialog({index = 0, image="", orientation="vertical", descriptionOfImage="Нет описания картинки"}) {
+    let title;
+    let indexOfStyleWord = document.title.indexOf(" стиль");
+    if (indexOfStyleWord > -1) {
+        title = document.title.slice(0, indexOfStyleWord);
+    } else {
+        title = document.title;
+    }
+
     return (
-            <dialog className='describing-block-mobile' key={`describing-block-mobile-${index + 1}`}>
-                <img src={`./Materials${image ? "/Images/" + document.title : ""}/${image ? image : "placeholder.png"}`} 
-                className='describing-image'
+            <dialog className={styles['describing-block-mobile']} key={`describing-block-mobile-${index + 1}`}>
+                <img src={`/src/assets${image ? "/Images/" + title : ""}/${image ? image : "placeholder.png"}`} 
+                className={styles['describing-image']}
                 id={`image-${index + 1}`}
                 key={`image-${index + 1}`}
                 alt={image.substring(0, image.indexOf("."))}
@@ -137,8 +155,8 @@ function DescribingMobileDialog({index = 0, image="", orientation="vertical", de
                 width = {orientation.toLowerCase() === "vertical" ? "140" : "600"}>
                 </img>
                 <span key={`description-${index + 1}`}>{descriptionOfImage}</span>
-                <button className="close-mobile-dialog"
-                onClick={() => document.querySelector(".describing-block-mobile").close()}></button>
+                <button className={styles["close-mobile-dialog"]}
+                onClick={() => document.querySelector(`.${styles["describing-block-mobile"]}`).close()}></button>
             </dialog>);
 }
 

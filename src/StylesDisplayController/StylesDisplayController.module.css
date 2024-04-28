@@ -1,0 +1,21 @@
+input[type="checkbox"] {
+    display: none;
+}
+
+label {
+    padding-left: 5px;
+}
+
+.checkbox {
+    display: inline-block;
+
+    width: 15px;
+    height: 15px;
+    background-color: #D0AB73;
+    border: 1px solid rgb(169, 102, 35);
+}
+
+input[type="checkbox"]:checked + .checkbox {
+    background-image: url("/src/assets/task.png");
+    background-size: cover;
+}

@@ -1,6 +1,7 @@
 import DATA from "../styles_data.js"
 import {Link} from "react-router-dom";
 import {arrayOf, bool} from "prop-types"
+import styles from "./StylesList.module.css"
 
 export default function StylesList({statesOfCheckboxes}) {
     let [classicStylesAreShown, modernStylesAreShown, ethnicStylesAreShown] = statesOfCheckboxes;
@@ -12,8 +13,8 @@ export default function StylesList({statesOfCheckboxes}) {
                 return (
                     <li key={style.name}>
                         <Link to={"/" + style.path}>{style.name}</Link>
-                        <div className="classic" title="Это классический стиль">
-                            <span className="visually-hidden">Это классический стиль</span>
+                        <div className={styles.classic} title="Это классический стиль">
+                            <span className={styles["visually-hidden"]}>Это классический стиль</span>
                         </div>
                     </li>
                 );
@@ -26,8 +27,8 @@ export default function StylesList({statesOfCheckboxes}) {
                     return (
                         <li key={style.name}>
                             <Link to={"/" + style.path}>{style.name}</Link>
-                            <div className="modern" title={style.comment ? style.comment : "Это современный стиль"}>
-                                <span className="visually-hidden">{style.comment ? style.comment : "Это современный стиль"}</span>
+                            <div className={styles.modern} title={style.comment ? style.comment : "Это современный стиль"}>
+                                <span className={styles["visually-hidden"]}>{style.comment ? style.comment : "Это современный стиль"}</span>
                             </div>
                         </li>
                     );
@@ -40,8 +41,8 @@ export default function StylesList({statesOfCheckboxes}) {
                 return (
                     <li key={style.name}>
                         <Link to={"/" + style.path}>{style.name}</Link>
-                        <div className="ethnic" title="Это этнический стиль">
-                            <span className="visually-hidden">Это этнический стиль</span>
+                        <div className={styles.ethnic} title="Это этнический стиль">
+                            <span className={styles["visually-hidden"]}>Это этнический стиль</span>
                         </div>
                     </li>
                 );

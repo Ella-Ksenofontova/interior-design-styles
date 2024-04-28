@@ -1,0 +1,18 @@
+.home-page-link {
+    display: grid;
+    grid-template-columns: 30px auto;
+    grid-column-gap: 10px;
+
+    align-items: center;
+
+    color: #D0AB73;
+}
+
+.homepage-img {
+    width: 30px;
+    height: 30px;
+
+    background-image: url("/src/assets/home.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
