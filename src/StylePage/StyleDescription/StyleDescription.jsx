@@ -90,8 +90,10 @@ export default function StyleDescription({description}) {
                                                 <span key={`paragraph-part-${index + 1}`}>
                                                     <mark ref={refs.setReference} 
                                                     key={`mark-${index + 1}`}
-                                                    onPointerOver={() => document.getElementById(`describing-block-${index + 1}`).classList.toggle(styles["hidden"])}
-                                                    onPointerOut={() => document.getElementById(`describing-block-${index + 1}`).classList.toggle(styles["hidden"])}>{textInMark}</mark>
+                                                    onPointerOver={() => document.getElementById(`describing-block-${index + 1}`).classList.add(styles["hidden"])}
+                                                    onFocus = {() => document.getElementById(`describing-block-${index + 1}`).classList.add(styles["hidden"])}
+                                                    onPointerOut={() => document.getElementById(`describing-block-${index + 1}`).classList.remove(styles["hidden"])}
+                                                    onBlur={() => document.getElementById(`describing-block-${index + 1}`).classList.remove(styles["hidden"])} tabIndex={0}>{textInMark}</mark>
                                                     <figure className={`${styles["describing-block"]} ${styles["hidden"]}`} id={`describing-block-${index + 1}`} 
                                                     key={`describing-block-${index + 1}`} ref={refs.setFloating} style={floatingStyles}>
                                                         <img src={`/src/assets/Images/${title}/${image}`} 

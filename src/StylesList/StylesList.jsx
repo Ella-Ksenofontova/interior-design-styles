@@ -14,7 +14,7 @@ export default function StylesList({statesOfCheckboxes}) {
                     <li key={style.name}>
                         <Link to={"/" + style.path}>{style.name}</Link>
                         <div className={styles.classic} title="Это классический стиль">
-                            <span className={styles["visually-hidden"]}>Это классический стиль</span>
+                            <span className="visually-hidden">Это классический стиль</span>
                         </div>
                     </li>
                 );
@@ -28,7 +28,7 @@ export default function StylesList({statesOfCheckboxes}) {
                         <li key={style.name}>
                             <Link to={"/" + style.path}>{style.name}</Link>
                             <div className={styles.modern} title={style.comment ? style.comment : "Это современный стиль"}>
-                                <span className={styles["visually-hidden"]}>{style.comment ? style.comment : "Это современный стиль"}</span>
+                                <span className="visually-hidden">{style.comment ? style.comment : "Это современный стиль"}</span>
                             </div>
                         </li>
                     );
@@ -42,7 +42,7 @@ export default function StylesList({statesOfCheckboxes}) {
                     <li key={style.name}>
                         <Link to={"/" + style.path}>{style.name}</Link>
                         <div className={styles.ethnic} title="Это этнический стиль">
-                            <span className={styles["visually-hidden"]}>Это этнический стиль</span>
+                            <span className="visually-hidden">Это этнический стиль</span>
                         </div>
                     </li>
                 );
