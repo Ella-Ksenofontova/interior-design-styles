@@ -18,6 +18,8 @@
 
 .style-name {
     width: 67%;
+    min-width: min-content;
+    padding-inline: 15px;
     margin: auto;
 
     background-color: #E9C590;
@@ -29,6 +31,7 @@
 .style-name h2 {
     padding-left: 0;
     color: rgb(192, 114, 65);
+    font-size: 22px;
 }
 
 @media screen and (min-width: 576px)  {

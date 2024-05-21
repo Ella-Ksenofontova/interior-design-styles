@@ -66,7 +66,11 @@ mark {
 }
 
 .describing-block-mobile .describing-image {
+    display: block;
+    float: none;
+    max-width: 90%;
     margin-right: 10px;
+    margin-bottom: 5px;
 }
 
 .describing-block-mobile span {

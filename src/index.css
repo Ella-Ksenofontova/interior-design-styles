@@ -68,6 +68,10 @@ p {
     color: #FDEDD4;
 }
 
+.info {
+    min-width: 200px;
+}
+
 p {
     width: 60%;
     max-width: 300px;
@@ -85,6 +89,15 @@ a:visited {
 span#info-header, span#related-styles-header, h2 {
     font-size: 1.5rem;
     font-weight: bold;
+    font-style: italic;
+}
+
+.loading-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
     font-style: italic;
 }
 

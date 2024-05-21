@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {bool} from "prop-types"
-import styles from "./Header.module.css";
+import { useContext } from "react";
 
-import DATA from "../styles_data";
+import styles from "./Header.module.css";
+import { StylesDataContext } from "../StylesDataContext";
 
 export default function Header() {
     return(
@@ -27,13 +28,15 @@ InputWithTooltip.propTypes = {
 }
 
 function InputWithTooltip({mobile}) {
+    const stylesData = useContext(StylesDataContext);
+
     const [appropriateLinks, setAppropriateLinks] = useState([]);
 
     function handleInput(event) {
         let tooltip = mobile ? document.querySelector(`.${styles["tooltip-mobile"]}`) : document.querySelector(`.${styles.tooltip}`);
         let linkInfos = [];
 
-        for (let style of DATA) {
+        for (let style of stylesData) {
             if (style.name.toLowerCase().startsWith(event.target.value.toLowerCase()) && event.target.value.length > 0) {
                 let linkInfo = {name: style.name, path: style.path};
                 linkInfos.push(linkInfo);
@@ -62,7 +65,7 @@ function InputWithTooltip({mobile}) {
     function handleFocus(event) {
         let tooltip = mobile ? document.querySelector(`.${styles["tooltip-mobile"]}`) : document.querySelector(`.${styles["tooltip"]}`);
 
-        for (let style of DATA) {
+        for (let style of stylesData) {
             if (style.name.toLowerCase().startsWith(event.target.value.toLowerCase()) && event.target.value.length > 0 && !mobile) {
                 tooltip.hidden = false;
                 if (!mobile) {

@@ -1,6 +1,7 @@
 .related-styles-list {
     margin-top: 20px;
     width: 250px;
+    max-width: calc(100% - 40px);
     padding: 15px;
 
     border-radius: 40px;

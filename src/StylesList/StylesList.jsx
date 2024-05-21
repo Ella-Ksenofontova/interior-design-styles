@@ -1,12 +1,15 @@
-import DATA from "../styles_data.js"
+import { useContext } from "react";
 import {Link} from "react-router-dom";
 import {arrayOf, bool} from "prop-types"
-import styles from "./StylesList.module.css"
+import styles from "./StylesList.module.css";
+
+import { StylesDataContext } from "../StylesDataContext.js";
 
 export default function StylesList({statesOfCheckboxes}) {
     let [classicStylesAreShown, modernStylesAreShown, ethnicStylesAreShown] = statesOfCheckboxes;
+    const stylesData = useContext(StylesDataContext);
 
-    const stylesItems = DATA.map(style => {
+    const stylesItems = stylesData.map(style => {
         switch(style.type) {
             case "Классический":
                if (classicStylesAreShown) {
