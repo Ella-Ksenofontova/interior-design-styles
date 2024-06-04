@@ -1,0 +1,28 @@
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-left: 20px;
+}
+
+figure {
+  min-width: 125px;
+  margin: 0;
+  text-align: center;
+}
+
+figure img {
+  cursor: zoom-in;
+}
+
+.gallery-explanation {
+  font-style: italic;
+  margin-left: 20px;
+  margin-bottom: 8px;
+}
+
+@media screen and (min-device-width: 576px) {
+  .source-of-image {
+    font-size: .8em;
+  }
+}

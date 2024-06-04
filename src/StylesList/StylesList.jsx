@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {arrayOf, bool} from "prop-types"
 import styles from "./StylesList.module.css";
 
-import { StylesDataContext } from "../StylesDataContext.js";
+import { StylesDataContext } from "../StylesDataContext";
 
 export default function StylesList({statesOfCheckboxes}) {
     let [classicStylesAreShown, modernStylesAreShown, ethnicStylesAreShown] = statesOfCheckboxes;

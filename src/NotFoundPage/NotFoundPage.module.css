@@ -1,0 +1,24 @@
+.not-found-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.not-found-image {
+  width: 200px;
+  height: 200px;
+
+  background-image: url("/src/assets/404.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+@media screen and (min-width: 576px) {
+  .not-found-image {
+    width: 400px;
+    height: 400px;
+  }
+}

@@ -1,3 +1,36 @@
-const LINKS = [{'name': 'Авангард', 'link': 'https://www.freepik.com/author/tohamina\n'}, {'name': 'Ампир', 'link': 'https://www.freepik.com/author/azerbaijan-stockers\n'}, {'name': 'Античный', 'link': 'https://www.freepik.com/author/rawpixel-com\n'}, {'name': 'Ар-деко', 'link': 'https://www.freepik.com/author/vecstock\n'}, {'name': 'Африканский', 'link': 'https://www.freepik.com/author/wirestock\n'}, {'name': 'Барокко', 'link': 'https://www.freepik.com/author/freepik\n'}, {'name': 'Брутальный', 'link': 'https://www.freepik.com/author/freepik\n'}, {'name': 'Восточный', 'link': 'https://www.freepik.com/author/mrsiraphol\n'}, {'name': 'Готический', 'link': 'https://www.freepik.com/author/wirestock\n'}, {'name': 'Египетский', 'link': 'https://amiel.club/27557-interer-v-stile-drevnego-egipta.html\n'}, {'name': 'Кантри', 'link': 'https://www.freepik.com/author/freepik\n'}, {'name': 'Китайский', 'link': 'https://www.freepik.com/author/evening-tao\n'}, {'name': 'Китч', 'link': 'https://dashamisura.ru/blog/dizajn-interera-v-stile-kitch/\n'}, {'name': 'Классический', 'link': 'https://www.freepik.com/author/azerbaijan-stockers\n'}, {'name': 'Консерватизм', 'link': 'https://www.freepik.com/author/dcstudio\n'}, {'name': 'Конструктивизм', 'link': 'https://mossebo.studio/sovetyi-po-dizaynu/konstruktivizm-v-interere/\n'}, {'name': 'Лофт', 'link': 'https://www.freepik.com/author/rawpixel-com\n'}, {'name': 'Минимализм', 'link': 'https://www.freepik.com/author/rawpixel-com\n'}, {'name': 'Модерн', 'link': 'https://www.freepik.com/author/vecstock\n'}, {'name': 'Неоклассицизм', 'link': 'https://www.freepik.com/author/chandlervid85\n'}, {'name': 'Поп-арт', 'link': 'https://basicdecor.ru/blog/post/i-popart/\n'}, {'name': 'Постмодернизм', 'link': 'https://www.freepik.com/author/vecstock\n'}, {'name': 'Прованс', 'link': 'https://www.freepik.com/author/freepik\n'}, {'name': 'Ренессанс', 'link': 'https://www.freepik.com/author/wirestock\n'}, {'name': 'Рококо', 'link': 'https://www.freepik.com/author/freepik\n'}, {'name': 'Романский', 'link': 'https://www.freepik.com/author/freepik\n'}, {'name': 'Скандинавский', 'link': 'https://www.freepik.com/author/chandlervid85\n'}, {'name': 'Техно', 'link': 'https://remont-f.ru/dizayn-interera/styli-interyera/tekhno/\n'}, {'name': 'Хай-тек', 'link': 'https://www.topdom.ru/articles/interior_design/interer_kvartiry_v_stile_khay-tek.htm\n'}, {'name': 'Шале', 'link': 'https://www.freepik.com/author/freepik\n'}, {'name': 'Эклектика', 'link': 'https://www.ivd.ru/dizajn-i-dekor/stili-interiera/7-universalnyh-pravil-dlya-sozdaniya-interera-v-stile-eklektika-81172\n'}, {'name': 'Этнический', 'link': 'https://www.freepik.com/author/azerbaijan-stockers\n'}, {'name': 'Японский', 'link': 'https://www.freepik.com/author/freepik'}];
+const LINKS = [
+{'name': 'Авангард', 'link': 'https://www.freepik.com/author/tohamina'},
+{'name': 'Ампир', 'link': 'https://www.freepik.com/author/azerbaijan-stockers'},
+{'name': 'Античный', 'link': 'https://www.freepik.com/author/rawpixel-com'},
+{'name': 'Ар-деко', 'link': 'https://www.freepik.com/author/vecstock'},
+{'name': 'Африканский', 'link': 'https://www.freepik.com/author/wirestock'},
+{'name': 'Барокко', 'link': 'https://www.freepik.com/author/freepik'},
+{'name': 'Брутальный', 'link': 'https://www.freepik.com/author/freepik'},
+{'name': 'Восточный', 'link': 'https://www.freepik.com/author/mrsiraphol'},
+{'name': 'Готический', 'link': 'https://www.freepik.com/author/wirestock'},
+{'name': 'Египетский', 'link': 'https://amiel.club/27557-interer-v-stile-drevnego-egipta.html'},
+{'name': 'Кантри', 'link': 'https://www.freepik.com/author/freepik'},
+{'name': 'Китайский', 'link': 'https://www.freepik.com/author/evening-tao'},
+{'name': 'Китч', 'link': 'https://dashamisura.ru/blog/dizajn-interera-v-stile-kitch/'},
+{'name': 'Классический', 'link': 'https://www.freepik.com/author/azerbaijan-stockers'},
+{'name': 'Консерватизм', 'link': 'https://www.freepik.com/author/dcstudio'},
+{'name': 'Конструктивизм', 'link': 'https://mossebo.studio/sovetyi-po-dizaynu/konstruktivizm-v-interere/'},
+{'name': 'Лофт', 'link': 'https://www.freepik.com/author/rawpixel-com'},
+{'name': 'Минимализм', 'link': 'https://www.freepik.com/author/rawpixel-com'},
+{'name': 'Модерн', 'link': 'https://www.freepik.com/author/vecstock'},
+{'name': 'Неоклассицизм', 'link': 'https://www.freepik.com/author/chandlervid85'},
+{'name': 'Поп-арт', 'link': 'https://basicdecor.ru/blog/post/i-popart/'},
+{'name': 'Постмодернизм', 'link': 'https://www.freepik.com/author/vecstock'},
+{'name': 'Прованс', 'link': 'https://www.freepik.com/author/freepik'},
+{'name': 'Ренессанс', 'link': 'https://www.freepik.com/author/wirestock'},
+{'name': 'Рококо', 'link': 'https://www.freepik.com/author/freepik'},
+{'name': 'Романский', 'link': 'https://www.freepik.com/author/freepik'},
+{'name': 'Скандинавский', 'link': 'https://www.freepik.com/author/chandlervid85'},
+{'name': 'Техно', 'link': 'https://remont-f.ru/dizayn-interera/styli-interyera/tekhno/'},
+{'name': 'Шале', 'link': 'https://www.freepik.com/author/freepik'},
+{'name': 'Эклектика', 'link': 'https://www.ivd.ru/dizajn-i-dekor/stili-interiera/7-universalnyh-pravil-dlya-sozdaniya-interera-v-stile-eklektika-81172'},
+{'name': 'Этнический', 'link': 'https://www.freepik.com/author/azerbaijan-stockers'},
+{'name': 'Японский', 'link': 'https://www.freepik.com/author/freepik'}
+];
 
 export default LINKS;

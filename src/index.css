@@ -12,11 +12,19 @@ body {
 }
 
 #root {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: min-content 1fr;
+    grid-template-columns: 100%;
     width: 100%;
+    min-height: 100vh;
     min-width: 270px;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
+}
+
+::-moz-selection {
+    background-color: brown;
+    color: white;
 }
 
 ::selection {
@@ -36,7 +44,8 @@ main, .image-container, header {
     border: 0;
     padding: 0;
     white-space: nowrap;
-    clip-path: inset(100%);
+    -webkit-clip-path: inset(100%);
+            clip-path: inset(100%);
     clip: rect(0 0 0 0);
     overflow: hidden;
 }
@@ -55,7 +64,7 @@ main, .image-container, header {
 }
 
 main {
-    margin: 0 auto;
+    margin-inline: auto;
     padding: 20px;
     width: 100%;
 
@@ -127,6 +136,8 @@ li img {
     #root {
         width: 80vw;
         margin: 0 auto;
+        padding-bottom: 20px;
+        border-bottom: 20px solid transparent;
     }
 
     .image-container, main {

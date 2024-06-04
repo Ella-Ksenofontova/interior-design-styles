@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import {arrayOf, string} from "prop-types";
 import { useContext } from "react";
 
-import styles from "./RelatedStylesList.module.css";
+import styles from "../StylePage.module.css";
 import { StylesDataContext } from "../../StylesDataContext";
 
 

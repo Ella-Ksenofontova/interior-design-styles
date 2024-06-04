@@ -1,0 +1,25 @@
+.related-styles-list,
+.info-sources-list {
+  margin-top: 20px;
+  max-width: calc(100% - 40px);
+  padding: 15px;
+
+  border-radius: 40px;
+  background-color: #c7a065;
+  color: #FDEDD4;
+}
+
+.related-styles-list h2,
+.info-sources-list h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #FDEDD4;
+}
+
+.related-styles-list {
+  width: 250px;
+}
+
+.info-sources-list {
+  width: 350px;
+}

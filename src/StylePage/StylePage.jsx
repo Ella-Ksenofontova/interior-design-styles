@@ -1,4 +1,4 @@
-import {string} from "prop-types"
+import { string } from "prop-types"
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useState, useEffect} from "react";
@@ -8,6 +8,8 @@ import HomePageLink from "./HomePageLink/HomePageLink";
 import StyleCard from "./StyleCard/StyleCard";
 import StyleDescription from "./StyleDescription/StyleDescription";
 import RelatedStylesList from "./RelatedStylesList/RelatedStylesList";
+import InfoSourcesList from "./InfoSourcesList/InfoSourcesList";
+import Gallery from "./Gallery/Gallery";
 
 async function getStyleData(styleName) {
     const firebaseConfig = {
@@ -25,13 +27,35 @@ async function getStyleData(styleName) {
 
     let styleData = {
         description: "Ошибка: не найден соответствующий документ",
-        relatedStyles: []
+        relatedStyles: [],
+        imagesData: {
+            desciptions: [],
+            imagesExtensions: [],
+            imagesSources: [],
+        },
+        infoSources: []
     };
 
     const docRef = doc(db, "Styles Data", `${styleName}`);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
         styleData.relatedStyles = docSnap.get("relatedStyles") || [];
+
+        const descriptions = docSnap.get("galleryDescriptions") || [];
+        const imagesExtensions = docSnap.get("imagesExtensions") || [];
+        const imagesSources = docSnap.get("imagesSources") || [];
+
+        styleData.imagesData = descriptions.map((item, index) => {
+            return {
+                description: item,
+                source: imagesSources[index] || "",
+                extension: imagesExtensions[index] || "jpg"
+            };
+        });
+
+        styleData.infoSources = docSnap.get("infoSources") || [];
+
+        styleData.cardSource = docSnap.get("cardSource");
     }
 
     const descriptionRef = doc(db, "Styles descriptions", `${styleName}`);
@@ -57,7 +81,8 @@ export default function StylePage({styleName, styleOrder}) {
 
     const [styleData, setStyleData] = useState({
         description: "",
-        relatedStyles: ""
+        relatedStyles: "",
+        infoSources: "",
     });
 
     if(!loaded) {
@@ -89,10 +114,19 @@ export default function StylePage({styleName, styleOrder}) {
                 <Header />
                 <main>
                     <HomePageLink />
-                    <StyleCard styleName={styleName} styleOrder={styleOrder}/>
-                    <StyleDescription description={styleData.description}/>
+                    <StyleCard styleName={styleName} 
+                    styleOrder={styleOrder} 
+                    source={styleData.cardSource}/>
+                    <StyleDescription description={styleData.description} />
 
-                    {styleData.relatedStyles.length > 0 ? <RelatedStylesList relatedStyles={styleData.relatedStyles}/> : ""}
+                    {styleData.relatedStyles.length > 0 ? <RelatedStylesList relatedStyles={styleData.relatedStyles} /> : ""}
+
+                    {styleData.imagesData.length > 0 ?
+                    <Gallery imagesData={styleData.imagesData} /> : ""
+                    }
+
+                    {styleData.infoSources.length > 0 ?
+                    <InfoSourcesList infoSources={styleData.infoSources}/> : ""}
                 </main>
             </>
         );

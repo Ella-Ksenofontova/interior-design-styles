@@ -17,7 +17,8 @@
 mark {
     background-color: #E9C590;
     text-decoration: underline;
-    text-decoration-style: dashed;
+    -webkit-text-decoration-style: dashed;
+            text-decoration-style: dashed;
 }
 
 .describing-image {
@@ -28,6 +29,7 @@ mark {
 .describing-block {
     margin: 0;
     display: grid;
+    grid-template-columns: -webkit-min-content;
     grid-template-columns: min-content;
 
     padding: 5px;

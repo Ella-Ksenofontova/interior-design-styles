@@ -18,8 +18,11 @@
 
 .style-name {
     width: 67%;
+    min-width: -webkit-min-content;
+    min-width: -moz-min-content;
     min-width: min-content;
     padding-inline: 15px;
+    padding-bottom: 15px;
     margin: auto;
 
     background-color: #E9C590;
@@ -32,10 +35,16 @@
     padding-left: 0;
     color: rgb(192, 114, 65);
     font-size: 22px;
+
+    margin-bottom: 3px;
 }
 
 @media screen and (min-width: 576px)  {
     .style-image {
         min-width: 400px;
+    }
+
+    .source-link {
+        font-size: .8em;
     }
 }

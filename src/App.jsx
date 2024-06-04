@@ -1,17 +1,23 @@
-import Header from './Header/Header';
-import ControlledStylesList from "./ControlledStylesList/ControlledStylesList";
-import StylePage from "./StylePage/StylePage";
-import CopyrightPage from "./CopyrightPage/CopyrightPage";
-
 import { useState } from 'react';
-import {StylesDataContext} from "./StylesDataContext"
-import {Routes, Route } from 'react-router-dom';
+import { StylesDataContext } from "./StylesDataContext"
+import {Routes, Route} from 'react-router-dom';
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, getDoc } from "firebase/firestore"; 
 import {arrayOf, string, bool, object} from "prop-types";
 
+import Header from './Header/Header';
+import ControlledStylesList from "./ControlledStylesList/ControlledStylesList";
+import StylePage from "./StylePage/StylePage";
+import CopyrightPage from "./CopyrightPage/CopyrightPage";
+import LoadingPage from './LoadingPage/LoadingPage';
+import NotFoundPage from './NotFoundPage/NotFoundPage'
+
 const STYLES = [
     "Авангард", "Ампир", "Античный", "Ар-деко", "Африканский", "Барокко", "Брутальный", "Восточный", "Готический", "Египетский", "Кантри", "Китайский", "Китч", "Классический", "Консерватизм", "Конструктивизм", "Лофт", "Минимализм", "Модерн", "Неоклассицизм", "Поп-арт", "Постмодернизм", "Прованс", "Ренессанс", "Рококо", "Романский", "Скандинавский", "Техно", "Шале", "Эклектика", "Этнический", "Японский"
+]
+
+const PATHS = [
+    "avant-garde", "empire", "antique", "art-deco", "african", "baroque", "brutal", "oriental", "gothic", "egyptian", "country", "chinese", "kitsch", "classic", "conservative", "constructivism", "loft", "minimalism", "modern", "neoclassic", "pop-art", "postmoden", "provence", "renaissanse", "rococo", "romanesque", "scandinavian", "techno", "chalet", "eclectism", "ethnic", "japanese"
 ]
 
 function HomePage({loaded, stylesData}) {
@@ -88,9 +94,9 @@ async function getStylesData(styles) {
 
         if (docSnap.exists()) {
             stylesData.push({
-                path: docSnap.get("path"),
                 styleOrder: docSnap.get("styleOrder"),
-                type: docSnap.get("type")
+                type: docSnap.get("type"),
+                comment: docSnap.get("comment"),
             });
         }
     }
@@ -114,32 +120,22 @@ export default function App() {
             setStylesData(result);
         });
     }
-    
-    if (loaded) {
-        return (
+    return (
             <Routes>
                 <Route path="/" element={<HomePage loaded={loaded} stylesData={stylesData}/>} />
-                <Route path="/copyright" element={<CopyrightPage />}/>
-                <>
-                        {stylesData.map((item, index) => {
-                            item.name = STYLES[index]
+                <Route path="/copyright" element={<StylesDataContext.Provider value = {stylesData}><CopyrightPage /></StylesDataContext.Provider>}/>
+                {loaded ? stylesData.map((item, index) => {
+                        item.name = STYLES[index]
+                        item.path = PATHS[index]
 
-                            return (
+                        return (
                             <Route key={item.name} path={"/" + item.path} element={
-                                <StylesDataContext.Provider value = {stylesData}><StylePage styleName={item.name} styleOrder={item.styleOrder}/></StylesDataContext.Provider>
+                            <StylesDataContext.Provider value = {stylesData}><StylePage styleName={item.name} styleOrder={item.styleOrder}/></StylesDataContext.Provider>
                         }/>);
-                        }
-                        )}
-                    
-                </>
+                    }) : STYLES.map((item, index) =>
+                        <Route key={item} path={"/" + PATHS[index]} element={<LoadingPage />}/>
+                )}
+                <Route path="*" element={<StylesDataContext.Provider value = {stylesData}><NotFoundPage /></StylesDataContext.Provider>}/>
             </Routes>
-        );
-    } else {
-        return(
-            <Routes>
-                <Route path="/" element={<HomePage loaded={loaded}/>} />
-                <Route path="/copyright" element={<CopyrightPage />}/>
-            </Routes>
-        );
-    }
+    );
 }

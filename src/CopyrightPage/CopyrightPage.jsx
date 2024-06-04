@@ -2,6 +2,8 @@ import Header from "../Header/Header";
 import HomePageLink from "../StylePage/HomePageLink/HomePageLink";
 import LINKS from "./links";
 
+//TODO: Добавить подгрузку источников, предварительно записав их в Firestore
+
 export default function CopyrightPage() {
     return(
         <>
@@ -23,10 +25,7 @@ export default function CopyrightPage() {
                     <li><a href="https://www.flaticon.com/authors/vectaicon">Ссылка на автора иконки &quot;На главную&quot;</a></li>
                     <li><a href="https://www.flaticon.com/authors/cap-cool">Ссылка на автора иконки в виде знака авторского права</a></li>
                     <li><a href="https://www.flaticon.com/authors/muhammad-usman">Ссылка на автора иконки галочки</a></li>
-                </ul>
-                <h2>Ссылки на авторов картинок стилей</h2>
-                <ul>
-                    {LINKS.map(item => <li key={item.name}><a href={item.link}>{item.name}</a></li>)}
+                    <li><a href="https://storyset.com">Ссылка на источник картинки, использованной на странице 404</a></li>
                 </ul>
             </main>
         </>
