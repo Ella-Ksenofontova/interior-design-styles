@@ -58,7 +58,7 @@ function HomePage({loaded, stylesData}) {
                     </p>
 
                 <div className="loading-wrapper">
-                <img src="/src/assets/loading.gif" alt="Стили загружаются" height={100} width={100}/>
+                <img src="/assets/loading.gif" alt="Стили загружаются" height={100} width={100}/>
                         Стили загружаются
                 </div>
                 </main>
