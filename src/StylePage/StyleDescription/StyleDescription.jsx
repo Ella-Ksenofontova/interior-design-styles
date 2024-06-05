@@ -126,7 +126,7 @@ function ParagraphPart({initialText, index, paragraphIndex}) {
                 onBlur={() => document.getElementById(`describing-block-${index + 1}-${paragraphIndex + 1}`).classList.add(styles["hidden"])} tabIndex={0}>{markParams.text}</mark>
                 <figure className={`${styles["describing-block"]} ${styles["hidden"]}`} id={`describing-block-${index + 1}-${paragraphIndex + 1}`} 
                 key={`describing-block-${index + 1}-${paragraphIndex + 1}`} ref={refs.setFloating} style={floatingStyles}>
-                    <img src={`/src/assets/styles_images/${title}/${markParams.image}`} 
+                    <img src={`/assets/styles_images/${title}/${markParams.image}`} 
                     className={styles['describing-image']}
                     id={`image-${index + 1}`}
                     key={`image-${index + 1}`}
@@ -177,7 +177,7 @@ function DescribingMobileDialog({index = 0, paragraphIndex = 0, image="", orient
 
     return (
             <dialog className={styles['describing-block-mobile']} key={`describing-block-mobile-${index + 1}-${paragraphIndex + 1}`} id={`describing-block-mobile-${index + 1}-${paragraphIndex + 1}`}>
-                <img src={`/src/assets${image ? "/styles_images/" + title : ""}/${image ? image : "placeholder.png"}`} 
+                <img src={`assets${image ? "/styles_images/" + title : ""}/${image ? image : "placeholder.png"}`} 
                 className={styles['describing-image']}
                 id={`image-${index + 1}`}
                 key={`image-${index + 1}`}

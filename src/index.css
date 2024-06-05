@@ -7,7 +7,7 @@ body {
     font-family: Roboto;
     font-weight: 500;
 
-    background: url("/src/assets/bg.jpg");
+    background: url("/assets/bg.jpg");
     background-size: contain;
 }
 
@@ -58,7 +58,7 @@ main, .image-container, header {
     height: max(20vw, 150px);
     width: 100%;
 
-    background-image: url("/src/assets/main_img.png");
+    background-image: url("/assets/main_img.png");
     background-size: cover;
     background-position: center;
 }

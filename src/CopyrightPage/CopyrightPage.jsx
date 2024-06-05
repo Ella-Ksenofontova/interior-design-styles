@@ -1,8 +1,5 @@
 import Header from "../Header/Header";
 import HomePageLink from "../StylePage/HomePageLink/HomePageLink";
-import LINKS from "./links";
-
-//TODO: Добавить подгрузку источников, предварительно записав их в Firestore
 
 export default function CopyrightPage() {
     return(

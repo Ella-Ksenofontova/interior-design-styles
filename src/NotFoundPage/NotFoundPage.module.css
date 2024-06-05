@@ -11,7 +11,7 @@
   width: 200px;
   height: 200px;
 
-  background-image: url("/src/assets/404.svg");
+  background-image: url("/assets/404.svg");
   background-size: contain;
   background-repeat: no-repeat;
 }

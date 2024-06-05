@@ -88,7 +88,7 @@ mark {
     height: 30px;
     width: 30px;
 
-    background-image: url("/src/assets/close.png");
+    background-image: url("/assets/close.png");
     background-size: 80%;
     background-repeat: no-repeat;
     background-position: center;

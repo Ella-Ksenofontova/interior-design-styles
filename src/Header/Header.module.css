@@ -26,7 +26,7 @@ header {
     min-width: 125px;
     min-height: 65px;
 
-    background-image: url("/src/assets/logo.jpg");
+    background-image: url("/assets/logo.jpg");
     background-size: cover;
     background-position: center;
 }
@@ -37,14 +37,14 @@ header {
 
 .magnifier-decorative {
     background-size: contain;
-    background-image: url("/src/assets/magnifier.png");
+    background-image: url("/assets/magnifier.png");
     width: 20px;
     height: 20px;
 }
 
 .magnifier-decorative-disabled {
     background-size: contain;
-    background-image: url("/src/assets/magnifier_disabled.png");
+    background-image: url("/assets/magnifier_disabled.png");
     width: 20px;
     height: 20px;
 }
@@ -64,7 +64,7 @@ header {
     padding: 10px;
 
     background-color: #FFEBCC;
-    background-image: url("/src/assets/magnifier.png");
+    background-image: url("/assets/magnifier.png");
     background-size: 80%;
     background-repeat: no-repeat;
     background-position: center;
@@ -169,7 +169,7 @@ a[href=""] {
     height: 45px;
     width: 45px;
 
-    background-image: url("/src/assets/copyright.png");
+    background-image: url("/assets/copyright.png");
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -208,7 +208,7 @@ dialog h2 {
     height: 30px;
     width: 30px;
 
-    background-image: url("/src/assets/close.png");
+    background-image: url("/assets/close.png");
     background-size: 80%;
     background-repeat: no-repeat;
     background-position: center;

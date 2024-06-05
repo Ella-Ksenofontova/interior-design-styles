@@ -9,7 +9,7 @@ export default function LoadingPage() {
       <main>
           <HomePageLink />
           <div className={"loading-wrapper"}>
-              <img src="/src/assets/loading.gif" alt="Страница загружается" height={100} width={100}/>
+              <img src="/public/assets/loading.gif" alt="Страница загружается" height={100} width={100}/>
               Получаем информацию о стилях...
           </div>
       </main>

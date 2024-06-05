@@ -27,7 +27,7 @@
   width: 30px;
   height: 30px;
 
-  background-image: url("/src/assets/close.png");
+  background-image: url("/assets/close.png");
   background-color: transparent;
   background-size: cover;
 }
@@ -41,11 +41,11 @@
 }
 
 #previous {
-  background-image: url("/src/assets/arrow-left.png");
+  background-image: url("/assets/arrow-left.png");
 }
 
 #next {
-  background-image: url("/src/assets/arrow-right.png");
+  background-image: url("/assets/arrow-right.png");
 }
 
 .images-sequence {

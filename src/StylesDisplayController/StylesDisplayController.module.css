@@ -16,6 +16,6 @@ label {
 }
 
 input[type="checkbox"]:checked + .checkbox {
-    background-image: url("/src/assets/task.png");
+    background-image: url("/assets/task.png");
     background-size: cover;
 }

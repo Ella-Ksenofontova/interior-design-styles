@@ -137,7 +137,7 @@ export default function StylePage({styleName, styleOrder}) {
                 <main>
                     <HomePageLink />
                     <div className={"loading-wrapper"}>
-                        <img src="/src/assets/loading.gif" alt="Страница загружается" height={100} width={100}/>
+                        <img src="/assets/loading.gif" alt="Страница загружается" height={100} width={100}/>
                         Страница загружается
                     </div>
                 </main>

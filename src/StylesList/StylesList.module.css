@@ -11,13 +11,13 @@
 }
 
 .classic {
-    background-image: url("/src/assets/chandelier.png");
+    background-image: url("/assets/chandelier.png");
 }
 
 .modern {
-    background-image: url("/src/assets/light-bulb.png");
+    background-image: url("/assets/light-bulb.png");
 }
 
 .ethnic {
-    background-image: url("/src/assets/ethnic.png");
+    background-image: url("/assets/ethnic.png");
 }

@@ -12,7 +12,7 @@
     width: 30px;
     height: 30px;
 
-    background-image: url("/src/assets/home.png");
+    background-image: url("/assets/home.png");
     background-size: contain;
     background-repeat: no-repeat;
 }
