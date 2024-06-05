@@ -26,3 +26,4 @@ dist-ssr
 *.txt
 .eslintrc.cjs
 .stylelintrc
+vite.config.js
