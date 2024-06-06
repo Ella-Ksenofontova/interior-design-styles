@@ -14,7 +14,7 @@ body {
 #root {
     box-sizing: border-box;
     display: grid;
-    grid-template-rows: min-content 1fr;
+    grid-template-rows: auto max(20vw, 150px) 1fr;
     grid-template-columns: 100%;
     width: 100%;
     min-height: 100vh;
@@ -70,6 +70,11 @@ main {
 
     background-color: #FFEBCC;
 }
+
+.loading-page-main,
+.not-found-page-main {
+    grid-row: span 2;
+  }
 
 p {
     border-radius: 40px;

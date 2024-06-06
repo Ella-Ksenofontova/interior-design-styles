@@ -49,7 +49,7 @@ export default function Gallery({imagesData}) {
             <img
             id={`gallery-image-${index + 1}`}
             key={`gallery-image-${index + 1}`}
-            src={`/assets/styles_images/${styleName}/additional-${index + 1}.${item.extension}`}
+            src={`/interior-design-styles/assets/styles_images/${styleName}/additional-${index + 1}.${item.extension}`}
             height={150}
             onLoad={e => {
               const width = Math.min(e.target.naturalWidth / e.target.naturalHeight * 150, document.body.offsetWidth - 50)

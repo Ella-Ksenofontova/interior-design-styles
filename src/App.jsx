@@ -58,7 +58,7 @@ function HomePage({loaded, stylesData}) {
                     </p>
 
                 <div className="loading-wrapper">
-                <img src="/assets/loading.gif" alt="Стили загружаются" height={100} width={100}/>
+                <img src="assets/loading.gif" alt="Стили загружаются" height={100} width={100}/>
                         Стили загружаются
                 </div>
                 </main>
@@ -122,18 +122,18 @@ export default function App() {
     }
     return (
             <Routes>
-                <Route path="/" element={<HomePage loaded={loaded} stylesData={stylesData}/>} />
-                <Route path="/copyright" element={<StylesDataContext.Provider value = {stylesData}><CopyrightPage /></StylesDataContext.Provider>}/>
+                <Route path="/interior-design-styles/" element={<HomePage loaded={loaded} stylesData={stylesData}/>} />
+                <Route path="/interior-design-styles/copyright" element={<StylesDataContext.Provider value = {stylesData}><CopyrightPage /></StylesDataContext.Provider>}/>
                 {loaded ? stylesData.map((item, index) => {
                         item.name = STYLES[index]
                         item.path = PATHS[index]
 
                         return (
-                            <Route key={item.name} path={"/" + item.path} element={
+                            <Route key={item.name} path={`/interior-design-styles/${item.path}`} element={
                             <StylesDataContext.Provider value = {stylesData}><StylePage styleName={item.name} styleOrder={item.styleOrder}/></StylesDataContext.Provider>
                         }/>);
                     }) : STYLES.map((item, index) =>
-                        <Route key={item} path={"/" + PATHS[index]} element={<LoadingPage />}/>
+                        <Route key={item} path={"/interior-design-styles/" + PATHS[index]} element={<LoadingPage />}/>
                 )}
                 <Route path="*" element={<StylesDataContext.Provider value = {stylesData}><NotFoundPage /></StylesDataContext.Provider>}/>
             </Routes>

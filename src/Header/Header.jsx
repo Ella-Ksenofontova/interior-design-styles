@@ -15,7 +15,7 @@ export default function Header() {
           onClick={() => document.getElementById(
             styles["search-mobile-dialog"]).showModal()}>
         </button>
-        <Link to="/copyright"><div id={styles.copyright}></div></Link>
+        <Link to="/interior-design-styles/copyright"><div id={styles.copyright}></div></Link>
       </header>
 
       <MobileInputWithTooltip/>

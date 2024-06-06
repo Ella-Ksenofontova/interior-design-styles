@@ -7,13 +7,13 @@ export default function NotFoundPage() {
   return (
     <>
       <Header />
-      <main className={styles["not-found-main"]}>
+      <main className={"not-found-page-main"}>
         <div className={styles["not-found-wrapper"]}>
           <div className={styles["not-found-image"]}>
           </div>
           <div className="text-wrapper">
             <h2>На сайте нет такой страницы</h2>
-            <Link to="/">Вернуться на главную</Link>
+            <Link to="/interior-design-styles/">Вернуться на главную</Link>
           </div>
         </div>
       </main>

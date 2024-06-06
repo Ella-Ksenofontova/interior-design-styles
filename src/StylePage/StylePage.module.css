@@ -1,3 +1,7 @@
+.style-page-main {
+  grid-row: span 2;
+}
+
 .related-styles-list,
 .info-sources-list {
   margin-top: 20px;

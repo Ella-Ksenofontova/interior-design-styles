@@ -15,7 +15,7 @@ export default function StylesList({statesOfCheckboxes}) {
                if (classicStylesAreShown) {
                 return (
                     <li key={style.name}>
-                        <Link to={"/" + style.path}>{style.name}</Link>
+                        <Link to={"/interior-design-styles/" + style.path}>{style.name}</Link>
                         <div className={styles.classic} title="Это классический стиль">
                             <span className="visually-hidden">Это классический стиль</span>
                         </div>
@@ -29,7 +29,7 @@ export default function StylesList({statesOfCheckboxes}) {
                if (modernStylesAreShown) {
                     return (
                         <li key={style.name}>
-                            <Link to={"/" + style.path}>{style.name}</Link>
+                            <Link to={"/interior-design-styles/" + `${style.path}`}>{style.name}</Link>
                             <div className={styles.modern} title={style.comment ? style.comment : "Это современный стиль"}>
                                 <span className="visually-hidden">{style.comment ? style.comment : "Это современный стиль"}</span>
                             </div>
@@ -43,7 +43,7 @@ export default function StylesList({statesOfCheckboxes}) {
                if (ethnicStylesAreShown) {
                 return (
                     <li key={style.name}>
-                        <Link to={"/" + style.path}>{style.name}</Link>
+                        <Link to={"/interior-design-styles/" + style.path}>{style.name}</Link>
                         <div className={styles.ethnic} title="Это этнический стиль">
                             <span className="visually-hidden">Это этнический стиль</span>
                         </div>

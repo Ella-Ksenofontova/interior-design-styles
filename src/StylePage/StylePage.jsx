@@ -11,6 +11,8 @@ import RelatedStylesList from "./RelatedStylesList/RelatedStylesList";
 import InfoSourcesList from "./InfoSourcesList/InfoSourcesList";
 import Gallery from "./Gallery/Gallery";
 
+import styles from "./StylePage.module.css"
+
 async function getStyleData(styleName) {
     const firebaseConfig = {
         apiKey: "AIzaSyDq1ZY-CdiWgtPAUNaLyZKyfi0KKWr20mk",
@@ -112,7 +114,7 @@ export default function StylePage({styleName, styleOrder}) {
         return (
             <>
                 <Header />
-                <main>
+                <main className={styles["style-page-main"]}>
                     <HomePageLink />
                     <StyleCard styleName={styleName} 
                     styleOrder={styleOrder} 
@@ -134,10 +136,10 @@ export default function StylePage({styleName, styleOrder}) {
         return (
             <>
                 <Header />
-                <main>
+                <main className={styles["style-page-main"]}>
                     <HomePageLink />
                     <div className={"loading-wrapper"}>
-                        <img src="/assets/loading.gif" alt="Страница загружается" height={100} width={100}/>
+                        <img src="/interior-design-styles/assets/loading.gif" alt="Страница загружается" height={100} width={100}/>
                         Страница загружается
                     </div>
                 </main>

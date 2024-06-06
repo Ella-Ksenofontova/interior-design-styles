@@ -5,7 +5,7 @@ export default function HomePageLink() {
     return (
         <div className={styles["home-page-link"]}>
             <div className={styles["homepage-img"]}></div>
-            <Link to="/">На главную</Link>
+            <Link to="/interior-design-styles/">На главную</Link>
         </div>
     )
 }

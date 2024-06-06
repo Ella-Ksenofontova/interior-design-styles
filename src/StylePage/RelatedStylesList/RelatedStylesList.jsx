@@ -17,7 +17,7 @@ export default function RelatedStylesList({relatedStyles}) {
         <div className={styles["related-styles-list"]}>
             <h2>Связанные стили</h2>
             <ul>
-                {relatedStyles.sort().map(styleName => <li key={styleName}><Link to={"/" + stylesData.find(style => styleName == style.name).path}>{styleName}</Link></li>)}
+                {relatedStyles.sort().map(styleName => <li key={styleName}><Link to={"/interior-design-styles/" + stylesData.find(style => styleName == style.name).path}>{styleName}</Link></li>)}
             </ul>
         </div>
     );
