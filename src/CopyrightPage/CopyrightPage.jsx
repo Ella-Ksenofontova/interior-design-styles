@@ -5,7 +5,7 @@ export default function CopyrightPage() {
     return(
         <>
             <Header />
-            <main>
+            <main className="copyright-main">
                 <HomePageLink />
                 <h2>Ссылки на авторов стороннего контента</h2>
                 <ul>

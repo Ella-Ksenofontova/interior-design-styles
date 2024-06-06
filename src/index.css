@@ -72,7 +72,8 @@ main {
 }
 
 .loading-page-main,
-.not-found-page-main {
+.not-found-page-main,
+.copyright-main {
     grid-row: span 2;
   }
 
