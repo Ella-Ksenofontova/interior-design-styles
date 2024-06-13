@@ -5,6 +5,13 @@ import {bool} from "prop-types";
 import styles from "./Header.module.css";
 import {StylesDataContext} from "../StylesDataContext";
 
+/**
+ * The component of website's header.
+ * @component
+ * @returns {React.JSX.Element} The rendered Header component.
+ * @listens click
+ */
+
 export default function Header() {
   return (
     <>
@@ -26,6 +33,15 @@ export default function Header() {
 InputWithTooltip.propTypes = {
   mobile: bool,
 };
+
+/**
+ * The component that consists of input and tooltip. It's used to search styles.
+ * @component
+ * @param {Object} props - This component accepts _mobile_ as prop.
+ * @param {boolean} props.mobile -  Indicates should we render mobile or desktop element.
+ * @returns {React.JSX.Element} The rendered InputWithTooltip component.
+ * @listens click, input, focus, mouseenter, mouseleave
+ */
 
 function InputWithTooltip({mobile}) {
   const stylesData = useContext(StylesDataContext);
@@ -125,6 +141,13 @@ function InputWithTooltip({mobile}) {
     </div>
   );
 };
+
+/**
+ * Mobile version for InputWithTooltip component. The feature of it is that everything in it is wrapped in _dialog_ tag.
+ * @component
+ * @returns {React.JSX.Element} The rendered MobileInputWithTooltip component.
+ * @see {@link InputWithTooltip}
+ */
 
 const MobileInputWithTooltip = function() {
   return (

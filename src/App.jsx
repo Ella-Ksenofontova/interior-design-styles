@@ -12,13 +12,36 @@ import CopyrightPage from "./CopyrightPage/CopyrightPage";
 import LoadingPage from './LoadingPage/LoadingPage';
 import NotFoundPage from './NotFoundPage/NotFoundPage'
 
+/**
+ * List of styles in interior design and architecture, about which articles on website exist.
+ * @constant
+ * @readonly
+ */
+
 const STYLES = [
     "Авангард", "Ампир", "Античный", "Ар-деко", "Африканский", "Барокко", "Брутальный", "Восточный", "Готический", "Египетский", "Кантри", "Китайский", "Китч", "Классический", "Консерватизм", "Конструктивизм", "Лофт", "Минимализм", "Модерн", "Неоклассицизм", "Поп-арт", "Постмодернизм", "Прованс", "Ренессанс", "Рококо", "Романский", "Скандинавский", "Техно", "Шале", "Эклектика", "Этнический", "Японский"
 ]
 
+/**
+ * List of paths which are corresponding to styles.
+ * @constant
+ * @readonly
+ * @see {@link STYLES}
+ */
+
 const PATHS = [
     "avant-garde", "empire", "antique", "art-deco", "african", "baroque", "brutal", "oriental", "gothic", "egyptian", "country", "chinese", "kitsch", "classic", "conservative", "constructivism", "loft", "minimalism", "modern", "neoclassic", "pop-art", "postmoden", "provence", "renaissanse", "rococo", "romanesque", "scandinavian", "techno", "chalet", "eclectism", "ethnic", "japanese"
 ]
+
+/**
+ * Component of Home page.
+ * 
+ * @component
+ * @param {Object} props - This component accepts _loaded_ and _stylesData_ as props.
+ * @param {boolean} props.loaded - Indicates whether information about styles that is neccessary for their correct display is received.
+ * @param {Array.<Object>} props.stylesData - Data about styles that is recieved from Firstore Database.
+ * @returns {React.JSX.Element} The rendered HomePage component.
+ */
 
 function HomePage({loaded, stylesData}) {
     document.title = "Стили в дизайне интерьеров и архитектуре"
@@ -72,6 +95,13 @@ HomePage.propTypes = {
     stylesData: arrayOf(object)
 };
 
+/**
+ * 
+ * @param {string[]} styles - List of styles.
+ * @async
+ * @returns {Array.<Object>} List of objects, each with data about certain style.
+ */
+
 async function getStylesData(styles) {
     const firebaseConfig = {
         apiKey: "AIzaSyDq1ZY-CdiWgtPAUNaLyZKyfi0KKWr20mk",
@@ -104,9 +134,10 @@ async function getStylesData(styles) {
     return stylesData;
 }
 
-getStylesData.propTypes = {
-    styles: arrayOf(string)
-};
+/**
+ * Root component of app. It uses routing for React.
+ * @returns {React.JSX.Element} The rendered App component. 
+ */
 
 export default function App() {
     const [loaded, setLoaded] = useState(false);

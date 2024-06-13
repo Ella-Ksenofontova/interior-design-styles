@@ -3,9 +3,23 @@ import GalleryCarousel from "../GalleryCarousel/GalleryCarousel";
 import galleryStyles from "../GalleryCarousel/GalleryCarousel.module.css"
 import { useState } from "react";
 
+/**
+ * Prevents default behaviour of specified event.
+ * @param {Event} event - Event object.
+ */
+
 function preventDefault(event) {
   event.preventDefault();
 }
+
+/**
+ * The component of gallery. It's used in style page.
+ * @component
+ * @param {Object} props - This component accepts _imagesData_ as prop.
+ * @param {Array.<Object>} props.imagesData - Array of objects that contain information about images.
+ * @returns {React.JSX.Element} The rendered Gallery component.
+ * @listens load, click, mousewheel, touchmove (the last two since image is clicked and until the carousel is closed)
+ */
 
 export default function Gallery({imagesData}) {
   const indexOfWord = document.title.indexOf(" стиль");

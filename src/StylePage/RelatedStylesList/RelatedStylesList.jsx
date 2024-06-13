@@ -10,6 +10,14 @@ RelatedStylesList.propTypes = {
     relatedStyles: arrayOf(string)
 };
 
+/**
+ * List of styles that are similar to one described on the page.
+ * @component
+ * @param {Object} props - This component accepts _relatedStyles_ as props.
+ * @param {string[]} props.relatedStyles - Array of related styles' names.
+ * @returns {React.JSX.Element} The rendered RelatedStylesList component.
+ */
+
 export default function RelatedStylesList({relatedStyles}) {
     const stylesData = useContext(StylesDataContext);
 

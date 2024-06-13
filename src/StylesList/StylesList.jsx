@@ -5,6 +5,14 @@ import styles from "./StylesList.module.css";
 
 import { StylesDataContext } from "../StylesDataContext";
 
+/**
+ * The component that represents styles list. It's used on homepage.
+ * @component
+ * @param {Object} props - This component accepts _statesOfCheckboxes_ as prop.
+ * @param {boolean[]} props.statesOfCheckboxes - Array with three boolean values that indicate should styles of each type be shown.
+ * @returns {React.JSX.Element} The rendered StylesList component.
+ */
+
 export default function StylesList({statesOfCheckboxes}) {
     let [classicStylesAreShown, modernStylesAreShown, ethnicStylesAreShown] = statesOfCheckboxes;
     const stylesData = useContext(StylesDataContext);

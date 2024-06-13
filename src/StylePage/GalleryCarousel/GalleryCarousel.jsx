@@ -1,6 +1,11 @@
 import styles from "./GalleryCarousel.module.css"
 import { useState, useEffect } from "react";
 
+/**
+ * Changes the dimensions of images. It's a callback in _resize_ event listener.
+ * @param {HTMLImageElement[]} imagesList - list of IMG tags which sizes should be changed.
+ */
+
 function resizeImages(imagesList) {
   for (let image of imagesList) {
     const ratio = image.naturalWidth / image.naturalHeight;
@@ -16,6 +21,17 @@ function resizeImages(imagesList) {
     image.parentElement.style.height = `${image.height}px`;
   }
 }
+
+/**
+ * The gallery carousel component.
+ * @component
+ * @param {Object} props - this component accepts _imagesData_, _clickedImage_ and _scrollCallback_ as props.
+ * @param {Array.<Object>} props.imagesData - Data about displayed images.
+ * @param {string} props.clickedImage - The path to clicked image.
+ * @param {Function} props.scrollCallback - Callback which is called when _touchmove_ and _mousewheel_ events occur. This param is needed to enable scrolling when the carousel is closed.
+ * @returns {React.JSX.Element} The rendered GalleryCarousel component.
+ * @listens touchstart, touchend, pointermove (when user is touching the image), load, click
+ */
 
 export default function GalleryCarousel({imagesData, clickedImage, scrollCallback}) {
     const [activeIndex, setActiveIndex] = useState(null);

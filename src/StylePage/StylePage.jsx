@@ -13,6 +13,21 @@ import Gallery from "./Gallery/Gallery";
 
 import styles from "./StylePage.module.css"
 
+/**
+ * Gets information about specified style from Firestore Database.
+ * @async
+ * @param {string} styleName - The name of the style.
+ * @returns {Promise<{desciption: string,
+ *  relatedStyles: string[],
+ *  imagesData: {
+ *      desciptions: string[],
+ *      imagesExtensions: string[],
+ *      imagesSources: string[]
+ * },
+ * infoSources: string[]
+ * }>} Data about specified style.
+ */
+
 async function getStyleData(styleName) {
     const firebaseConfig = {
         apiKey: "AIzaSyDq1ZY-CdiWgtPAUNaLyZKyfi0KKWr20mk",
@@ -72,6 +87,14 @@ async function getStyleData(styleName) {
 getStyleData.propTypes = {
     styleName: string
 };
+
+/**
+ * The component of style page.
+ * @param {Object} props - This component accepts _styleName_ and _styleOrder_ as props.
+ * @param {string} props.styleName - name of the style.
+ * @param {"before" | "after"} props.styleOrder - indicates whether word "Стиль" (means "style" in Russian) should be written before or after style's name.
+ * @returns {React.JSX.Element} The rendered StylePage component.
+ */
 
 export default function StylePage({styleName, styleOrder}) {
     document.title = styleOrder == "before" ? `${styleName} стиль` : styleName;

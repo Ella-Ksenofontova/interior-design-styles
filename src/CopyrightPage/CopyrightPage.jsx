@@ -1,6 +1,12 @@
 import Header from "../Header/Header";
 import HomePageLink from "../StylePage/HomePageLink/HomePageLink";
 
+/**
+ * The component of copyright page.
+ * @component
+ * @returns {React.JSX.Element} The rendered CopyrightPage component.
+ */
+
 export default function CopyrightPage() {
     return(
         <>

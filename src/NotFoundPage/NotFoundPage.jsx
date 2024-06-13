@@ -3,6 +3,12 @@ import styles from "./NotFoundPage.module.css"
 
 import Header from "../Header/Header";
 
+/**
+ * The component which is mounted when 404 error occurs.
+ * @component
+ * @returns {React.JSX.Element} The rendered NotFoundPage component.
+ */
+
 export default function NotFoundPage() {
   return (
     <>

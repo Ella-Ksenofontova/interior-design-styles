@@ -1,6 +1,16 @@
 import { string } from "prop-types";
 import styles from "./StyleCard.module.css";
 
+/**
+ * This component consists of image of style (or placeholder if image isn't found) and its name. It is used on style page.
+ * @component
+ * @param {Object} props - This component accepts _styleName_, _styleOrder_ and _source_ as props.
+ * @param {string} props.styleName - The name of style.
+ * @param {"before" | "after"} props.styleOrder - indicates whether the word "Стиль" (means "style" in Russian) goes before its name or after it.
+ * @param {string} props.source - link to information about either source on author of image.
+ * @returns {React.JSX.Element} The rendered StyleCard component
+ */
+
 export default function StyleCard({styleName, styleOrder, source}) {
     const styleTitle = styleOrder === "before" ? `${styleName} стиль` : `Стиль ${styleName.toLowerCase()}`;
 
@@ -19,6 +29,7 @@ export default function StyleCard({styleName, styleOrder, source}) {
 
 StyleCard.propTypes = {
     styleName: string,
-    styleOrder: string
+    styleOrder: string,
+    source: string,
 };
 
