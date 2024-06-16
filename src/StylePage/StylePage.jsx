@@ -8,7 +8,7 @@ import HomePageLink from "./HomePageLink/HomePageLink";
 import StyleCard from "./StyleCard/StyleCard";
 import StyleDescription from "./StyleDescription/StyleDescription";
 import RelatedStylesList from "./RelatedStylesList/RelatedStylesList";
-import InfoSourcesList from "./InfoSourcesList/InfoSourcesList";
+import SourcesList from "./SourcesList/SourcesList";
 import Gallery from "./Gallery/Gallery";
 
 import styles from "./StylePage.module.css"
@@ -151,7 +151,7 @@ export default function StylePage({styleName, styleOrder}) {
                     }
 
                     {styleData.infoSources.length > 0 ?
-                    <InfoSourcesList infoSources={styleData.infoSources}/> : ""}
+                    <SourcesList title="Источники информации" sources={styleData.infoSources}/> : ""}
                 </main>
             </>
         );

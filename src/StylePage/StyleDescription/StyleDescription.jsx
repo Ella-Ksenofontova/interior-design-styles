@@ -4,6 +4,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useState } from 'react';
 
+import SourcesList from '../SourcesList/SourcesList';
 import styles from "./StyleDescription.module.css"
 
 /**
@@ -37,7 +38,7 @@ async function getAttributes(numberOfMark) {
             text: docSnap.get("text"),
             orientation: docSnap.get("orientation"),
             image: docSnap.get("image"),
-            descriptionOfImage: docSnap.get("description")
+            descriptionOfImage: docSnap.get("description"),
         };
 
         return attributes;
@@ -51,6 +52,36 @@ async function getAttributes(numberOfMark) {
     };
 }
 
+async function getSourcesAndImageName(numbersOfMarks) {
+    const firebaseConfig = {
+        apiKey: "AIzaSyDq1ZY-CdiWgtPAUNaLyZKyfi0KKWr20mk",
+        authDomain: "interior-design-styles-eef77.firebaseapp.com",
+        projectId: "interior-design-styles-eef77",
+        storageBucket: "interior-design-styles-eef77.appspot.com",
+        messagingSenderId: "617285631640",
+        appId: "1:617285631640:web:4feecb5b608fcbb18c1aed",
+        measurementId: "G-BPSKCJ06PB"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    let sources = [];
+
+    for (let number of numbersOfMarks) {
+        const docRef = doc(db, "Marks", `Mark${number}`);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            const imageName = docSnap.get("image");
+            sources.push({
+                url: docSnap.get("source"),
+                description: imageName.substring(0, imageName.indexOf("."))
+            });
+        }
+    }
+
+    return sources;
+}
+
 /**
  * Description of style split at paragraphs.
  * @component
@@ -60,6 +91,19 @@ async function getAttributes(numberOfMark) {
  */
 
 export default function StyleDescription({ description }) {
+    const [sources, setSources] = useState([]);
+    const regexp = /!mark\d+/g;
+    const matches = description.match(regexp);
+    if (matches) {
+        const numbersOfMarks = matches.map(item => item.substring(5));
+        const sourcesResponse = getSourcesAndImageName(numbersOfMarks);
+        sourcesResponse.then(result => {
+            if (sources.length === 0) {
+                setSources(result);
+            }
+        })
+    }
+
     description = description.split("\\n");
 
     return (<section>
@@ -84,6 +128,9 @@ export default function StyleDescription({ description }) {
             }
 
         </div>
+        <SourcesList title="Источники изображений" 
+        explanation="Здесь перечислены источники картинок, которые использовались во всплывающих подсказках к следующим словам: "
+        sources={sources}/>
     </section>);
 }
 
@@ -112,12 +159,12 @@ function ParagraphPart({ initialText, index, paragraphIndex }) {
     });
 
     const [requested, setRequested] = useState(false);
-
     const [markParams, setMarkParams] = useState({
         text: "",
         orientation: "vertical",
         image: "",
-        descriptionOfImage: ""
+        descriptionOfImage: "",
+        source: ""
     });
 
     let title;
@@ -167,7 +214,10 @@ function ParagraphPart({ initialText, index, paragraphIndex }) {
                         height={markParams.orientation.toLowerCase() === "vertical" ? "200" : "150"}
                         width={markParams.orientation.toLowerCase() === "vertical" ? "125" : "300"}
                     />
-                    <figcaption key={`caption-${index + 1}`}>{markParams.descriptionOfImage}</figcaption>
+                    <figcaption key={`caption-${index + 1}`}>
+                        {markParams.descriptionOfImage}<br />
+                        <a href={markParams.source}>Ссылка на источник изображения или его автора</a>
+                    </figcaption>
                 </figure>
                 <DescribingMobileDialog
                     index={index}
@@ -196,11 +246,12 @@ ParagraphPart.propTypes = {
  * @param {string} props.image - Path to image. Default value is empty string.
  * @param {"vertical" | "horizontal"} props.orientation - Orientation of image. Default value is vertical.
  * @param {string} props.descriptionOfImage - The text that describes word(s) in mark hovering on (or touching of) which caused display of tooltip.
+ * @param {string} props.source - Source of image used in dialog.
  * @returns {React.JSX.Element} The rendered DescribingMobileDialog component.
  * @listens click
  */
 
-function DescribingMobileDialog({ index = 0, paragraphIndex = 0, image = "", orientation = "vertical", descriptionOfImage = "Нет описания картинки" }) {
+function DescribingMobileDialog({ index = 0, paragraphIndex = 0, image = "", orientation = "vertical", descriptionOfImage = "Нет описания картинки"}) {
     let title;
     let indexOfStyleWord = document.title.indexOf(" стиль");
     if (indexOfStyleWord > -1) {
@@ -219,7 +270,9 @@ function DescribingMobileDialog({ index = 0, paragraphIndex = 0, image = "", ori
                 height={orientation.toLowerCase() === "vertical" ? "200" : "150"}
                 width={orientation.toLowerCase() === "vertical" ? "125" : "300"}>
             </img>
-            <span key={`description-${index + 1}`}>{descriptionOfImage}</span>
+            <span key={`description-${index + 1}`}>
+                {descriptionOfImage}<br/>
+            </span>
             <button className={styles["close-mobile-dialog"]}
                 onClick={() => document.getElementById(`describing-block-mobile-${index + 1}-${paragraphIndex + 1}`).close()}></button>
         </dialog>);
@@ -230,5 +283,6 @@ DescribingMobileDialog.propTypes = {
     paragraphIndex: number,
     image: string,
     orientation: string,
-    descriptionOfImage: string
+    descriptionOfImage: string,
+    source: string
 };

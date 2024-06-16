@@ -3,7 +3,7 @@
 }
 
 .related-styles-list,
-.info-sources-list {
+.sources-list {
   margin-top: 20px;
   max-width: calc(100% - 40px);
   padding: 15px;
@@ -14,16 +14,21 @@
 }
 
 .related-styles-list h2,
-.info-sources-list h2 {
+.sources-list h2 {
   margin-top: 0;
   margin-bottom: 0;
   color: #FDEDD4;
+}
+
+.explanation {
+  display: inline-block;
+  padding-left: 20px; 
 }
 
 .related-styles-list {
   width: 250px;
 }
 
-.info-sources-list {
+.sources-list {
   width: 350px;
 }
