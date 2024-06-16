@@ -7,27 +7,27 @@ import { useState } from 'react';
 import SourcesList from '../SourcesList/SourcesList';
 import styles from "./StyleDescription.module.css"
 
+const firebaseConfig = {
+    apiKey: "AIzaSyDq1ZY-CdiWgtPAUNaLyZKyfi0KKWr20mk",
+    authDomain: "interior-design-styles-eef77.firebaseapp.com",
+    projectId: "interior-design-styles-eef77",
+    storageBucket: "interior-design-styles-eef77.appspot.com",
+    messagingSenderId: "617285631640",
+    appId: "1:617285631640:web:4feecb5b608fcbb18c1aed",
+    measurementId: "G-BPSKCJ06PB"
+};
+
 /**
- * Gets inforamtion that is neccessary for display of description from Firestore Database.
+ * Gets information that is neccessary for display of description from Firestore Database.
  * @async
  * @param {number} numberOfMark - The number of mark in list of all marks. Descriprtions initially come with substrings like !markn, where n is a number of mark. Then these substrings are replaced with appropriate _MARK_ tags and tooltips.
  * @returns {Promise<{text: string,
- * orientation: "vertical" | "horizontal", 
- * descriptionOfImage: string,
- * text: string}>} The promise that returns object with neccessary attributes when it's fullfiled.
- */
+* orientation: "vertical" | "horizontal", 
+* descriptionOfImage: string,
+* text: string}>} The promise that returns object with neccessary attributes when it's fullfiled.
+*/
 
 async function getAttributes(numberOfMark) {
-    const firebaseConfig = {
-        apiKey: "AIzaSyDq1ZY-CdiWgtPAUNaLyZKyfi0KKWr20mk",
-        authDomain: "interior-design-styles-eef77.firebaseapp.com",
-        projectId: "interior-design-styles-eef77",
-        storageBucket: "interior-design-styles-eef77.appspot.com",
-        messagingSenderId: "617285631640",
-        appId: "1:617285631640:web:4feecb5b608fcbb18c1aed",
-        measurementId: "G-BPSKCJ06PB"
-    };
-
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
@@ -52,17 +52,16 @@ async function getAttributes(numberOfMark) {
     };
 }
 
-async function getSourcesAndImageName(numbersOfMarks) {
-    const firebaseConfig = {
-        apiKey: "AIzaSyDq1ZY-CdiWgtPAUNaLyZKyfi0KKWr20mk",
-        authDomain: "interior-design-styles-eef77.firebaseapp.com",
-        projectId: "interior-design-styles-eef77",
-        storageBucket: "interior-design-styles-eef77.appspot.com",
-        messagingSenderId: "617285631640",
-        appId: "1:617285631640:web:4feecb5b608fcbb18c1aed",
-        measurementId: "G-BPSKCJ06PB"
-    };
+/**
+ * Finds information that is neccessary for displaying list of tooltip images' sources.
+ * @param {string[]} numbersOfMarks - Array with numbers of marks we've got to search. Note that these "numbers" are actually strings, and theoretically, you can pass a sequence of letters - that will not cause any mistake.
+ * @returns {Promise<{
+ *  url: string,
+ *  description: string
+ * }>} The promise that returns object with neccessary attributes when it's fullfiled.
+ */
 
+async function getSourcesAndImageName(numbersOfMarks) {
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
     let sources = [];
@@ -139,13 +138,13 @@ StyleDescription.propTypes = {
 };
 
 /**
- * The part of the paragraph before or after !markn substring. Also includes mark and tooltip themselves, if its index is bigger than 0.
+ * The part of the paragraph before or after !markn substring (where _n_ is number). Also includes mark and tooltip themselves, if its index is bigger than 0.
  * @component
  * @param {Object} props - This component accepts _initialText_, _index_ and _paragraphIndex_ as props.
  * @param {string} props.initialText - Initial text of paragraph part, that is edited before being added to the page.
  * @param {number} props.index - The index of whole paragraph among all paragraphs on the page.
  * @param {number} props.paragraphIndex - The index of paragraph part in current paragraph.
- * @returns {React.JSX.Element} The rendered ParagrapPart component.
+ * @returns {React.JSX.Element} The rendered ParagraphPart component.
  * @listens focus, blur, mouseover, mouseout, touchstart
  */
 

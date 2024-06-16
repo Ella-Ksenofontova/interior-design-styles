@@ -1,7 +1,7 @@
 import styles from "../StylePage.module.css";
 
 /**
- * The component with list of sources of information shown in tooltips. It's used on style page.
+ * The component with list of sources. It's reusable and appears on style page.
  * @component
  * @param {Object} props - This component accepts _sources_ and _title_ as props.
  * @param {string} props.title - Title of list;
