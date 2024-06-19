@@ -13,7 +13,9 @@ export default function SourcesList({title, explanation="", sources}) {
   return (
     <div className={styles["sources-list"]}>
       <h2>{title}</h2>
-      <span className={styles["explanation"]}>{explanation}</span>
+      {explanation ? 
+        <span className={styles["explanation"]}>{explanation}</span>
+      : ""}
       <ul>
         {sources.map((item, index) => 
           <li key={`source-${index + 1}`}><a href={item.url}>{item.description}</a></li>

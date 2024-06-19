@@ -84,6 +84,45 @@ async function getStyleData(styleName) {
     return styleData;
 }
 
+/**
+ * Finds information that is neccessary for displaying list of tooltip images' sources.
+ * @param {string[]} numbersOfMarks - Array with numbers of marks we've got to search. Note that these "numbers" are actually strings, and theoretically, you can pass a sequence of letters - that will not cause any mistake.
+ * @returns {Promise<{
+*  url: string,
+*  description: string
+* }>} The promise that returns object with neccessary attributes when it's fullfiled.
+*/
+
+async function getSourcesAndImageName(numbersOfMarks) {
+    const firebaseConfig = {
+        apiKey: "AIzaSyDq1ZY-CdiWgtPAUNaLyZKyfi0KKWr20mk",
+        authDomain: "interior-design-styles-eef77.firebaseapp.com",
+        projectId: "interior-design-styles-eef77",
+        storageBucket: "interior-design-styles-eef77.appspot.com",
+        messagingSenderId: "617285631640",
+        appId: "1:617285631640:web:4feecb5b608fcbb18c1aed",
+        measurementId: "G-BPSKCJ06PB"
+    };
+
+   const app = initializeApp(firebaseConfig);
+   const db = getFirestore(app);
+   let sources = [];
+
+   for (let number of numbersOfMarks) {
+       const docRef = doc(db, "Marks", `Mark${number}`);
+       const docSnap = await getDoc(docRef);
+       if (docSnap.exists()) {
+           const imageName = docSnap.get("image");
+           sources.push({
+               url: docSnap.get("source"),
+               description: imageName.substring(0, imageName.indexOf("."))
+           });
+       }
+   }
+
+   return sources;
+}
+
 getStyleData.propTypes = {
     styleName: string
 };
@@ -101,6 +140,7 @@ export default function StylePage({styleName, styleOrder}) {
     window.scrollTo(0, 0);
 
     const [loaded, setLoaded] = useState(false);
+    const [sources, setSources] = useState([]);
 
     useEffect(() => setLoaded(false), [styleName])
 
@@ -109,6 +149,16 @@ export default function StylePage({styleName, styleOrder}) {
         relatedStyles: "",
         infoSources: "",
     });
+
+    const regexp = /!mark\d+/g;
+    const matches = styleData.description.match(regexp);
+    if (matches && sources.length === 0) {
+        const numbersOfMarks = matches.map(item => item.substring(5));
+        const sourcesResponse = getSourcesAndImageName(numbersOfMarks);
+        sourcesResponse.then(result => {
+            setSources(result);
+        })
+    }
 
     if(!loaded) {
         const response = getStyleData(styleName);
@@ -142,7 +192,7 @@ export default function StylePage({styleName, styleOrder}) {
                     <StyleCard styleName={styleName} 
                     styleOrder={styleOrder} 
                     source={styleData.cardSource}/>
-                    <StyleDescription description={styleData.description} />
+                    <StyleDescription description={styleData.description.split("\\n")} />
 
                     {styleData.relatedStyles.length > 0 ? <RelatedStylesList relatedStyles={styleData.relatedStyles} /> : ""}
 
@@ -152,6 +202,11 @@ export default function StylePage({styleName, styleOrder}) {
 
                     {styleData.infoSources.length > 0 ?
                     <SourcesList title="Источники информации" sources={styleData.infoSources}/> : ""}
+
+                    {sources.length ? 
+                    <SourcesList title="Источники изображений" 
+                    explanation="Здесь перечислены источники картинок, которые использовались во всплывающих подсказках к следующим словам: "
+                    sources={sources}/> : ""}
                 </main>
             </>
         );

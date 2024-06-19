@@ -1,10 +1,8 @@
 import { useFloating, offset, autoPlacement, autoUpdate } from '@floating-ui/react';
-import { number, string } from "prop-types";
+import { number, string, arrayOf } from "prop-types";
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useState } from 'react';
-
-import SourcesList from '../SourcesList/SourcesList';
 import styles from "./StyleDescription.module.css"
 
 const firebaseConfig = {
@@ -53,58 +51,14 @@ async function getAttributes(numberOfMark) {
 }
 
 /**
- * Finds information that is neccessary for displaying list of tooltip images' sources.
- * @param {string[]} numbersOfMarks - Array with numbers of marks we've got to search. Note that these "numbers" are actually strings, and theoretically, you can pass a sequence of letters - that will not cause any mistake.
- * @returns {Promise<{
- *  url: string,
- *  description: string
- * }>} The promise that returns object with neccessary attributes when it's fullfiled.
- */
-
-async function getSourcesAndImageName(numbersOfMarks) {
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    let sources = [];
-
-    for (let number of numbersOfMarks) {
-        const docRef = doc(db, "Marks", `Mark${number}`);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-            const imageName = docSnap.get("image");
-            sources.push({
-                url: docSnap.get("source"),
-                description: imageName.substring(0, imageName.indexOf("."))
-            });
-        }
-    }
-
-    return sources;
-}
-
-/**
  * Description of style split at paragraphs.
  * @component
  * @param {Object} props - This component accepts _description_ as props.
- * @param {string} props.description - The description of style. 
+ * @param {string[]} props.description - The description of style, which is array of paragraphs. 
  * @returns {React.JSX.Element} The rendered StyleDescription component.
  */
 
 export default function StyleDescription({ description }) {
-    const [sources, setSources] = useState([]);
-    const regexp = /!mark\d+/g;
-    const matches = description.match(regexp);
-    if (matches) {
-        const numbersOfMarks = matches.map(item => item.substring(5));
-        const sourcesResponse = getSourcesAndImageName(numbersOfMarks);
-        sourcesResponse.then(result => {
-            if (sources.length === 0) {
-                setSources(result);
-            }
-        })
-    }
-
-    description = description.split("\\n");
-
     return (<section>
         <h2>Описание стиля</h2>
         <div id={styles["description"]}>
@@ -127,14 +81,11 @@ export default function StyleDescription({ description }) {
             }
 
         </div>
-        <SourcesList title="Источники изображений" 
-        explanation="Здесь перечислены источники картинок, которые использовались во всплывающих подсказках к следующим словам: "
-        sources={sources}/>
     </section>);
 }
 
 StyleDescription.propTypes = {
-    description: string
+    description: arrayOf(string)
 };
 
 /**
@@ -183,7 +134,7 @@ function ParagraphPart({ initialText, index, paragraphIndex }) {
     } else {
         let regexp = /^\d+/;
         let match = initialText.match(regexp);
-        let remainingText = initialText.substring(match.length + 1);
+        let remainingText = initialText.substring(match[0].length);
 
         let attributes = getAttributes(match[0]);
 
