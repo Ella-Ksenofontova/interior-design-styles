@@ -6,7 +6,7 @@
   "homepage": "https://ella-ksenofontova.github.io/interior-design-styles/",
   "scripts": {
     "dev": "vite",
-    "predeploy": "npm run build; xcopy 404.html ./build/",
+    "predeploy": "npm run build ; xcopy 404.html ./build/",
     "deploy": "gh-pages -d dist",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
