@@ -1,0 +1,23 @@
+body {
+  background-color: #FFEBCC;
+  font-family: Roboto;
+}
+
+::-moz-selection {
+  background-color: brown;
+  color: white;
+}
+
+::selection {
+  background-color: brown;
+  color: white;
+}
+
+a {
+  color: rgb(126, 76, 45);
+}
+
+a:visited {
+  color: #472a1f;
+}
+
