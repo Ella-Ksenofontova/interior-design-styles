@@ -46,6 +46,7 @@ InputWithTooltip.propTypes = {
 function InputWithTooltip({mobile}) {
   const stylesData = useContext(StylesDataContext);
   const [appropriateLinks, setAppropriateLinks,] = useState([]);
+  const [listenerAdded, setListenerAdded] = useState(false);
 
   const handleInput = function(event) {
     const tooltip = mobile ?
@@ -77,7 +78,7 @@ function InputWithTooltip({mobile}) {
           document.querySelector(`.${styles["input-and-tooltip-mobile"]}`);
           inputAndTooltipMobile.firstElementChild.value = "";
           document.getElementById(styles["search-mobile-dialog"]).close();
-        } : () => {}}><Link to={`/${item.path}`}>{item.name}</Link></li>);
+        } : () => {}}><Link to={`/interior-design-styles/${item.path}`}>{item.name}</Link></li>);
       setAppropriateLinks(links);
     } else {
       tooltip.hidden = true;
@@ -102,6 +103,20 @@ function InputWithTooltip({mobile}) {
         }
         break;
       }
+    }
+
+    if(!listenerAdded) {
+      window.addEventListener("resize", () => {
+        if(!mobile) {
+          let tooltipSelector = `.${styles.tooltip}`;
+          let tooltip = document.querySelector(tooltipSelector);
+          let input = document.querySelector("input[type='text']");
+          
+          tooltip.style.top = `${input.getBoundingClientRect().bottom + 10}px`;
+          tooltip.style.left = `${input.getBoundingClientRect().left}px`;
+        }
+      })
+      setListenerAdded(true);
     }
   };
 
