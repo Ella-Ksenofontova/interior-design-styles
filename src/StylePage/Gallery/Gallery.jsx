@@ -50,13 +50,22 @@ export default function Gallery({imagesData}) {
           width: Math.min(document.getElementById(`gallery-image-${index + 1}`).naturalWidth, innerWidth * 0.75),
         }
       })
-    )
+    );
+
+    window.addEventListener("resize", resizeImages);
+  }
+
+  function resizeImages() {
+    const images = document.querySelectorAll("img[id^=gallery-image]");
+    for (let image of images) {
+      image.width = Math.min(image.naturalWidth / image.naturalHeight * 150, document.body.offsetWidth - 50);
+    }
   }
 
   return(
     <>
       <h2 className={styles["gallery-header"]}>Галерея</h2>
-      <div className={styles["gallery-explanation"]}>Кликните на какое-либо изображение, чтобы просмотреть карусель</div>
+      <div className={styles["gallery-explanation"]}>Кликните на какое-либо изображение, чтобы просмотреть карусель.</div>
       <div className={styles["gallery"]}>
         {imagesData.map((item, index) => 
           <figure key={`gallery-figure-${index + 1}`}>

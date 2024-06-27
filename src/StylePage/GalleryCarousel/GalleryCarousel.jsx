@@ -35,7 +35,6 @@ function resizeImages(imagesList) {
 
 export default function GalleryCarousel({imagesData, clickedImage, scrollCallback}) {
     const [activeIndex, setActiveIndex] = useState(null);
-    let currentActiveIndex = activeIndex ?? imagesData.findIndex(item => item.name === clickedImage);
 
     window.onresize =  () => {
         const images = document.querySelectorAll(`.${styles["image-wrapper"]} img`);
@@ -44,23 +43,32 @@ export default function GalleryCarousel({imagesData, clickedImage, scrollCallbac
         const imagesSequence = document.querySelector(`.${styles["images-sequence"]}`);
         if (imagesSequence) {
           imagesSequence.classList.add(styles["resizing"]);
-          imagesSequence.scrollTo(findScrollWidth(), 0);
+          imagesSequence.scrollTo(findScrollWidth(activeIndex), 0);
         }
     };
 
+  
     useEffect(() => {
       const imagesSequence = document.querySelector(`.${styles["images-sequence"]}`);
-      if (imagesSequence && activeIndex === null) {
+      const currentActiveIndex = imagesData.findIndex(item => item.name === clickedImage);
+      if (imagesSequence?.parentElement.open && activeIndex === null && currentActiveIndex > -1) {
         imagesSequence.classList.add(styles["just-opened"]);
-        imagesSequence.scrollTo(findScrollWidth(), 0);
+        imagesSequence.scrollTo(findScrollWidth(currentActiveIndex), 0);
+        setActiveIndex(currentActiveIndex);
       }
     })
 
-    function findScrollWidth() {
+    /**
+     * Finds width that sequence of images should be scrolled to.
+     * @param {number} currentIndex - index of image that should be shown after scrolling.
+     * @returns {number} - Found scroll width in pixels.
+     */
+
+    function findScrollWidth(currentIndex) {
       let i = 0;
       let foundScrollWidth= 0;
 
-      while (i < currentActiveIndex) {
+      while (i < currentIndex) {
         foundScrollWidth += innerWidth * 0.7 + 5;
         i ++;
       }
@@ -70,36 +78,40 @@ export default function GalleryCarousel({imagesData, clickedImage, scrollCallbac
 
     function goToNextImage() {
       const imagesSequence = document.querySelector(`.${styles["images-sequence"]}`);
+      let newIndex;
 
-      if (currentActiveIndex === imagesData.length - 1) {
-        currentActiveIndex = 0;
+      if (activeIndex === imagesData.length - 1) {
+        newIndex = 0;
         setActiveIndex(0);
       } else {
-        ++currentActiveIndex;
-        setActiveIndex(currentActiveIndex);
+        newIndex = activeIndex + 1;
+        setActiveIndex(newIndex);
       }
 
       imagesSequence.classList.remove(styles["just-opened"]);
       imagesSequence.classList.remove(styles["resizing"]);
+
       
-      imagesSequence.scrollTo(findScrollWidth(), 0);
+      imagesSequence.scrollTo(findScrollWidth(newIndex), 0);
     }
 
     function goToPreviousImage() {
       const imagesSequence = document.querySelector(`.${styles["images-sequence"]}`);
 
-      if (currentActiveIndex === 0) {
-        currentActiveIndex = imagesData.length - 1;
-        setActiveIndex(currentActiveIndex);
+      let newIndex;
+
+      if (activeIndex === 0) {
+        newIndex = imagesData.length - 1;
+        setActiveIndex(newIndex);
       } else {
-        --currentActiveIndex;
-        setActiveIndex(currentActiveIndex);
+        newIndex = activeIndex - 1;
+        setActiveIndex(newIndex);
       }
 
       imagesSequence.classList.remove(styles["just-opened"]);
       imagesSequence.classList.remove(styles["resizing"]);
 
-      imagesSequence.scrollTo(findScrollWidth(), 0);
+      imagesSequence.scrollTo(findScrollWidth(newIndex), 0);
     }
 
     if (clickedImage) {
@@ -124,15 +136,13 @@ export default function GalleryCarousel({imagesData, clickedImage, scrollCallbac
               imagesSequence.onpointermove = event => {
                 imagesSequence.scrollTo(imagesSequence.scrollLeft - event.movementX, 0);
 
-                if (imagesSequence.scrollLeft - findScrollWidth() > innerWidth * 0.35) {
-                  if (currentActiveIndex !== imagesData.length - 1) {
-                    ++currentActiveIndex;
-                    setActiveIndex(currentActiveIndex);
+                if (imagesSequence.scrollLeft - findScrollWidth(activeIndex) > innerWidth * 0.35) {
+                  if (activeIndex !== imagesData.length - 1) {
+                    setActiveIndex(activeIndex + 1);
                   }
-                } else if (imagesSequence.scrollLeft - findScrollWidth() < -innerWidth * 0.35) {
-                  if (currentActiveIndex > 0) {
-                    --currentActiveIndex;
-                    setActiveIndex(currentActiveIndex);
+                } else if (imagesSequence.scrollLeft - findScrollWidth(activeIndex) < -innerWidth * 0.35) {
+                  if (activeIndex > 0) {
+                    setActiveIndex(activeIndex - 1);
                   }
                 }
               }
@@ -143,7 +153,7 @@ export default function GalleryCarousel({imagesData, clickedImage, scrollCallbac
               document.querySelector(`.${styles["images-sequence"]}`).onpointermove = "";
               const imagesSequence = document.querySelector(`.${styles["images-sequence"]}`);
               imagesSequence.classList.remove(styles["just-opened"]);
-              imagesSequence.scrollTo(findScrollWidth(), 0);
+              imagesSequence.scrollTo(findScrollWidth(activeIndex), 0);
             }
           }>
             {imagesData.map((item, index) => 
@@ -155,7 +165,7 @@ export default function GalleryCarousel({imagesData, clickedImage, scrollCallbac
                   const imagesSequence = document.querySelector(`.${styles["images-sequence"]}`);
                   if (index === imagesData.length - 1) {
                     imagesSequence.classList.add(styles["just-opened"]);
-                    imagesSequence.scrollTo(findScrollWidth(), 0);
+                    imagesSequence.scrollTo(findScrollWidth(activeIndex), 0);
                   }
 
                   const ratio = event.target.naturalWidth / event.target.naturalHeight;
@@ -178,7 +188,7 @@ export default function GalleryCarousel({imagesData, clickedImage, scrollCallbac
             onClick={goToNextImage}
           ></button>
           <div className={styles["description"]}>
-            {imagesData[currentActiveIndex].description}
+            {imagesData[activeIndex]?.description || ""}
           </div>
         </dialog>
       );
