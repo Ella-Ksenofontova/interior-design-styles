@@ -8,7 +8,7 @@ body {
     font-weight: 500;
 
     background: url("/assets/bg.jpg");
-    background-size: contain;
+    background-size: 100%;
 }
 
 #root {
