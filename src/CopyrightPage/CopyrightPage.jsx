@@ -8,6 +8,8 @@ import HomePageLink from "../StylePage/HomePageLink/HomePageLink";
  */
 
 export default function CopyrightPage() {
+    document.title = "Сссылки на авторов стороннего контента";
+
     return(
         <>
             <Header />

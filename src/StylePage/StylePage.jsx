@@ -188,17 +188,18 @@ export default function StylePage({styleName, styleOrder}) {
             <>
                 <Header />
                 <main className={styles["style-page-main"]}>
+                    <span className="visually-hidden" tabIndex={0}>Поиск по сайту стал доступен. Он расположен в шапке сайта.</span>
                     <HomePageLink />
                     <StyleCard styleName={styleName} 
                     styleOrder={styleOrder} 
                     source={styleData.cardSource}/>
                     <StyleDescription description={styleData.description.split("\\n")} />
 
-                    {styleData.relatedStyles.length > 0 ? <RelatedStylesList relatedStyles={styleData.relatedStyles} /> : ""}
-
                     {styleData.imagesData.length > 0 ?
                     <Gallery imagesData={styleData.imagesData} /> : ""
                     }
+
+                    {styleData.relatedStyles.length > 0 ? <RelatedStylesList relatedStyles={styleData.relatedStyles} /> : ""}
 
                     {styleData.infoSources.length > 0 ?
                     <SourcesList title="Источники информации" sources={styleData.infoSources}/> : ""}
@@ -215,6 +216,7 @@ export default function StylePage({styleName, styleOrder}) {
             <>
                 <Header />
                 <main className={styles["style-page-main"]}>
+                    <span className="visually-hidden" tabIndex={0}>Поиск по сайту стал доступен. Он расположен в шапке сайта.</span>
                     <HomePageLink />
                     <div className={"loading-wrapper"}>
                         <img src="/interior-design-styles/assets/loading.gif" alt="Страница загружается" height={100} width={100}/>

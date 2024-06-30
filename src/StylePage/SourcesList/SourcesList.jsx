@@ -12,9 +12,9 @@ import styles from "../StylePage.module.css";
 export default function SourcesList({title, explanation="", sources}) {
   return (
     <div className={styles["sources-list"]}>
-      <h2>{title}</h2>
+      <h2 tabIndex={0}>{title}</h2>
       {explanation ? 
-        <span className={styles["explanation"]}>{explanation}</span>
+        <span className={styles["explanation"]} tabIndex={0}>{explanation}</span>
       : ""}
       <ul>
         {sources.map((item, index) => 

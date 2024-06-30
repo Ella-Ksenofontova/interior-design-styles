@@ -23,7 +23,7 @@ export default function RelatedStylesList({relatedStyles}) {
 
     return (
         <div className={styles["related-styles-list"]}>
-            <h2>Связанные стили</h2>
+            <h2 tabIndex={0}>Связанные стили</h2>
             <ul>
                 {relatedStyles.sort().map(styleName => <li key={styleName}><Link to={"/interior-design-styles/" + stylesData.find(style => styleName == style.name).path}>{styleName}</Link></li>)}
             </ul>

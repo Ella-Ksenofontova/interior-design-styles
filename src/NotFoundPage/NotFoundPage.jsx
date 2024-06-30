@@ -10,9 +10,11 @@ import Header from "../Header/Header";
  */
 
 export default function NotFoundPage() {
+  document.title = "Страница не найдена";
+
   return (
     <>
-      <Header />
+      <Header/>
       <main className={"not-found-page-main"}>
         <div className={styles["not-found-wrapper"]}>
           <div className={styles["not-found-image"]}>

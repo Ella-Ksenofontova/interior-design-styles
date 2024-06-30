@@ -44,7 +44,7 @@ const PATHS = [
  */
 
 function HomePage({loaded, stylesData}) {
-    document.title = "Стили в дизайне интерьеров и архитектуре"
+    document.title = "Стили в дизайне интерьеров и архитектуре";
 
     if (loaded) {
         return (
@@ -164,7 +164,7 @@ export default function App() {
                             <StylesDataContext.Provider value = {stylesData}><StylePage styleName={item.name} styleOrder={item.styleOrder}/></StylesDataContext.Provider>
                         }/>);
                     }) : STYLES.map((item, index) =>
-                        <Route key={item} path={"/interior-design-styles/" + PATHS[index]} element={<LoadingPage />}/>
+                        <Route key={item} path={`/interior-design-styles/${PATHS[index]}`} element={<LoadingPage />}/>
                 )}
                 <Route path="*" element={<StylesDataContext.Provider value = {stylesData}><NotFoundPage /></StylesDataContext.Provider>}/>
             </Routes>

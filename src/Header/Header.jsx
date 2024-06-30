@@ -13,16 +13,19 @@ import {StylesDataContext} from "../StylesDataContext";
  */
 
 export default function Header() {
+  const stylesData = useContext(StylesDataContext);
+
   return (
     <>
-      <header>
+      <header araia-live="assertive">
+        <span className="visually-hidden" aria-live="assertive">{stylesData.length ? "Поиск по сайту доступен" : "Поиск по сайту пока недоступен"}</span>
         <div id={styles.logo}></div>
         <InputWithTooltip mobile={false}/>
         <button id={styles["search-mobile"]}
           onClick={() => document.getElementById(
             styles["search-mobile-dialog"]).showModal()}>
         </button>
-        <Link to="/interior-design-styles/copyright"><div id={styles.copyright}></div></Link>
+        <Link to="/interior-design-styles/copyright"><div id={styles.copyright} title="Ссылки на авторов стороннего контента"></div></Link>
       </header>
 
       <MobileInputWithTooltip/>

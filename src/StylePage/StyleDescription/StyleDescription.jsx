@@ -151,11 +151,21 @@ function ParagraphPart({ initialText, index, paragraphIndex }) {
                     onMouseOver={() => document.getElementById(`describing-block-${index + 1}-${paragraphIndex + 1}`).classList.remove(styles["hidden"])}
                     onFocus={() => document.getElementById(`describing-block-${index + 1}-${paragraphIndex + 1}`).classList.remove(styles["hidden"])}
                     onMouseOut={() => document.getElementById(`describing-block-${index + 1}-${paragraphIndex + 1}`).classList.add(styles["hidden"])}
-                    onBlur={() => document.getElementById(`describing-block-${index + 1}-${paragraphIndex + 1}`).classList.add(styles["hidden"])}
+                    onBlur={(e) => {
+                        if (!e.relatedTarget.classList.contains(styles["describing-block"])) {
+                            document.getElementById(`describing-block-${index + 1}-${paragraphIndex + 1}`).classList.add(styles["hidden"]);
+                        }
+                    }}
                     onTouchStart={() => document.getElementById(`describing-block-mobile-${index + 1}-${paragraphIndex + 1}`).showModal()}
                     tabIndex={0}>{markParams.text}</mark>
                 <figure className={`${styles["describing-block"]} ${styles["hidden"]}`} id={`describing-block-${index + 1}-${paragraphIndex + 1}`}
-                    key={`describing-block-${index + 1}-${paragraphIndex + 1}`} ref={refs.setFloating} style={floatingStyles}>
+                    key={`describing-block-${index + 1}-${paragraphIndex + 1}`} ref={refs.setFloating} style={floatingStyles}
+                    tabIndex={0}
+                    onBlur={(e) => {
+                        if (!e.relatedTarget.classList.contains("description-of-tooltip")) {
+                            document.getElementById(`describing-block-${index + 1}-${paragraphIndex + 1}`).classList.add(styles["hidden"]);
+                        }
+                    }}>
                     <img src={`/interior-design-styles/assets/${markParams.image? `styles_images/${title}/${markParams.image}` : "placeholder.png"}`}
                         className={styles['describing-image']}
                         id={`image-${index + 1}`}
@@ -165,8 +175,7 @@ function ParagraphPart({ initialText, index, paragraphIndex }) {
                         width={markParams.orientation.toLowerCase() === "vertical" ? "125" : "300"}
                     />
                     <figcaption key={`caption-${index + 1}`}>
-                        {markParams.descriptionOfImage}<br />
-                        <a href={markParams.source}>Ссылка на источник изображения или его автора</a>
+                        <span className="description-of-tooltip" tabIndex={0}>{markParams.descriptionOfImage}</span><br />
                     </figcaption>
                 </figure>
                 <DescribingMobileDialog

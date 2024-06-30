@@ -19,7 +19,7 @@ export default function StyleCard({styleName, styleOrder, source}) {
         <div className={styles["style-image"]} style={{background: `url(/interior-design-styles/assets/styles_images/${styleName}/card.jpg) center / cover, url(/interior-design-styles/assets/styles_images/${styleName}/card.svg) center / cover, #F3DAB3 center / cover`}}>
             <div className={styles["style-name"]}
             >
-                <h2>{styleTitle}</h2>
+                <h2 tabIndex={0}>{styleTitle}</h2>
             <a href={source} className={styles["source-link"]}>Ссылка на источник изображения или его автора</a>
             </div>
             
