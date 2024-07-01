@@ -34,10 +34,12 @@ async function getAttributes(numberOfMark) {
     if (docSnap.exists()) {
         let attributes = {
             text: docSnap.get("text"),
-            orientation: docSnap.get("orientation"),
+            orientation: docSnap.get("orientation") || "vertical",
             image: docSnap.get("image"),
             descriptionOfImage: docSnap.get("description"),
         };
+
+        if (!docSnap.get("orientation")) console.log("Error in Mark#" + numberOfMark);
 
         return attributes;
     }
@@ -135,15 +137,15 @@ function ParagraphPart({ initialText, index, paragraphIndex }) {
         let regexp = /^\d+/;
         let match = initialText.match(regexp);
         let remainingText = initialText.substring(match[0].length);
+        
+        if (!requested) {
+            let attributes = getAttributes(match[0]);
 
-        let attributes = getAttributes(match[0]);
-
-        attributes.then((result) => {
-            if (!requested) {
+            attributes.then((result) => {
                 setMarkParams(result);
                 setRequested(true);
-            }
-        });
+            });
+        };
         return (
             <>
                 <mark ref={refs.setReference}

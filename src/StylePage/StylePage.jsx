@@ -112,7 +112,7 @@ async function getSourcesAndImageName(numbersOfMarks) {
        const docRef = doc(db, "Marks", `Mark${number}`);
        const docSnap = await getDoc(docRef);
        if (docSnap.exists()) {
-           const imageName = docSnap.get("image");
+           const imageName = docSnap.get("image") || "";
            sources.push({
                url: docSnap.get("source"),
                description: imageName.substring(0, imageName.indexOf("."))
@@ -187,7 +187,7 @@ export default function StylePage({styleName, styleOrder}) {
         return (
             <>
                 <Header />
-                <main className={styles["style-page-main"]}>
+                <main className={styles["style-page-main"]} id="main">
                     <span className="visually-hidden" tabIndex={0}>Поиск по сайту стал доступен. Он расположен в шапке сайта.</span>
                     <HomePageLink />
                     <StyleCard styleName={styleName} 
@@ -215,7 +215,7 @@ export default function StylePage({styleName, styleOrder}) {
         return (
             <>
                 <Header />
-                <main className={styles["style-page-main"]}>
+                <main className={styles["style-page-main"]} id="main">
                     <span className="visually-hidden" tabIndex={0}>Поиск по сайту стал доступен. Он расположен в шапке сайта.</span>
                     <HomePageLink />
                     <div className={"loading-wrapper"}>

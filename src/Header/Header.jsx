@@ -17,7 +17,17 @@ export default function Header() {
 
   return (
     <>
-      <header araia-live="assertive">
+      <span className={`visually-hidden ${styles["skip-link"]}`}>
+        <a 
+        href="#main"
+        onFocus={e => e.target.parentElement.classList.remove("visually-hidden")}
+        onBlur={e => e.target.parentElement.classList.add("visually-hidden")}
+        >
+          Перейти к основному контенту
+        </a>
+      </span>
+
+      <header aria-live="assertive">
         <span className="visually-hidden" aria-live="assertive">{stylesData.length ? "Поиск по сайту доступен" : "Поиск по сайту пока недоступен"}</span>
         <div id={styles.logo}></div>
         <InputWithTooltip mobile={false}/>

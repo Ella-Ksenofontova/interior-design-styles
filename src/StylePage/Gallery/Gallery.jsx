@@ -109,7 +109,7 @@ export default function Gallery({imagesData}) {
             alt={item.description}
             />
             <figcaption>{item.description} <br/>
-            <a className={styles["source-of-image"]} href={item.source}><i>Ссылка на источник изображения или его автора</i></a>
+            <a className={styles["source-of-image"]} href={item.source}><i>Источник или автор изображения</i></a>
             </figcaption>
           </figure>
         )}

@@ -20,7 +20,7 @@ export default function StyleCard({styleName, styleOrder, source}) {
             <div className={styles["style-name"]}
             >
                 <h2 tabIndex={0}>{styleTitle}</h2>
-            <a href={source} className={styles["source-link"]}>Ссылка на источник изображения или его автора</a>
+            <a href={source} className={styles["source-link"]}>Источник или автор изображения</a>
             </div>
             
         </div>

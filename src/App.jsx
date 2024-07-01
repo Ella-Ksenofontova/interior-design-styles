@@ -52,7 +52,7 @@ function HomePage({loaded, stylesData}) {
                 <Header />
                 <div className="image-container">
                 </div>
-                <main>  
+                <main id="main">  
                     <p className="info">
                         <span id="info-header">Информация о сайте</span> <br />
                         На этом сайте собрана информация о 33 стилях в дизайне интерьера и архитектуре. <br />

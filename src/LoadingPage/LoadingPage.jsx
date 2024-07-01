@@ -12,7 +12,7 @@ export default function LoadingPage() {
   return (
     <>
       <Header />
-      <main className="loading-page-main">
+      <main className="loading-page-main" id="main">
           <HomePageLink />
           <div className={"loading-wrapper"}>
               <img src="/interior-design-styles/assets/loading.gif" alt="Страница загружается" height={100} width={100}/>

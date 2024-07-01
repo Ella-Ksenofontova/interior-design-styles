@@ -15,7 +15,7 @@ export default function NotFoundPage() {
   return (
     <>
       <Header/>
-      <main className={"not-found-page-main"}>
+      <main className={"not-found-page-main"} id="main">
         <div className={styles["not-found-wrapper"]}>
           <div className={styles["not-found-image"]}>
           </div>
