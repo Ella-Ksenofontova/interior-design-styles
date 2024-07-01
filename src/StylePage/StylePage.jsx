@@ -186,7 +186,7 @@ export default function StylePage({styleName, styleOrder}) {
     if (loaded) {
         return (
             <>
-                <Header />
+                <Header searchAvailableMessage=""/>
                 <main className={styles["style-page-main"]} id="main">
                     <span className="visually-hidden" tabIndex={0}>Поиск по сайту стал доступен. Он расположен в шапке сайта.</span>
                     <HomePageLink />
@@ -214,7 +214,7 @@ export default function StylePage({styleName, styleOrder}) {
     } else {
         return (
             <>
-                <Header />
+                <Header searchAvailableMessage=""/>
                 <main className={styles["style-page-main"]} id="main">
                     <span className="visually-hidden" tabIndex={0}>Поиск по сайту стал доступен. Он расположен в шапке сайта.</span>
                     <HomePageLink />

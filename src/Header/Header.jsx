@@ -8,11 +8,13 @@ import {StylesDataContext} from "../StylesDataContext";
 /**
  * The component of website's header.
  * @component
+ * @param {object} props - This function accepts searchAvailableMessage as prop
+ * @param {string} props.searchAvailableMessage - Text of the message for screenreaders users that search became available.
  * @returns {React.JSX.Element} The rendered Header component.
  * @listens click
  */
 
-export default function Header() {
+export default function Header({searchAvailableMessage="Поиск по сайту доступен"}) {
   const stylesData = useContext(StylesDataContext);
 
   return (
@@ -28,7 +30,7 @@ export default function Header() {
       </span>
 
       <header aria-live="assertive">
-        <span className="visually-hidden" aria-live="assertive">{stylesData.length ? "Поиск по сайту доступен" : "Поиск по сайту пока недоступен"}</span>
+        <span className="visually-hidden" aria-live="assertive">{stylesData.length ? searchAvailableMessage : "Поиск по сайту пока недоступен"}</span>
         <div id={styles.logo}></div>
         <InputWithTooltip mobile={false}/>
         <button id={styles["search-mobile"]}

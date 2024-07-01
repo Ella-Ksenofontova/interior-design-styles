@@ -235,7 +235,10 @@ function DescribingMobileDialog({ index = 0, paragraphIndex = 0, image = "", ori
                 {descriptionOfImage}<br/>
             </span>
             <button className={styles["close-mobile-dialog"]}
-                onClick={() => document.getElementById(`describing-block-mobile-${index + 1}-${paragraphIndex + 1}`).close()}></button>
+                onClick={() => document.getElementById(`describing-block-mobile-${index + 1}-${paragraphIndex + 1}`).close()}
+                title='Закрыть пояснение'
+            >
+            </button>
         </dialog>);
 }
 

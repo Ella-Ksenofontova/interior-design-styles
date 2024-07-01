@@ -116,8 +116,9 @@ export default function GalleryCarousel({imagesData, clickedImage, scrollCallbac
 
     if (clickedImage) {
       return (
-        <dialog className={styles["gallery-carousel"]}>
+        <dialog className={styles["gallery-carousel"]} aria-label={"Карусель с изображениями."} aria-live="assertive">
           <button id={styles["close"]}
+          title="Закрыть карусель"
           onClick={() => {
             document.querySelector(`.${styles["gallery-carousel"]}`).close();
             setActiveIndex(null);
@@ -126,6 +127,8 @@ export default function GalleryCarousel({imagesData, clickedImage, scrollCallbac
           }}
           ></button>
           <button
+            aria-hidden
+            title="Предыдущее изображение"
             id={styles["previous"]}
             onClick={goToPreviousImage}
           ></button>
@@ -161,6 +164,7 @@ export default function GalleryCarousel({imagesData, clickedImage, scrollCallbac
               key={`image-wrapper-${index + 1}`}
               >
                 <img src={item.name}
+                alt={imagesData[index].description}
                 onLoad={(event) => {
                   const imagesSequence = document.querySelector(`.${styles["images-sequence"]}`);
                   if (index === imagesData.length - 1) {
@@ -184,10 +188,12 @@ export default function GalleryCarousel({imagesData, clickedImage, scrollCallbac
             )}
           </div>
           <button
+            aria-hidden
+            title="Следующее изображение"
             id={styles["next"]}
             onClick={goToNextImage}
           ></button>
-          <div className={styles["description"]}>
+          <div className={styles["description"]} aria-hidden>
             {imagesData[activeIndex]?.description || ""}
           </div>
         </dialog>
