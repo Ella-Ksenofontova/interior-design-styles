@@ -14,8 +14,8 @@ function resizeImages(imagesList) {
       const height = Math.min(innerHeight * 0.8 - 45, (1 / ratio) * innerWidth * 0.7);
       image.height = height;
     } else {
-      image.height = innerHeight * 0.8 - 45;
-      image.width = Math.min(ratio * (innerHeight * 0.8 - 45), innerWidth * 0.7);
+      image.height = innerHeight * 0.6 - 45;
+      image.width = Math.min(ratio * (innerHeight * 0.6 - 45), innerWidth * 0.7);
     }
   
     image.parentElement.style.height = `${image.height}px`;
