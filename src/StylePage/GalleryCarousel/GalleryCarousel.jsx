@@ -9,13 +9,13 @@ import { useState, useEffect } from "react";
 function resizeImages(imagesList) {
   for (let image of imagesList) {
     const ratio = image.naturalWidth / image.naturalHeight;
-    if (ratio >= 1) {
+    if (ratio >= 0.75) {
       image.width = innerWidth * 0.7;
       const height = Math.min(innerHeight * 0.8 - 45, (1 / ratio) * innerWidth * 0.7);
       image.height = height;
     } else {
       image.height = innerHeight * 0.8 - 45;
-      image.width = ratio * (innerHeight * 0.8 - 45);
+      image.width = Math.min(ratio * (innerHeight * 0.8 - 45), innerWidth * 0.7);
     }
   
     image.parentElement.style.height = `${image.height}px`;
@@ -173,13 +173,13 @@ export default function GalleryCarousel({imagesData, clickedImage, scrollCallbac
                   }
 
                   const ratio = event.target.naturalWidth / event.target.naturalHeight;
-                  if (ratio >= 1) {
+                  if (ratio >= 0.75) {
                     const height = Math.min(innerHeight * 0.8 - 45, (1 / ratio) * innerWidth * 0.7);
                     event.target.height = height;
                     event.target.width = innerWidth * 0.7;
                   } else {
-                    event.target.height = innerHeight * 0.8 - 45;
-                    event.target.width = ratio * (innerHeight * 0.8 - 45);
+                    event.target.height = innerHeight * 0.6 - 45;
+                    event.target.width =  Math.min(ratio * (innerHeight * 0.6 - 45), innerWidth * 0.7);
                   }
 
                   event.target.parentElement.style.height = `${event.target.height}px`;
