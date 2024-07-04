@@ -36,6 +36,8 @@ main, .image-container, header {
     box-sizing: border-box;
 }
 
+/*Код класса visually-hidden взят с сайта Doka.guide*/
+
 .visually-hidden {
     position: absolute;
     width: 1px;
