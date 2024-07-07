@@ -1,50 +1,44 @@
 .style-image {
-    display: grid;
-    grid-template-columns: 100%;
-    align-items: center;
-
-    margin-top: 20px;
-
-    width: 85%;
-    min-width: 1px;
-    max-width: 500px;
-    height: 45vh;
-    min-height: 300px;
-
-    background-color: #F3DAB3;
-    background-size: cover;
-    border-radius: 50px;
+  display: grid;
+  grid-template-columns: 100%;
+  align-items: center;
+  margin-top: 20px;
+  width: 85%;
+  min-width: 1px;
+  max-width: 500px;
+  height: 45vh;
+  min-height: 300px;
+  background-color: #f3dab3;
+  background-size: cover;
+  border-radius: 50px;
 }
 
 .style-name {
-    width: 50%;
-    min-width: -webkit-min-content;
-    min-width: -moz-min-content;
-    min-width: min-content;
-    padding-inline: 15px;
-    padding-bottom: 15px;
-    margin: auto;
-
-    background-color: #E9C590;
-    border-radius: 30px;
-
-    text-align: center;
+  width: 50%;
+  min-width: -webkit-min-content;
+  min-width: -moz-min-content;
+  min-width: min-content;
+  padding-inline: 15px;
+  padding-bottom: 15px;
+  margin: auto;
+  background-color: #e9c590;
+  border-radius: 30px;
+  text-align: center;
 }
 
 .style-name h2 {
-    padding-left: 0;
-    color: rgb(192, 114, 65);
-    font-size: 22px;
-
-    margin-bottom: 3px;
+  padding-left: 0;
+  color: rgb(192, 114, 65);
+  font-size: 22px;
+  margin-bottom: 3px;
 }
 
-@media screen and (min-width: 576px)  {
-    .style-image {
-        min-width: 400px;
-    }
+@media screen and (min-width: 576px) {
+  .style-image {
+    min-width: 400px;
+  }
 
-    .source-link {
-        font-size: .8em;
-    }
+  .source-link {
+    font-size: .8em;
+  }
 }

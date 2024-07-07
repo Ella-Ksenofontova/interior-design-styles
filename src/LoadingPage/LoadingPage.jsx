@@ -8,16 +8,16 @@ import HomePageLink from "../StylePage/HomePageLink/HomePageLink";
  * @returns {React.JSX.Element} The rendered LoadingPage component.
  */
 export default function LoadingPage() {
-  document.title = "Загрузка информации..."
+  document.title = "Загрузка информации...";
   return (
     <>
       <Header />
       <main className="loading-page-main" id="main">
-          <HomePageLink />
-          <div className={"loading-wrapper"}>
-              <img src="/interior-design-styles/assets/loading.gif" alt="Страница загружается" height={100} width={100}/>
+        <HomePageLink />
+        <div className={"loading-wrapper"}>
+          <img src="/interior-design-styles/assets/loading.gif" alt="Страница загружается" height={100} width={100}/>
               Получаем информацию о стилях...
-          </div>
+        </div>
       </main>
     </>
   );

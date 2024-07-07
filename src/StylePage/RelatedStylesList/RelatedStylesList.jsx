@@ -1,13 +1,11 @@
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import {arrayOf, string} from "prop-types";
-import { useContext } from "react";
-
 import styles from "../StylePage.module.css";
-import { StylesDataContext } from "../../StylesDataContext";
+import STYLES_DATA from "../../styles_data";
 
 
 RelatedStylesList.propTypes = {
-    relatedStyles: arrayOf(string)
+  relatedStyles: arrayOf(string),
 };
 
 /**
@@ -18,15 +16,13 @@ RelatedStylesList.propTypes = {
  * @returns {React.JSX.Element} The rendered RelatedStylesList component.
  */
 
-export default function RelatedStylesList({relatedStyles}) {
-    const stylesData = useContext(StylesDataContext);
-
-    return (
-        <div className={styles["related-styles-list"]}>
-            <h2 tabIndex={0}>Связанные стили</h2>
-            <ul>
-                {relatedStyles.sort().map(styleName => <li key={styleName}><Link to={"/interior-design-styles/" + stylesData.find(style => styleName == style.name).path}>{styleName}</Link></li>)}
-            </ul>
-        </div>
-    );
+export default function RelatedStylesList({relatedStyles,}) {
+  return (
+    <div className={styles["related-styles-list"]}>
+      <h2 tabIndex={0}>Связанные стили</h2>
+      <ul>
+        {relatedStyles.sort().map(styleName => <li key={styleName}><Link to={`/interior-design-styles/${STYLES_DATA.find(style => styleName === style.name).path}`}>{styleName}</Link></li>)}
+      </ul>
+    </div>
+  );
 }

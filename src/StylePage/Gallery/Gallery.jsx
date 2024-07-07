@@ -1,7 +1,7 @@
-import styles from "./Gallery.module.css"
+import styles from "./Gallery.module.css";
 import GalleryCarousel from "../GalleryCarousel/GalleryCarousel";
-import galleryStyles from "../GalleryCarousel/GalleryCarousel.module.css"
-import { useState } from "react";
+import galleryStyles from "../GalleryCarousel/GalleryCarousel.module.css";
+import {useState} from "react";
 
 /**
  * Prevents default behaviour of specified event.
@@ -21,7 +21,7 @@ function preventDefault(event) {
  * @listens load, click, mousewheel, touchmove (the last two since image is clicked and until the carousel is closed)
  */
 
-export default function Gallery({imagesData}) {
+export default function Gallery({imagesData,}) {
   const indexOfWord = document.title.indexOf(" стиль");
   let styleName;
   if (indexOfWord > -1) {
@@ -36,20 +36,18 @@ export default function Gallery({imagesData}) {
     setNumberOfOpens(numberOfOpens + 1);
   }
 
-  const [activeImage, setActiveImage] = useState("");
-  const [dataForCarousel, setDataForCarousel] = useState([]);
-  const [IMGTagsAreLoaded, setIMGTagsAreLoaded] = useState(false);
-  const [numberOfOpens, setNumberOfOpens] = useState(0);
+  const [activeImage, setActiveImage,] = useState("");
+  const [dataForCarousel, setDataForCarousel,] = useState([]);
+  const [IMGTagsAreLoaded, setIMGTagsAreLoaded,] = useState(false);
+  const [numberOfOpens, setNumberOfOpens,] = useState(0);
 
   if (IMGTagsAreLoaded && dataForCarousel.length == 0) {
     setDataForCarousel(
-      imagesData.map((item, index) => {
-        return {
-          description: item.description,
-          name: document.getElementById(`gallery-image-${index + 1}`).src,
-          width: Math.min(document.getElementById(`gallery-image-${index + 1}`).naturalWidth, innerWidth * 0.75),
-        }
-      })
+      imagesData.map((item, index) => ({
+        description: item.description,
+        name: document.getElementById(`gallery-image-${index + 1}`).src,
+        width: Math.min(document.getElementById(`gallery-image-${index + 1}`).naturalWidth, innerWidth * 0.75),
+      }))
     );
 
     window.addEventListener("resize", resizeImages);
@@ -57,26 +55,25 @@ export default function Gallery({imagesData}) {
 
   function resizeImages() {
     const images = document.querySelectorAll("img[id^=gallery-image]");
-    for (let image of images) {
+    for (const image of images) {
       image.width = Math.min(image.naturalWidth / image.naturalHeight * 150, document.body.offsetWidth - 50);
     }
   }
 
-  return(
+  return (
     <>
       <h2 className={styles["gallery-header"]}>Галерея</h2>
       <div className={styles["gallery-explanation"]}>Кликните на какое-либо изображение, чтобы просмотреть карусель.</div>
-      <div className={styles["gallery"]}>
-        {imagesData.map((item, index) => 
-          <figure key={`gallery-figure-${index + 1}`}>
-            <img
+      <div className={styles.gallery}>
+        {imagesData.map((item, index) => <figure key={`gallery-figure-${index + 1}`}>
+          <img
             id={`gallery-image-${index + 1}`}
             key={`gallery-image-${index + 1}`}
             src={`/interior-design-styles/assets/styles_images/${styleName}/additional-${index + 1}.${item.extension}`}
             tabIndex={0}
             height={150}
             onLoad={e => {
-              const width = Math.min(e.target.naturalWidth / e.target.naturalHeight * 150, document.body.offsetWidth - 50)
+              const width = Math.min(e.target.naturalWidth / e.target.naturalHeight * 150, document.body.offsetWidth - 50);
 
               e.target.width = width;
               e.target.parentElement.style.width = `${e.target.width}px`;
@@ -91,36 +88,36 @@ export default function Gallery({imagesData}) {
 
               let supportsPassive = false;
               try {
-                  const opts = Object.defineProperty({}, 'passive', {
-                      get: function() {
-                          supportsPassive = true;
-                      }
-                  });
-                  window.addEventListener("test", null, opts);
+                const opts = Object.defineProperty({}, "passive", {
+                  get: function() {
+                    supportsPassive = true;
+                  },
+                });
+                window.addEventListener("test", null, opts);
               } catch (e) {
 
               }
 
-              const options = supportsPassive ? { passive: false } : false;
+              const options = supportsPassive ? {passive: false,} : false;
 
               window.addEventListener("mousewheel", preventDefault, options);
-              window.addEventListener('touchmove', preventDefault, options);
+              window.addEventListener("touchmove", preventDefault, options);
             }}
             alt={item.description}
-            />
-            <figcaption><span aria-hidden>{item.description}</span> <br/>
+          />
+          <figcaption><span aria-hidden>{item.description}</span> <br/>
             <a className={styles["source-of-image"]} href={item.source}><i>Источник или автор изображения</i></a>
-            </figcaption>
-          </figure>
+          </figcaption>
+        </figure>
         )}
       </div>
 
-      {dataForCarousel.length > 0 ? 
+      {dataForCarousel.length > 0 ?
         <GalleryCarousel
-        clickedImage={activeImage}
-        imagesData={dataForCarousel}
-        scrollCallback={preventDefault}
-      ></GalleryCarousel> : ""
+          clickedImage={activeImage}
+          imagesData={dataForCarousel}
+          scrollCallback={preventDefault}
+        ></GalleryCarousel> : ""
       }
     </>
   );

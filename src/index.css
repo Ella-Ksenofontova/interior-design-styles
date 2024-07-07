@@ -1,155 +1,155 @@
 /* General */
 
 body {
-    width: 100%;
-    margin: 0;
-
-    font-family: Roboto;
-    font-weight: 500;
-
-    background: url("/assets/bg.jpg");
-    background-size: 100%;
+  width: 100%;
+  margin: 0;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  background: url("/assets/bg.jpg");
+  background-size: 100%;
 }
 
 #root {
-    box-sizing: border-box;
-    display: grid;
-    grid-template-rows: auto max(20vw, 150px) 1fr;
-    grid-template-columns: 100%;
-    width: 100%;
-    min-height: 100vh;
-    min-width: 270px;
-    justify-content: center;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: auto max(20vw, 150px) 1fr;
+  grid-template-columns: 100%;
+  width: 100%;
+  min-height: 100vh;
+  min-width: 270px;
+  justify-content: center;
 }
 
 ::-moz-selection {
-    background-color: brown;
-    color: white;
+  background-color: brown;
+  color: white;
 }
 
 ::selection {
-    background-color: brown;
-    color: white;
+  background-color: brown;
+  color: white;
 }
 
-main, .image-container, header {
-    box-sizing: border-box;
+main,
+.image-container,
+header {
+  box-sizing: border-box;
 }
 
-/*Код класса visually-hidden взят с сайта Doka.guide*/
+/* Код класса visually-hidden взят с сайта Doka.guide */
 
 .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    border: 0;
-    padding: 0;
-    white-space: nowrap;
-    -webkit-clip-path: inset(100%);
-    clip-path: inset(100%);
-    clip: rect(0 0 0 0);
-    overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }
 
 /* Main content */
 
 .image-container {
-    margin: 0;
-    padding: 20px;
-    height: max(20vw, 150px);
-    width: 100%;
-
-    background-image: url("/assets/main_img.png");
-    background-size: cover;
-    background-position: center;
+  margin: 0;
+  padding: 20px;
+  height: max(20vw, 150px);
+  width: 100%;
+  background-image: url("/assets/main_img.png");
+  background-size: cover;
+  background-position: center;
 }
 
 main {
-    margin-inline: auto;
-    padding: 20px;
-    width: 100%;
-
-    background-color: #FFEBCC;
+  margin-inline: auto;
+  padding: 20px;
+  width: 100%;
+  background-color: #ffebcc;
 }
 
 .loading-page-main,
 .not-found-page-main,
 .copyright-main {
-    grid-row: span 2;
-  }
+  grid-row: span 2;
+}
 
 p {
-    border-radius: 40px;
-    background-color: #c7a065;
-    color: #FDEDD4;
+  width: 60%;
+  max-width: 300px;
+  padding: 20px;
+  border-radius: 40px;
+  background-color: #c7a065;
+  color: #fdedd4;
 }
 
 .info {
-    min-width: 200px;
+  min-width: 200px;
 }
 
-p {
-    width: 60%;
-    max-width: 300px;
-
-    padding: 20px;
-}
 a {
-    color: rgb(126, 76, 45);
+  color: rgb(126, 76, 45);
 }
 
 a:visited {
-    color: #472a1f;
+  color: #472a1f;
 }
 
-span#info-header, span#related-styles-header, h2 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    font-style: italic;
+span#info-header,
+span#related-styles-header,
+h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-style: italic;
 }
 
 .loading-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-
-    font-style: italic;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-style: italic;
 }
 
 /* List of styles */
 
-h2, ol, label {
-    color: #D0AB73;
+h2,
+ol,
+label {
+  color: #d0ab73;
 }
 
-h2, form {
-    padding-left: 20px;
+h2,
+form {
+  padding-left: 20px;
 }
 
 ol {
-    margin-left: 30px;
+  margin-left: 30px;
 }
 
 li img {
-    margin-bottom: -5px;
-    margin-top: 5px;
-    padding-left: 5px;
+  margin-bottom: -5px;
+  margin-top: 5px;
+  padding-left: 5px;
 }
 
-/*Media queries*/
+/* Media queries */
 
 @media screen and (min-width: 576px) {
-    #root {
-        width: 80vw;
-        margin: 0 auto;
-        padding-bottom: 20px;
-        border-bottom: 20px solid transparent;
-    }
+  #root {
+    width: 80vw;
+    margin: 0 auto;
+    padding-bottom: 20px;
+    border-bottom: 20px solid transparent;
+  }
 
-    .image-container, main {
-        width: 80vw;
-        min-width: 500px;
-    }
+  .image-container,
+  main {
+    width: 80vw;
+    min-width: 500px;
+  }
 }

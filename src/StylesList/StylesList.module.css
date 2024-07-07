@@ -1,23 +1,23 @@
-.classic, .modern, .ethnic {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-
-    margin-top: 3px;
-    margin-left: 3px;
-
-    background-size: contain;
-    background-repeat: no-repeat;
+.classic,
+.modern,
+.ethnic {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-top: 3px;
+  margin-left: 3px;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .classic {
-    background-image: url("/assets/chandelier.png");
+  background-image: url("/assets/chandelier.png");
 }
 
 .modern {
-    background-image: url("/assets/light-bulb.png");
+  background-image: url("/assets/light-bulb.png");
 }
 
 .ethnic {
-    background-image: url("/assets/ethnic.png");
+  background-image: url("/assets/ethnic.png");
 }

@@ -1,9 +1,7 @@
-import { useContext } from "react";
 import {Link} from "react-router-dom";
-import {arrayOf, bool} from "prop-types"
+import {arrayOf, bool} from "prop-types";
 import styles from "./StylesList.module.css";
-
-import { StylesDataContext } from "../StylesDataContext";
+import STYLES_DATA from "../styles_data";
 
 /**
  * The component that represents styles list. It's used on homepage.
@@ -14,61 +12,59 @@ import { StylesDataContext } from "../StylesDataContext";
  */
 
 export default function StylesList({statesOfCheckboxes}) {
-    let [classicStylesAreShown, modernStylesAreShown, ethnicStylesAreShown] = statesOfCheckboxes;
-    const stylesData = useContext(StylesDataContext);
+  const [classicStylesAreShown, modernStylesAreShown, ethnicStylesAreShown,] = statesOfCheckboxes;
+   const stylesItems = STYLES_DATA.map(style => {
+    switch (style.type) {
+    case "Классический":
+      if (classicStylesAreShown) {
+        return (
+          <li key={style.name}>
+            <Link to={`/interior-design-styles/${style.path}`}>{style.name}</Link>
+            <div className={styles.classic} title="Это классический стиль">
+              <span className="visually-hidden">Это классический стиль</span>
+            </div>
+          </li>
+        );
+      }
 
-    const stylesItems = stylesData.map(style => {
-        switch(style.type) {
-            case "Классический":
-               if (classicStylesAreShown) {
-                return (
-                    <li key={style.name}>
-                        <Link to={"/interior-design-styles/" + style.path}>{style.name}</Link>
-                        <div className={styles.classic} title="Это классический стиль">
-                            <span className="visually-hidden">Это классический стиль</span>
-                        </div>
-                    </li>
-                );
-               }
+      break;
 
-               break;
+    case "Современный":
+      if (modernStylesAreShown) {
+        return (
+          <li key={style.name}>
+            <Link to={"/interior-design-styles/" + `${style.path}`}>{style.name}</Link>
+            <div className={styles.modern} title={style.comment ? style.comment : "Это современный стиль"}>
+              <span className="visually-hidden">{style.comment ? style.comment : "Это современный стиль"}</span>
+            </div>
+          </li>
+        );
+      }
 
-            case "Современный": 
-               if (modernStylesAreShown) {
-                    return (
-                        <li key={style.name}>
-                            <Link to={"/interior-design-styles/" + `${style.path}`}>{style.name}</Link>
-                            <div className={styles.modern} title={style.comment ? style.comment : "Это современный стиль"}>
-                                <span className="visually-hidden">{style.comment ? style.comment : "Это современный стиль"}</span>
-                            </div>
-                        </li>
-                    );
-               }
+      break;
 
-               break;
-
-            case "Этнический":
-               if (ethnicStylesAreShown) {
-                return (
-                    <li key={style.name}>
-                        <Link to={"/interior-design-styles/" + style.path}>{style.name}</Link>
-                        <div className={styles.ethnic} title="Это этнический стиль">
-                            <span className="visually-hidden">Это этнический стиль</span>
-                        </div>
-                    </li>
-                );
-            }
-        }
-    })
+    case "Этнический":
+      if (ethnicStylesAreShown) {
+        return (
+          <li key={style.name}>
+            <Link to={`/interior-design-styles/${style.path}`}>{style.name}</Link>
+            <div className={styles.ethnic} title="Это этнический стиль">
+              <span className="visually-hidden">Это этнический стиль</span>
+            </div>
+          </li>
+        );
+      }
+    }
+  });
 
 
-    return (
-        <ol>
-            {stylesItems}
-        </ol>
-    );
+  return (
+    <ol>
+      {stylesItems}
+    </ol>
+  );
 }
 
 StylesList.propTypes = {
-    statesOfCheckboxes: arrayOf(bool)
+  statesOfCheckboxes: arrayOf(bool),
 };

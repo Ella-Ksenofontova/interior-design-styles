@@ -1,6 +1,6 @@
 body {
-  background-color: #FFEBCC;
-  font-family: Roboto;
+  background-color: #ffebcc;
+  font-family: Roboto, sans-serif;
 }
 
 ::-moz-selection {
@@ -20,4 +20,3 @@ a {
 a:visited {
   color: #472a1f;
 }
-

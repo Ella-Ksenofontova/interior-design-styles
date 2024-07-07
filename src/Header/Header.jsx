@@ -1,36 +1,32 @@
-import {useState, useContext} from "react";
+import {useState} from "react";
 import {Link} from "react-router-dom";
 import {bool} from "prop-types";
 
 import styles from "./Header.module.css";
-import {StylesDataContext} from "../StylesDataContext";
+import  STYLES_DATA from "../styles_data";
 
 /**
  * The component of website's header.
  * @component
  * @param {object} props - This function accepts searchAvailableMessage as prop
- * @param {string} props.searchAvailableMessage - Text of the message for screenreaders users that search became available.
  * @returns {React.JSX.Element} The rendered Header component.
  * @listens click
  */
 
-export default function Header({searchAvailableMessage="Поиск по сайту доступен"}) {
-  const stylesData = useContext(StylesDataContext);
-
+export default function Header() {
   return (
     <>
       <span className={`visually-hidden ${styles["skip-link"]}`}>
-        <a 
-        href="#main"
-        onFocus={e => e.target.parentElement.classList.remove("visually-hidden")}
-        onBlur={e => e.target.parentElement.classList.add("visually-hidden")}
+        <a
+          href="#main"
+          onFocus={e => e.target.parentElement.classList.remove("visually-hidden")}
+          onBlur={e => e.target.parentElement.classList.add("visually-hidden")}
         >
           Перейти к основному контенту
         </a>
       </span>
 
-      <header aria-live="assertive">
-        <span className="visually-hidden" aria-live="assertive">{stylesData.length ? searchAvailableMessage : "Поиск по сайту пока недоступен"}</span>
+      <header>
         <div id={styles.logo}></div>
         <InputWithTooltip mobile={false}/>
         <button id={styles["search-mobile"]}
@@ -58,10 +54,9 @@ InputWithTooltip.propTypes = {
  * @listens click, input, focus, mouseenter, mouseleave
  */
 
-function InputWithTooltip({mobile}) {
-  const stylesData = useContext(StylesDataContext);
+function InputWithTooltip({mobile,}) {
   const [appropriateLinks, setAppropriateLinks,] = useState([]);
-  const [listenerAdded, setListenerAdded] = useState(false);
+  const [listenerAdded, setListenerAdded,] = useState(false);
 
   const handleInput = function(event) {
     const tooltip = mobile ?
@@ -69,7 +64,7 @@ function InputWithTooltip({mobile}) {
       document.querySelector(`.${styles.tooltip}`);
     const linkInfos = [];
 
-    for (const style of stylesData) {
+    for (const style of STYLES_DATA) {
       if (style.name.toLowerCase().startsWith(
         event.target.value.toLowerCase())
         && event.target.value.length > 0) {
@@ -106,7 +101,7 @@ function InputWithTooltip({mobile}) {
       document.querySelector(`.${styles["tooltip-mobile"]}`) :
       document.querySelector(`.${styles.tooltip}`);
 
-    for (const style of stylesData) {
+    for (const style of STYLES_DATA) {
       if (style.name.toLowerCase().startsWith(event.target.value.toLowerCase())
         && event.target.value.length > 0 && !mobile) {
         tooltip.hidden = false;
@@ -120,17 +115,17 @@ function InputWithTooltip({mobile}) {
       }
     }
 
-    if(!listenerAdded) {
+    if (!listenerAdded) {
       window.addEventListener("resize", () => {
-        if(!mobile) {
-          let tooltipSelector = `.${styles.tooltip}`;
-          let tooltip = document.querySelector(tooltipSelector);
-          let input = document.querySelector("input[type='text']");
+        if (!mobile) {
+          const tooltipSelector = `.${styles.tooltip}`;
+          const tooltip = document.querySelector(tooltipSelector);
+          const input = document.querySelector("input[type='text']");
           
           tooltip.style.top = `${input.getBoundingClientRect().bottom + 10}px`;
           tooltip.style.left = `${input.getBoundingClientRect().left}px`;
         }
-      })
+      });
       setListenerAdded(true);
     }
   };
@@ -144,14 +139,8 @@ function InputWithTooltip({mobile}) {
       <input type="text" placeholder="Поиск по сайту"
         onInput={handleInput}
         onFocus={handleFocus}
-        onMouseEnter={handleFocus}
-        disabled={!(stylesData && stylesData.length !== 0)}
-        title={stylesData && stylesData.length !== 0 ?
-          "" : "Информация о стилях загружается"}/>
-      <div className={!(stylesData &&
-        stylesData.length !== 0) ?
-        styles["magnifier-decorative-disabled"]
-        : styles["magnifier-decorative"]}
+        onMouseEnter={handleFocus}/>
+      <div className={styles["magnifier-decorative"]}
       id={mobile ?
         styles["search-icon-mobile-dialog"]
         : styles["search-icon"]}>
