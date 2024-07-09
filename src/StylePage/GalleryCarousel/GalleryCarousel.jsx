@@ -18,8 +18,6 @@ function resizeImages(imagesList) {
       const newWidth = width + 100;
       const newHeight = (1 / ratio) * newWidth;
 
-      console.log(newHeight, maxHeight)
-
       if (newWidth > maxWidth || newHeight > maxHeight) {
         break
       }

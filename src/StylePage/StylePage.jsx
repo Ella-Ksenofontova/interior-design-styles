@@ -34,7 +34,10 @@ export default function StylePage({styleName, styleOrder,}) {
     const numbersOfMarks = matches.map(item => item.substring(5));
     for (let number of numbersOfMarks) {
       let markObj = MARKS.find(item => item.name === `Mark${number}`);
-      sources.push(markObj?.source || "");
+      sources.push({
+        url: markObj?.source,
+        description: markObj?.image.substring(0, markObj.image.indexOf("."))
+      });
     }
   }
 
