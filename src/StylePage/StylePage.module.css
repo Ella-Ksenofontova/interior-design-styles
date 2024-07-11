@@ -12,6 +12,16 @@
   color: #fdedd4;
 }
 
+.related-styles-list a,
+.sources-list a {
+  color: white;
+}
+
+.related-styles-list a:visited,
+.sources-list a:visited {
+  color: #fdedd4;
+}
+
 .related-styles-list h2,
 .sources-list h2 {
   margin-top: 0;

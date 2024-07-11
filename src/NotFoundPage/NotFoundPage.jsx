@@ -2,6 +2,7 @@ import {Link} from "react-router-dom";
 import styles from "./NotFoundPage.module.css";
 
 import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 /**
  * The component which is mounted when 404 error occurs.
@@ -25,6 +26,7 @@ export default function NotFoundPage() {
           </div>
         </div>
       </main>
+      <Footer/>
     </>
   );
 }

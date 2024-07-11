@@ -12,7 +12,7 @@ body {
 #root {
   box-sizing: border-box;
   display: grid;
-  grid-template-rows: auto max(20vw, 150px) 1fr;
+  grid-template-rows: auto max(20vw, 150px) auto auto;
   grid-template-columns: 100%;
   width: 100%;
   min-height: 100vh;
@@ -82,20 +82,30 @@ p {
   max-width: 300px;
   padding: 20px;
   border-radius: 40px;
-  background-color: #c7a065;
+  background-color: #a28251;
   color: #fdedd4;
-}
-
-.info {
-  min-width: 200px;
 }
 
 a {
   color: rgb(126, 76, 45);
 }
 
+p a,
+footer a {
+  color: white;
+}
+
 a:visited {
   color: #472a1f;
+}
+
+p a:visited,
+footer a:visited {
+  color: #fdedd4;
+}
+
+.info {
+  min-width: 200px;
 }
 
 span#info-header,
@@ -116,10 +126,13 @@ h2 {
 
 /* List of styles */
 
-h2,
+h2 {
+  color: #8b795b;
+}
+
 ol,
 label {
-  color: #d0ab73;
+  color: #72634b;
 }
 
 h2,
@@ -137,18 +150,37 @@ li img {
   padding-left: 5px;
 }
 
+/* Footer */
+footer {
+  position: relative;
+  width: 100%;
+  min-height: 40px;
+  margin-inline: auto;
+  box-sizing: border-box;
+  padding: 15px;
+  background-color: #cdad7c;
+  color: #fdedd4;
+}
+
+footer .footer-text {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 1em;
+  margin-block: auto;
+}
+
 /* Media queries */
 
 @media screen and (min-width: 576px) {
   #root {
     width: 80vw;
     margin: 0 auto;
-    padding-bottom: 20px;
-    border-bottom: 20px solid transparent;
   }
 
   .image-container,
-  main {
+  main,
+  footer {
     width: 80vw;
     min-width: 500px;
   }

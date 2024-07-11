@@ -19,7 +19,7 @@ header {
   padding-left: 15px;
   padding-bottom: 5px;
   padding-right: 20px;
-  background-color: #e9c590;
+  background-color: #cdad7c;
 }
 
 #logo {
@@ -79,19 +79,16 @@ header {
 
 input[type="text"] {
   height: calc(1rem + 10px);
+  width: 80%;
   border-radius: 10px;
   border: 1px solid #d0ab73;
   background-color: #f5e1c5;
   color: #d0ab73;
 }
 
-input[type="text"]:disabled {
-  background-color: rgb(229, 228, 228);
-  border: 1px solid gray;
-}
-
-input[type="text"]:disabled::placeholder {
-  color: gray;
+dialog input[type="text"] {
+  margin: 0 auto;
+  grid-column: span 2;
 }
 
 ::placeholder {
@@ -107,27 +104,40 @@ input[type="text"]:disabled::placeholder {
   color: #d0ab73;
 }
 
-input[type="text"]:focus {
-  border: 3px solid #a68758;
-  outline: none;
-}
-
 .input-and-tooltip-mobile {
+  width: 100%;
+  margin-inline: auto;
   display: flex;
+  flex-direction: column;
   gap: 5px;
   align-items: center;
   grid-column: span 2;
 }
 
+.search-field {
+  display: grid;
+  grid-template-columns: 100% 0 0;
+  align-items: center;
+}
+
 .tooltip-mobile {
+  width: 100%;
   justify-self: left;
   text-align: left;
+}
+
+.tooltip-mobile a {
+  color: white;
+}
+
+.tooltip-mobile a:visited {
+  color: #fdedd4;
 }
 
 .tooltip {
   position: absolute;
   width: 200px;
-  background-color: #bf9a64;
+  background-color: #fccd87;
   border-radius: 20px;
 }
 
@@ -136,7 +146,7 @@ input[type="text"]:focus {
 }
 
 #search-icon-mobile-dialog {
-  transform: translateX(-30px);
+  transform: translateX(-40px);
 }
 
 a[href=""] {
@@ -159,33 +169,51 @@ dialog {
   text-align: center;
   position: fixed;
   margin: 0;
+  padding: 10px 20px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #a68758;
+  background-color: #bc975f;
   border: 1px solid #472a1f;
   border-radius: 30px;
 }
 
 .dialog-items-container {
+  width: 100%;
   display: grid;
-  grid-template-columns: auto auto;
-  grid-auto-columns: 100% 0;
+  grid-template-columns: max-content;
   align-items: center;
   justify-content: center;
+  padding: 10px 0;
 }
 
 dialog h2 {
+  grid-column: span 2;
   padding-left: 0;
   color: #f5e1c5;
 }
 
+input[type="text"]:disabled {
+  background-color: rgb(229, 228, 228);
+  border: 1px solid gray;
+}
+
+input[type="text"]:focus {
+  border: 3px solid #a68758;
+  outline: none;
+}
+
+input[type="text"]:disabled::placeholder {
+  color: gray;
+}
+
 .close-mobile-dialog {
-  float: right;
-  clear: left;
+  position: absolute;
+  top: 10px;
+  right: 10px;
   height: 30px;
   width: 30px;
-  background-image: url("/assets/close.png");
+  background-image: url("/assets/close-white.png");
   background-size: 80%;
   background-repeat: no-repeat;
   background-position: center;

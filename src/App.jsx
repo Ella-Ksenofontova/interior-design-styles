@@ -1,6 +1,7 @@
 import {Routes, Route} from "react-router-dom";
 
 import Header from "./Header/Header";
+import Footer from "./Footer/Footer";
 import ControlledStylesList from "./ControlledStylesList/ControlledStylesList";
 import StylePage from "./StylePage/StylePage";
 import CopyrightPage from "./CopyrightPage/CopyrightPage";
@@ -34,6 +35,7 @@ function HomePage() {
           <h2>Список стилей</h2>
           <ControlledStylesList/>
         </main>
+        <Footer/>
       </>
     );
 }  

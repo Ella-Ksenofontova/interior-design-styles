@@ -122,8 +122,10 @@ function InputWithTooltip({mobile,}) {
           const tooltip = document.querySelector(tooltipSelector);
           const input = document.querySelector("input[type='text']");
           
-          tooltip.style.top = `${input.getBoundingClientRect().bottom + 10}px`;
-          tooltip.style.left = `${input.getBoundingClientRect().left}px`;
+          if (tooltip) {
+            tooltip.style.top = `${input.getBoundingClientRect().bottom + 10}px`;
+            tooltip.style.left = `${input.getBoundingClientRect().left}px`;
+          }
         }
       });
       setListenerAdded(true);
@@ -136,15 +138,17 @@ function InputWithTooltip({mobile,}) {
       styles["input-and-tooltip-mobile"] : styles["input-and-tooltip"]}
     onMouseLeave={() => document.querySelector(`.${styles.tooltip}`).hidden =
       true}>
-      <input type="text" placeholder="Поиск по сайту"
-        onInput={handleInput}
-        onFocus={handleFocus}
-        onMouseEnter={handleFocus}/>
-      <div className={styles["magnifier-decorative"]}
-      id={mobile ?
-        styles["search-icon-mobile-dialog"]
-        : styles["search-icon"]}>
-      </div>
+        <div className={styles["search-field"]}>
+          <input type="text" placeholder="Поиск по сайту"
+            onInput={handleInput}
+            onFocus={handleFocus}
+            onMouseEnter={handleFocus}/>
+          <div className={styles["magnifier-decorative"]}
+          id={mobile ?
+            styles["search-icon-mobile-dialog"]
+            : styles["search-icon"]}>
+          </div>
+        </div>
       <div className={mobile ?
         styles["tooltip-mobile"]
         : styles.tooltip} hidden={!appropriateLinks.length}

@@ -13,6 +13,7 @@ figure {
 
 figure img {
   cursor: zoom-in;
+  border-radius: 10px;
 }
 
 .gallery-explanation {

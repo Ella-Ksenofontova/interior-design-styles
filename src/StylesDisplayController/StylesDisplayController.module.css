@@ -12,6 +12,7 @@ label {
   height: 15px;
   background-color: #d0ab73;
   border: 1px solid rgb(169, 102, 35);
+  border-radius: 3px;
 }
 
 input[type="checkbox"]:checked + .checkbox {

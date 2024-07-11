@@ -1,4 +1,5 @@
 import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 import HomePageLink from "../StylePage/HomePageLink/HomePageLink";
 
 /**
@@ -28,11 +29,13 @@ export default function CopyrightPage() {
           <li><a href="https://www.flaticon.com/authors/iconixar">Автор иконки лампочки</a></li>
           <li><a href="https://www.flaticon.com/authors/freepik">Автор иконки африканской маски и веера</a></li>
           <li><a href="https://www.flaticon.com/authors/vectaicon">Автор иконки &quot;На главную&quot;</a></li>
-          <li><a href="https://www.flaticon.com/authors/cap-cool">Автор иконки в виде знака авторского права</a></li>
+          <li><a href="https://www.flaticon.com/authors/freepik">Автор иконки в виде знака авторского права</a></li>
           <li><a href="https://www.flaticon.com/authors/muhammad-usman">Автор иконки галочки</a></li>
+          <li><a href="https://www.flaticon.com/authors/inkubators">Автор иконки крестика</a></li>
           <li><a href="https://storyset.com">Источник картинки, использованной на странице 404</a></li>
         </ul>
       </main>
+      <Footer/>
     </>
   );
 }

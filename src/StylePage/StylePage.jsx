@@ -7,6 +7,7 @@ import StyleDescription from "./StyleDescription/StyleDescription";
 import RelatedStylesList from "./RelatedStylesList/RelatedStylesList";
 import SourcesList from "./SourcesList/SourcesList";
 import Gallery from "./Gallery/Gallery";
+import Footer from "../Footer/Footer";
 
 import styles from "./StylePage.module.css";
 import STYLES_DATA from "../styles_data";
@@ -73,6 +74,7 @@ export default function StylePage({styleName, styleOrder,}) {
               explanation="Здесь перечислены источники картинок, которые использовались во всплывающих подсказках к следующим словам: "
               sources={sources}/> : ""}
         </main>
+        <Footer/>
       </>
     );
 }

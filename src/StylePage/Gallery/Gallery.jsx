@@ -56,7 +56,8 @@ export default function Gallery({imagesData,}) {
   function resizeImages() {
     const images = document.querySelectorAll("img[id^=gallery-image]");
     for (const image of images) {
-      image.width = Math.min(image.naturalWidth / image.naturalHeight * 150, document.body.offsetWidth - 50);
+      image.width = Math.min(image.naturalWidth / image.naturalHeight * 150, document.body.offsetWidth - 50,);
+      image.parentElement.style.width = `${image.width}px`;
     }
   }
 

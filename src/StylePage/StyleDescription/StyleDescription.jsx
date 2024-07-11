@@ -1,7 +1,24 @@
 import {useFloating, offset, autoPlacement, autoUpdate} from "@floating-ui/react";
 import {number, string, arrayOf} from "prop-types";
+import { useState, useContext } from "react";
 import styles from "./StyleDescription.module.css";
 import MARKS from "../../marks"
+import IsMobileContext from "./IsMobileContext";
+
+/*
+Авторы: 
+https://stackoverflow.com/users/999204/gsxrboy73
+https://stackoverflow.com/users/104380/vsync
+*/
+
+function checkMobile() {
+  var match = window.matchMedia || window.msMatchMedia;
+  if(match) {
+      var mediaQuery = match("(pointer:coarse)");
+      return mediaQuery.matches;
+  }
+  return false;
+}
 
 /**
  * Description of style split at paragraphs.
@@ -11,34 +28,53 @@ import MARKS from "../../marks"
  * @returns {React.JSX.Element} The rendered StyleDescription component.
  */
 
-export default function StyleDescription({description,}) {
-  return (<section>
-    <h2>Описание стиля</h2>
-    <div id={styles.description}>
-      {description.map((paragraph, index) => {
-        const initialParagraphParts = paragraph.split("!mark");
+export default function StyleDescription({description}) {
+  const [isMobile, setIsMobile] = useState(checkMobile());
+  const [listenerAdded, setListenerAdded] = useState(false);
 
-        return (
-          <div key={`paragraph-${index + 1}`}
-            className={styles["style-description"]}>
-            {initialParagraphParts.map((paragraphPart, paragraphIndex) => <ParagraphPart
-              key={`part-component-${index}-${paragraphIndex}`}
-              initialText={paragraphPart}
-              index={index}
-              paragraphIndex={paragraphIndex}
-            ></ParagraphPart>
-            )}
-          </div>);
-      })
-      }
+  if (!listenerAdded) {
+    window.addEventListener("resize", () => {
+      setIsMobile(checkMobile());
+    });
 
-    </div>
-  </section>);
+    setListenerAdded(true);
+  }
+
+  return (
+  <IsMobileContext.Provider value={isMobile}>
+    <section>
+      <h2>Описание стиля</h2>
+      <div id={styles.description}>
+        {description.map((paragraph, index) => {
+          const initialParagraphParts = paragraph.split("!mark");
+
+          return (
+            <div key={`paragraph-${index + 1}`}
+              className={styles["style-description"]}>
+              {initialParagraphParts.map((paragraphPart, paragraphIndex) => <ParagraphPart
+                key={`part-component-${index}-${paragraphIndex}`}
+                initialText={paragraphPart}
+                index={index}
+                paragraphIndex={paragraphIndex}
+              ></ParagraphPart>
+              )}
+            </div>);
+        })
+        }
+
+      </div>
+    </section>
+  </IsMobileContext.Provider>
+  );
 }
 
 StyleDescription.propTypes = {
   description: arrayOf(string),
 };
+
+function preventDefault(event) {
+  event.preventDefault();
+}
 
 /**
  * The part of the paragraph before or after !markn substring (where _n_ is number). Also includes mark and tooltip themselves, if its index is bigger than 0.
@@ -52,6 +88,8 @@ StyleDescription.propTypes = {
  */
 
 function ParagraphPart({initialText, index, paragraphIndex,}) {
+  const isMobile = useContext(IsMobileContext);
+
   const {refs, floatingStyles,} = useFloating({
     middleware: [
       offset(5),
@@ -85,20 +123,46 @@ function ParagraphPart({initialText, index, paragraphIndex,}) {
       <mark ref={refs.setReference}
         key={`mark-${index + 1}`}
         onMouseOver={() => document.getElementById(`describing-block-${index + 1}-${paragraphIndex + 1}`).classList.remove(styles.hidden)}
-        onFocus={() => document.getElementById(`describing-block-${index + 1}-${paragraphIndex + 1}`).classList.remove(styles.hidden)}
+        onFocus={() => {
+          if (!isMobile) {
+            document.getElementById(`describing-block-${index + 1}-${paragraphIndex + 1}`).classList.remove(styles.hidden);
+          }
+        }}
         onMouseOut={() => document.getElementById(`describing-block-${index + 1}-${paragraphIndex + 1}`).classList.add(styles.hidden)}
         onBlur={e => {
-          if (!e.relatedTarget.classList.contains(styles["describing-block"])) {
+          if (!e.relatedTarget?.classList.contains(styles["describing-block"])) {
             document.getElementById(`describing-block-${index + 1}-${paragraphIndex + 1}`).classList.add(styles.hidden);
           }
         }}
-        onTouchStart={() => document.getElementById(`describing-block-mobile-${index + 1}-${paragraphIndex + 1}`).showModal()}
-        tabIndex={0}>{markParams.text}</mark>
+        onTouchStart={() => {
+          document.getElementById(`describing-block-mobile-${index + 1}-${paragraphIndex + 1}`).showModal();
+
+          let supportsPassive = false;
+          try {
+            const opts = Object.defineProperty({}, "passive", {
+              get: function() {
+                supportsPassive = true;
+              },
+            });
+            window.addEventListener("test", null, opts);
+          } catch (e) {
+
+          }
+
+          const options = supportsPassive ? {passive: false,} : false;
+
+          window.addEventListener("mousewheel", preventDefault, options);
+          window.addEventListener("touchmove", preventDefault, options);
+        }}
+        tabIndex={0}
+        >{`${markParams.text}`}
+        <span className="visually-hidden">{isMobile ? " Щёлкните, чтобы узнать, что это такое" : ""}</span>
+        </mark>
       <figure className={`${styles["describing-block"]} ${styles.hidden}`} id={`describing-block-${index + 1}-${paragraphIndex + 1}`}
         key={`describing-block-${index + 1}-${paragraphIndex + 1}`} ref={refs.setFloating} style={floatingStyles}
         tabIndex={0}
         onBlur={e => {
-          if (!e.relatedTarget.classList.contains("description-of-tooltip")) {
+          if (!e.relatedTarget?.classList.contains("description-of-tooltip")) {
             document.getElementById(`describing-block-${index + 1}-${paragraphIndex + 1}`).classList.add(styles.hidden);
           }
         }}>
@@ -108,7 +172,7 @@ function ParagraphPart({initialText, index, paragraphIndex,}) {
           key={`image-${index + 1}`}
           alt={markParams.image.substring(0, markParams.image.indexOf("."))}
           height={markParams.orientation.toLowerCase() === "vertical" ? "200" : "150"}
-          width={markParams.orientation.toLowerCase() === "vertical" ? "125" : "300"}
+          width={markParams.orientation.toLowerCase() === "vertical" ? "125" : String(Math.min(300, innerWidth * 0.9 - 10))}
         />
         <figcaption key={`caption-${index + 1}`}>
           <span className="description-of-tooltip" tabIndex={0}>{markParams.description}</span><br />
@@ -119,7 +183,7 @@ function ParagraphPart({initialText, index, paragraphIndex,}) {
         paragraphIndex={paragraphIndex}
         orientation={markParams.orientation}
         image={markParams.image}
-        descriptionOfImage={markParams.descriptionOfImage}
+        descriptionOfImage={markParams.description}
       ></DescribingMobileDialog>
       {remainingText}
     </>);
@@ -162,13 +226,17 @@ function DescribingMobileDialog({index = 0, paragraphIndex = 0, image = "", orie
         key={`image-${index + 1}`}
         alt={image.substring(0, image.indexOf("."))}
         height={orientation.toLowerCase() === "vertical" ? "200" : "150"}
-        width={orientation.toLowerCase() === "vertical" ? "125" : "300"}>
+        width={orientation.toLowerCase() === "vertical" ? "125" : String(Math.min(300, innerWidth * 0.9))}>
       </img>
       <span key={`description-${index + 1}`}>
         {descriptionOfImage}<br/>
       </span>
       <button className={styles["close-mobile-dialog"]}
-        onClick={() => document.getElementById(`describing-block-mobile-${index + 1}-${paragraphIndex + 1}`).close()}
+        onClick={() => {
+          document.getElementById(`describing-block-mobile-${index + 1}-${paragraphIndex + 1}`).close();
+          window.removeEventListener("mousewheel", preventDefault);
+          window.removeEventListener("touchmove", preventDefault);
+        }}
         title='Закрыть пояснение'
       >
       </button>
