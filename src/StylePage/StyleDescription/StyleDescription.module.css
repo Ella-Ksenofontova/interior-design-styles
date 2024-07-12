@@ -21,16 +21,12 @@ mark {
 
 .describing-image {
   float: left;
-  max-width: 0;
   border-radius: 10px;
+  max-width: 100vw;
 }
 
 .describing-block {
   margin: 0;
-  display: grid;
-  grid-template-columns: -webkit-min-content;
-  grid-template-columns: min-content;
-  padding: 5px;
   color: white;
   text-align: center;
   font-size: .8em;
@@ -45,7 +41,7 @@ mark {
 
 .describing-block-mobile {
   position: fixed;
-  top: unset;
+  top: auto;
   left: 0;
   right: 0;
   z-index: 0;
@@ -90,7 +86,11 @@ mark {
 }
 
 @media screen and (min-width: 576px) {
-  .describing-image {
-    max-width: unset;
+  .describing-block {
+    display: grid;
+    grid-template-columns: -webkit-min-content;
+    grid-template-columns: min-content;
+    grid-template-rows: repeat(2, min-content);
+    padding: 5px;
   }
 }

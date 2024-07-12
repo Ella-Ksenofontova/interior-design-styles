@@ -5,19 +5,24 @@ import styles from "./StyleDescription.module.css";
 import MARKS from "../../marks"
 import IsMobileContext from "./IsMobileContext";
 
-/*
-Авторы: 
-https://stackoverflow.com/users/999204/gsxrboy73
-https://stackoverflow.com/users/104380/vsync
-*/
-
+//Автор: https://stackoverflow.com/users/1291879/tigger
 function checkMobile() {
-  var match = window.matchMedia || window.msMatchMedia;
-  if(match) {
-      var mediaQuery = match("(pointer:coarse)");
-      return mediaQuery.matches;
+  const result = navigator.maxTouchPoints || document.documentElement.ontouchstart;
+  return result;
+}
+
+function getRatio(src) {
+  let image = document.querySelector(`img[src='${src}]'`);
+  if (!image) {
+    image = document.createElement("img");
+    image.src = src;
   }
-  return false;
+
+  if (image.naturalHeight === 0) {
+    return 0;
+  } else {
+    return image.naturalWidth / image.naturalHeight;
+  }
 }
 
 /**
@@ -159,24 +164,31 @@ function ParagraphPart({initialText, index, paragraphIndex,}) {
         <span className="visually-hidden">{isMobile ? " Щёлкните, чтобы узнать, что это такое" : ""}</span>
         </mark>
       <figure className={`${styles["describing-block"]} ${styles.hidden}`} id={`describing-block-${index + 1}-${paragraphIndex + 1}`}
-        key={`describing-block-${index + 1}-${paragraphIndex + 1}`} ref={refs.setFloating} style={floatingStyles}
+        key={`describing-block-${index + 1}-${paragraphIndex + 1}`} ref={refs.setFloating} style={Object.assign(isMobile ? {width: 0} : {}, floatingStyles)}
         tabIndex={0}
         onBlur={e => {
           if (!e.relatedTarget?.classList.contains("description-of-tooltip")) {
             document.getElementById(`describing-block-${index + 1}-${paragraphIndex + 1}`).classList.add(styles.hidden);
           }
         }}>
+        {!isMobile ? <>
         <img src={`/interior-design-styles/assets/${markParams.image ? `styles_images/${title}/${markParams.image}` : "placeholder.png"}`}
           className={styles["describing-image"]}
           id={`image-${index + 1}`}
           key={`image-${index + 1}`}
           alt={markParams.image.substring(0, markParams.image.indexOf("."))}
-          height={markParams.orientation.toLowerCase() === "vertical" ? "200" : "150"}
-          width={markParams.orientation.toLowerCase() === "vertical" ? "125" : String(Math.min(300, innerWidth * 0.9 - 10))}
+          width = {isMobile ? 0 : markParams.orientation === "vertical" ? "150" : Math.min(300, innerWidth * 0.9)}
+          height={isMobile ? 0 : markParams.orientation === "vertical" ? 
+            150 * (1 / getRatio(`/interior-design-styles/assets/${markParams.image ? `styles_images/${title}/${markParams.image}` : "placeholder.png"}`)) :
+            Math.min(300, innerWidth * 0.9) * (1 / getRatio(`/interior-design-styles/assets/${markParams.image ? `styles_images/${title}/${markParams.image}` : "placeholder.png"}`))
+          }
         />
         <figcaption key={`caption-${index + 1}`}>
-          <span className="description-of-tooltip" tabIndex={0}>{markParams.description}</span><br />
+          <span className={`description-of-tooltip ${isMobile ? "visually-hidden" : ""}`} tabIndex={0}>{markParams.description}</span><br />
         </figcaption>
+        </> :
+        ""
+        }
       </figure>
       <DescribingMobileDialog
         index={index}
@@ -224,10 +236,7 @@ function DescribingMobileDialog({index = 0, paragraphIndex = 0, image = "", orie
         className={styles["describing-image"]}
         id={`image-${index + 1}`}
         key={`image-${index + 1}`}
-        alt={image.substring(0, image.indexOf("."))}
-        height={orientation.toLowerCase() === "vertical" ? "200" : "150"}
-        width={orientation.toLowerCase() === "vertical" ? "125" : String(Math.min(300, innerWidth * 0.9))}>
-      </img>
+        alt={image.substring(0, image.indexOf("."))}/>
       <span key={`description-${index + 1}`}>
         {descriptionOfImage}<br/>
       </span>

@@ -1,5 +1,5 @@
 import styles from "./GalleryCarousel.module.css";
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 
 /**
  * Changes the dimensions of images. It's a callback in _resize_ event listener.
@@ -14,8 +14,8 @@ function resizeImages(imagesList) {
     let width = 100;
     let height = (1 / ratio) * width;
 
-    while(true) {
-      const newWidth = width + 100;
+    while (true) {
+      const newWidth = width + 10;
       const newHeight = (1 / ratio) * newWidth;
 
       if (newWidth > maxWidth || newHeight > maxHeight) {
@@ -28,7 +28,7 @@ function resizeImages(imagesList) {
 
     image.width = width;
     image.height = height;
-  
+
     image.parentElement.style.height = `${image.height}px`;
   }
 }
@@ -44,28 +44,38 @@ function resizeImages(imagesList) {
  * @listens touchstart, touchend, pointermove (when user is touching the image), load, click
  */
 
-export default function GalleryCarousel({imagesData, clickedImage, scrollCallback,}) {
+export default function GalleryCarousel({ imagesData, clickedImage, scrollCallback}) {
   const [activeIndex, setActiveIndex,] = useState(null);
 
-  window.onresize =  () => {
+  window.onresize = () => {
     const images = document.querySelectorAll(`.${styles["image-wrapper"]} img`);
     resizeImages(images);
 
     const imagesSequence = document.querySelector(`.${styles["images-sequence"]}`);
     if (imagesSequence) {
-      imagesSequence.classList.add(styles.resizing);
+      imagesSequence.classList.add(styles["no-smooth-scroll"]);
       imagesSequence.scrollTo(findScrollWidth(activeIndex), 0);
+
+      const allImages = document.querySelectorAll(`.${styles["gallery-carousel"]} img`);
+      const currentImage = allImages[activeIndex];
+
+      imagesSequence.style.height = `${currentImage?.height + 20}px`;
     }
   };
 
-  
+
   useEffect(() => {
     const imagesSequence = document.querySelector(`.${styles["images-sequence"]}`);
     const currentActiveIndex = imagesData.findIndex(item => item.name === clickedImage);
     if (imagesSequence?.parentElement.open && activeIndex === null && currentActiveIndex > -1) {
-      imagesSequence.classList.add(styles["just-opened"]);
+      imagesSequence.classList.add(styles["no-smooth-scroll"]);
       imagesSequence.scrollTo(findScrollWidth(currentActiveIndex), 0);
       setActiveIndex(currentActiveIndex);
+
+      const allImages = document.querySelectorAll(`.${styles["gallery-carousel"]} img`);
+      const currentImage = allImages[currentActiveIndex];
+      
+      imagesSequence.style.height = `${currentImage.height + 20}px`;
     }
   });
 
@@ -81,7 +91,7 @@ export default function GalleryCarousel({imagesData, clickedImage, scrollCallbac
 
     while (i < currentIndex) {
       foundScrollWidth += innerWidth * 0.7 + 5;
-      i ++;
+      i++;
     }
 
     return foundScrollWidth;
@@ -98,12 +108,19 @@ export default function GalleryCarousel({imagesData, clickedImage, scrollCallbac
       newIndex = activeIndex + 1;
       setActiveIndex(newIndex);
     }
+    imagesSequence.classList.remove(styles["no-smooth-scroll"]);
 
-    imagesSequence.classList.remove(styles["just-opened"]);
-    imagesSequence.classList.remove(styles.resizing);
+    const description = document.querySelector(`.${styles.description}`);
+    description.hidden = true;
 
-      
     imagesSequence.scrollTo(findScrollWidth(newIndex), 0);
+
+    const allImages = document.querySelectorAll(`.${styles["gallery-carousel"]} img`);
+    const currentImage = allImages[newIndex];
+    
+    imagesSequence.style.height = `${currentImage.height + 20}px`;
+
+    description.hidden = false;
   }
 
   function goToPreviousImage() {
@@ -119,10 +136,19 @@ export default function GalleryCarousel({imagesData, clickedImage, scrollCallbac
       setActiveIndex(newIndex);
     }
 
-    imagesSequence.classList.remove(styles["just-opened"]);
-    imagesSequence.classList.remove(styles.resizing);
+    imagesSequence.classList.remove(styles["no-smooth-scroll"]);
+
+    const description = document.querySelector(`.${styles.description}`);
+    description.hidden = true;
 
     imagesSequence.scrollTo(findScrollWidth(newIndex), 0);
+
+    const allImages = document.querySelectorAll(`.${styles["gallery-carousel"]} img`);
+    const currentImage = allImages[newIndex];
+    
+    imagesSequence.style.height = `${currentImage.height + 20}px`;
+
+    setTimeout(() => description.hidden = false, 0);
   }
 
   if (clickedImage) {
@@ -146,7 +172,7 @@ export default function GalleryCarousel({imagesData, clickedImage, scrollCallbac
         <div className={styles["images-sequence"]}
           onTouchStart={() => {
             const imagesSequence = document.querySelector(`.${styles["images-sequence"]}`);
-            imagesSequence.classList.add(styles["just-opened"]);
+            imagesSequence.classList.add(styles["no-smooth-scroll"]);
             imagesSequence.onpointermove = event => {
               imagesSequence.scrollTo(imagesSequence.scrollLeft - event.movementX, 0);
 
@@ -166,48 +192,57 @@ export default function GalleryCarousel({imagesData, clickedImage, scrollCallbac
             () => {
               document.querySelector(`.${styles["images-sequence"]}`).onpointermove = "";
               const imagesSequence = document.querySelector(`.${styles["images-sequence"]}`);
-              imagesSequence.classList.remove(styles["just-opened"]);
+              imagesSequence.classList.remove(styles["no-smooth-scroll"]);
               imagesSequence.scrollTo(findScrollWidth(activeIndex), 0);
+
+              const allImages = document.querySelectorAll(`.${styles["gallery-carousel"]} img`);
+              const currentImage = allImages[activeIndex];
+
+              imagesSequence.style.height = `${currentImage.height + 20}px`;
             }
           }>
-          {imagesData.map((item, index) => <div className={styles["image-wrapper"]}
-            key={`image-wrapper-${index + 1}`}
-          >
-            <img src={item.name}
-              alt={imagesData[index].description}
-              onLoad={event => {
-                const imagesSequence = document.querySelector(`.${styles["images-sequence"]}`);
-                if (index === imagesData.length - 1) {
-                  imagesSequence.classList.add(styles["just-opened"]);
-                  imagesSequence.scrollTo(findScrollWidth(activeIndex), 0);
-                }
-
-                const image = event.target;
-
-                const ratio = image.naturalWidth / image.naturalHeight;
-                const maxHeight = innerHeight * 0.8 - 45;
-                const maxWidth = innerWidth * 0.7;
-                let width = 100;
-                let height = (1 / ratio) * width;
-            
-                while(true) {
-                  const newWidth = width + 100;
-                  const newHeight = (1 / ratio) * newWidth;
-            
-                  if (newWidth > maxWidth || newHeight > maxHeight) {
-                    break
+          {imagesData.map((item, index) =>
+            <div className={styles["image-wrapper"]}
+              key={`image-wrapper-${index + 1}`}>
+              <img src={item.name}
+                alt={imagesData[index].description}
+                onLoad={event => {
+                  const imagesSequence = document.querySelector(`.${styles["images-sequence"]}`);
+                  if (index === imagesData.length - 1) {
+                    imagesSequence.classList.add(styles["no-smooth-scroll"]);
+                    imagesSequence.scrollTo(findScrollWidth(activeIndex), 0);
                   }
-            
-                  width = newWidth;
-                  height = newHeight;
-                }
 
-                image.width = width;
-                image.height = height;
-              
-                image.parentElement.style.height = `${image.height}px`;
-              }}/>
-          </div>
+                  const image = event.target;
+
+                  const ratio = image.naturalWidth / image.naturalHeight;
+                  const maxHeight = innerHeight * 0.8 - 45;
+                  const maxWidth = innerWidth * 0.7;
+                  let width = 100;
+                  let height = (1 / ratio) * width;
+
+                  while (true) {
+                    const newWidth = width + 10;
+                    const newHeight = (1 / ratio) * newWidth;
+
+                    if (newWidth > maxWidth || newHeight > maxHeight) {
+                      break
+                    }
+
+                    width = newWidth;
+                    height = newHeight;
+                  }
+
+                  image.width = width;
+                  image.height = height;
+
+                  image.parentElement.style.height = `${image.height}px`;
+
+                  const allImages = document.querySelectorAll(`.${styles["gallery-carousel"]} img`);
+                  const currentImage = allImages[activeIndex];
+                  imagesSequence.style.height = `${currentImage.height + 20}px`;
+                }} />
+                </div>
           )}
         </div>
         <button
@@ -216,9 +251,7 @@ export default function GalleryCarousel({imagesData, clickedImage, scrollCallbac
           id={styles.next}
           onClick={goToNextImage}
         ></button>
-        <div className={styles.description} aria-hidden>
-          {imagesData[activeIndex]?.description || ""}
-        </div>
+        <div className={styles.description}>{activeIndex === null ? "" : imagesData[activeIndex].description}</div>
       </dialog>
     );
   }

@@ -56,7 +56,9 @@ export default function Gallery({imagesData,}) {
   function resizeImages() {
     const images = document.querySelectorAll("img[id^=gallery-image]");
     for (const image of images) {
-      image.width = Math.min(image.naturalWidth / image.naturalHeight * 150, document.body.offsetWidth - 50,);
+      const ratio = image.naturalWidth / image.naturalHeight;
+      image.width = Math.min(ratio * 150, document.body.offsetWidth - 50);
+      image.height = image.width / ratio;
       image.parentElement.style.width = `${image.width}px`;
     }
   }
@@ -72,11 +74,12 @@ export default function Gallery({imagesData,}) {
             key={`gallery-image-${index + 1}`}
             src={`/interior-design-styles/assets/styles_images/${styleName}/additional-${index + 1}.${item.extension}`}
             tabIndex={0}
-            height={150}
             onLoad={e => {
-              const width = Math.min(e.target.naturalWidth / e.target.naturalHeight * 150, document.body.offsetWidth - 50);
+              const ratio = e.target.naturalWidth / e.target.naturalHeight;
+              const width = Math.min(ratio * 150, document.body.offsetWidth - 50);
 
               e.target.width = width;
+              e.target.height = width / ratio;
               e.target.parentElement.style.width = `${e.target.width}px`;
 
               if (!IMGTagsAreLoaded && index === imagesData.length - 1) {
