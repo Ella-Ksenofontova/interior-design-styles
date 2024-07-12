@@ -123,6 +123,7 @@ function ParagraphPart({initialText, index, paragraphIndex,}) {
   const remainingText = initialText.substring(match[0].length);
         
   const markParams = MARKS.find(item => item.name === `Mark${match[0]}`);
+  const src = `/interior-design-styles/assets/${markParams.image ? `styles_images/${title}/${markParams.image}` : "placeholder.png"}`;
   return (
     <>
       <mark ref={refs.setReference}
@@ -172,15 +173,15 @@ function ParagraphPart({initialText, index, paragraphIndex,}) {
           }
         }}>
         {!isMobile ? <>
-        <img src={`/interior-design-styles/assets/${markParams.image ? `styles_images/${title}/${markParams.image}` : "placeholder.png"}`}
+        <img src={src}
           className={styles["describing-image"]}
           id={`image-${index + 1}`}
           key={`image-${index + 1}`}
           alt={markParams.image.substring(0, markParams.image.indexOf("."))}
           width = {isMobile ? 0 : markParams.orientation === "vertical" ? "150" : Math.min(300, innerWidth * 0.9)}
           height={isMobile ? 0 : markParams.orientation === "vertical" ? 
-            150 * (1 / getRatio(`/interior-design-styles/assets/${markParams.image ? `styles_images/${title}/${markParams.image}` : "placeholder.png"}`)) :
-            Math.min(300, innerWidth * 0.9) * (1 / getRatio(`/interior-design-styles/assets/${markParams.image ? `styles_images/${title}/${markParams.image}` : "placeholder.png"}`))
+            150 * (1 / getRatio(src)) :
+            Math.min(300, innerWidth * 0.9) * (1 / getRatio(src))
           }
         />
         <figcaption key={`caption-${index + 1}`}>
