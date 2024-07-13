@@ -27,7 +27,7 @@ export default function Header() {
       </span>
 
       <header>
-        <div id={styles.logo}></div>
+        <a href="/" id={styles.logo}></a>
         <InputWithTooltip mobile={false}/>
         <button id={styles["search-mobile"]}
           onClick={() => document.getElementById(
