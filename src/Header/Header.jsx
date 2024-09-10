@@ -142,7 +142,8 @@ function InputWithTooltip({mobile,}) {
           <input type="text" placeholder="Поиск по сайту"
             onInput={handleInput}
             onFocus={handleFocus}
-            onMouseEnter={handleFocus}/>
+            onMouseEnter={handleFocus}
+            name={mobile ? "mobileSearchField" : "searchField"}/>
           <div className={styles["magnifier-decorative"]}
           id={mobile ?
             styles["search-icon-mobile-dialog"]
