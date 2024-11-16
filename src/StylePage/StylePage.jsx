@@ -42,14 +42,14 @@ export default function StylePage({styleName, styleOrder,}) {
     }
   }
 
-  const imagesData = styleData.imagesSources.map((item, index) => {
+  const imagesData = styleData.imagesSources?.map((item, index) => {
     return {
       extension: styleData.imagesExtensions[index] || "jpg",
       description: styleData.galleryDescriptions[index] || "Нет описания картинки",
       source: styleData.imagesSources[index] || "",
     }
   })
-
+ || [];
   return (
       <>
         <Header searchAvailableMessage=""/>
@@ -64,7 +64,7 @@ export default function StylePage({styleName, styleOrder,}) {
             <Gallery imagesData={imagesData} /> : ""
           }
 
-          {styleData.relatedStyles.length > 0 ? <RelatedStylesList relatedStyles={styleData.relatedStyles} /> : ""}
+          {styleData.relatedStyles?.length > 0 ? <RelatedStylesList relatedStyles={styleData.relatedStyles} /> : ""}
 
           {styleData.infoSources?.length > 0 ?
             <SourcesList title="Источники информации" sources={styleData.infoSources}/> : ""}

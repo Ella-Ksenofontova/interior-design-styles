@@ -314,7 +314,7 @@ const STYLES_DATA = [
     "path": "gothic",
   },
   {
-    "realtedStyles": [
+    "relatedStyles": [
       "Африканский",
       "Этнический"
     ],
@@ -334,7 +334,7 @@ const STYLES_DATA = [
     "cardSource": "https://amiel.club/27557-interer-v-stile-drevnego-egipta.html",
     "styleOrder": "before",
     "name": "Египетский",
-    "path": "egypgtian",
+    "path": "egyptian",
   },
   {
     "galleryDescriptions": [
