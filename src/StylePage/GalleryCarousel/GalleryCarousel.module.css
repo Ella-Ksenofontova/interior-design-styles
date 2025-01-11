@@ -36,6 +36,7 @@
   width: min(50px, 5vw);
   height: min(50px, 5vw);
   background-color: transparent;
+  background-repeat: no-repeat;
   background-size: contain;
 }
 
