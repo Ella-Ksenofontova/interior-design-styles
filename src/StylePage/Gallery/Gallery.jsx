@@ -1,7 +1,7 @@
 import styles from "./Gallery.module.css";
 import GalleryCarousel from "../GalleryCarousel/GalleryCarousel";
 import galleryStyles from "../GalleryCarousel/GalleryCarousel.module.css";
-import {useState} from "react";
+import { useState } from "react";
 
 /**
  * Prevents default behaviour of specified event.
@@ -21,7 +21,7 @@ function preventDefault(event) {
  * @listens load, click, mousewheel, touchmove (the last two since image is clicked and until the carousel is closed)
  */
 
-export default function Gallery({imagesData,}) {
+export default function Gallery({ imagesData, }) {
   const indexOfWord = document.title.indexOf(" стиль");
   let styleName;
   if (indexOfWord > -1) {
@@ -41,15 +41,20 @@ export default function Gallery({imagesData,}) {
   const [IMGTagsAreLoaded, setIMGTagsAreLoaded,] = useState(false);
   const [numberOfOpens, setNumberOfOpens,] = useState(0);
 
-  if (IMGTagsAreLoaded && dataForCarousel.length == 0) {
-    setDataForCarousel(
-      imagesData.map((item, index) => ({
-        description: item.description,
-        name: document.getElementById(`gallery-image-${index + 1}`).src,
-        width: Math.min(document.getElementById(`gallery-image-${index + 1}`).naturalWidth, innerWidth * 0.75),
-      }))
-    );
+  if (IMGTagsAreLoaded) {
+    let currentCarouselData = imagesData.map((item, index) => ({
+      description: item.description,
+      name: document.getElementById(`gallery-image-${index + 1}`)?.src,
+      width: Math.min(document.getElementById(`gallery-image-${index + 1}`)?.naturalWidth, innerWidth * 0.75)
+    }));
 
+    const equality_condition = JSON.stringify(currentCarouselData) === JSON.stringify(dataForCarousel);
+
+    if (!equality_condition) setIMGTagsAreLoaded(false);
+
+    if (dataForCarousel.length === 0 || !equality_condition) {
+      setDataForCarousel(currentCarouselData);
+    }
     window.addEventListener("resize", resizeImages);
   }
 
@@ -70,10 +75,11 @@ export default function Gallery({imagesData,}) {
       <div className={styles.gallery}>
         {imagesData.map((item, index) => <figure key={`gallery-figure-${index + 1}`}>
           <img
+            width={IMGTagsAreLoaded ? "" : 0}
+            height={IMGTagsAreLoaded ? "" : 0}
             id={`gallery-image-${index + 1}`}
             key={`gallery-image-${index + 1}`}
             src={`/interior-design-styles/assets/styles_images/${styleName}/additional-${index + 1}.${item.extension}`}
-            tabIndex={0}
             onLoad={e => {
               const ratio = e.target.naturalWidth / e.target.naturalHeight;
               const width = Math.min(ratio * 150, document.body.offsetWidth - 50);
@@ -86,14 +92,14 @@ export default function Gallery({imagesData,}) {
                 setIMGTagsAreLoaded(true);
               }
             }}
-            onClick = {event => {
+            onClick={event => {
               handleClick(event);
               document.querySelector(`.${galleryStyles["gallery-carousel"]}`).showModal();
 
               let supportsPassive = false;
               try {
                 const opts = Object.defineProperty({}, "passive", {
-                  get: function() {
+                  get: function () {
                     supportsPassive = true;
                   },
                 });
@@ -102,14 +108,14 @@ export default function Gallery({imagesData,}) {
 
               }
 
-              const options = supportsPassive ? {passive: false,} : false;
+              const options = supportsPassive ? { passive: false, } : false;
 
               window.addEventListener("mousewheel", preventDefault, options);
               window.addEventListener("touchmove", preventDefault, options);
             }}
             alt={item.description}
           />
-          <figcaption><span aria-hidden>{item.description}</span> <br/>
+          <figcaption><span aria-hidden>{item.description}</span> <br />
             <a className={styles["source-of-image"]} href={item.source}><i>Источник или автор изображения</i></a>
           </figcaption>
         </figure>

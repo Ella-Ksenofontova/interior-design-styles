@@ -240,7 +240,7 @@ export default function GalleryCarousel({ imagesData, clickedImage, scrollCallba
 
                   const allImages = document.querySelectorAll(`.${styles["gallery-carousel"]} img`);
                   const currentImage = allImages[activeIndex];
-                  imagesSequence.style.height = `${currentImage.height + 20}px`;
+                  imagesSequence.style.height = `${currentImage ? currentImage.height + 20 : 0}px`;
                 }} />
                 </div>
           )}

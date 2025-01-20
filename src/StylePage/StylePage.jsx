@@ -50,6 +50,7 @@ export default function StylePage({styleName, styleOrder,}) {
     }
   })
  || [];
+
   return (
       <>
         <Header searchAvailableMessage=""/>
