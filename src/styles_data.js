@@ -83,6 +83,7 @@ const STYLES_DATA = [
         "url": "https://ru.wikipedia.org/wiki/%D0%9F%D0%B0%D0%BB%D1%8C%D0%BC%D0%B5%D1%82%D1%82%D0%B0"
       },
       {
+        "url": "https://rah.ru/science/glossary/?ID=19953&let=%D0%9F",
         "description": "Статья про плетёнку в словаре Российской академии художеств"
       }
     ],
