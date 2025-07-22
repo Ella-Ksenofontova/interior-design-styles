@@ -22,8 +22,22 @@ figure img {
   margin-bottom: 8px;
 }
 
-@media screen and (min-device-width: 576px) {
+@media screen and (min-width: 576px) {
   .source-of-image {
     font-size: .8em;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  figure {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+    width: 100%;
+  }
+
+  .gallery {
+    margin-left: 0;
   }
 }

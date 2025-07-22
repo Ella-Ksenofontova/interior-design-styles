@@ -62,7 +62,7 @@ export default function Gallery({ imagesData, }) {
     const images = document.querySelectorAll("img[id^=gallery-image]");
     for (const image of images) {
       const ratio = image.naturalWidth / image.naturalHeight;
-      image.width = Math.min(ratio * 150, document.body.offsetWidth - 50);
+      image.width = innerWidth > 576 ? ratio * 150 : document.body.offsetWidth - 50;
       image.height = image.width / ratio;
       image.parentElement.style.width = `${image.width}px`;
     }
@@ -82,7 +82,7 @@ export default function Gallery({ imagesData, }) {
             src={`/interior-design-styles/assets/styles_images/${styleName}/additional-${index + 1}.${item.extension}`}
             onLoad={e => {
               const ratio = e.target.naturalWidth / e.target.naturalHeight;
-              const width = Math.min(ratio * 150, document.body.offsetWidth - 50);
+              const width = innerWidth > 576 ? ratio * 150 : document.body.offsetWidth - 50;
 
               e.target.width = width;
               e.target.height = width / ratio;
