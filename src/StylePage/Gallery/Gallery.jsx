@@ -71,7 +71,7 @@ export default function Gallery({ imagesData, }) {
   return (
     <>
       <h2 className={styles["gallery-header"]}>Галерея</h2>
-      <div className={styles["gallery-explanation"]}>Кликните на какое-либо изображение, чтобы просмотреть карусель.</div>
+      <div className={styles["gallery-explanation"]}>Кликните на какое-либо изображение, чтобы просмотреть карусель и прочитать полные описания изображений.</div>
       <div className={styles.gallery}>
         {imagesData.map((item, index) => <figure key={`gallery-figure-${index + 1}`}>
           <img

@@ -1,5 +1,6 @@
 /* General */
 
+
 body {
   width: 100%;
   margin: 0;
@@ -34,6 +35,15 @@ main,
 .image-container,
 header {
   box-sizing: border-box;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  list-style-type: none;
 }
 
 /* Код класса visually-hidden взят с сайта Doka.guide */
@@ -81,16 +91,18 @@ p {
   width: 60%;
   max-width: 300px;
   padding: 20px;
-  border-radius: 40px;
-  background-color: #a28251;
-  color: #fdedd4;
+  border-radius: 15px;
 }
 
 a {
   color: rgb(126, 76, 45);
+  text-decoration: none;
 }
 
-p a,
+a:hover {
+  text-decoration: underline;
+}
+
 footer a {
   color: white;
 }
@@ -105,7 +117,12 @@ footer a:visited {
 }
 
 .info {
-  min-width: 200px;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: unset;
+  border: 1px solid #c7a065;
+  background-color: #fce0b5;
+  color: #8b795b;
 }
 
 span#info-header,
@@ -113,7 +130,6 @@ span#related-styles-header,
 h2 {
   font-size: 1.5rem;
   font-weight: bold;
-  font-style: italic;
 }
 
 .loading-wrapper {
@@ -121,12 +137,12 @@ h2 {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  font-style: italic;
 }
 
 /* List of styles */
 
 h2 {
+  margin-block: 10px;
   color: #8b795b;
 }
 
@@ -135,7 +151,6 @@ label {
   color: #72634b;
 }
 
-h2,
 form {
   padding-left: 20px;
 }

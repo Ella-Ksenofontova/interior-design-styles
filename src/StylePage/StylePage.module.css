@@ -5,39 +5,16 @@
 .related-styles-list,
 .sources-list {
   margin-top: 20px;
-  max-width: calc(100% - 40px);
+  width: 100%;
+  box-sizing: border-box;
+  max-width: unset;
   padding: 15px;
-  border-radius: 40px;
-  background-color: #c7a065;
-  color: #fdedd4;
-}
-
-.related-styles-list a,
-.sources-list a {
-  color: white;
-}
-
-.related-styles-list a:visited,
-.sources-list a:visited {
-  color: #fdedd4;
-}
-
-.related-styles-list h2,
-.sources-list h2 {
-  margin-top: 0;
-  margin-bottom: 0;
-  color: #fdedd4;
+  border-radius: 15px;
+  border: 1px solid #c7a065;
+  background-color: #fce0b5;
 }
 
 .explanation {
   display: inline-block;
-  padding-left: 20px;
-}
-
-.related-styles-list {
-  width: 250px;
-}
-
-.sources-list {
-  width: 350px;
+  margin-bottom: 5px;
 }

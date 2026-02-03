@@ -84,6 +84,7 @@ input[type="text"] {
   border: 1px solid #d0ab73;
   background-color: #f5e1c5;
   color: #d0ab73;
+  font-family: inherit;
 }
 
 dialog input[type="text"] {
@@ -137,6 +138,8 @@ dialog input[type="text"] {
 .tooltip {
   position: absolute;
   width: 200px;
+  padding: 10px;
+  box-sizing: border-box;
   background-color: #fccd87;
   border-radius: 20px;
 }

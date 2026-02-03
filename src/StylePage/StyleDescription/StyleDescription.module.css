@@ -26,12 +26,19 @@ mark {
 }
 
 .describing-block {
+  width: fit-content;
   margin: 0;
   color: white;
   text-align: center;
   font-size: .8em;
   background-color: saddlebrown;
   border-radius: 10px;
+}
+
+.description-of-tooltip {
+  display: inline-block;
+  white-space: wrap;
+  max-width: 100%;
 }
 
 .describing-block.hidden,
@@ -71,6 +78,10 @@ mark {
   margin-right: 45px;
 }
 
+.describing-block figcaption {
+  display: inline-block;
+}
+
 .describing-block-mobile .close-mobile-dialog {
   position: absolute;
   top: 10px;
@@ -87,10 +98,9 @@ mark {
 
 @media screen and (min-width: 576px) {
   .describing-block {
-    display: grid;
-    grid-template-columns: -webkit-min-content;
-    grid-template-columns: min-content;
-    grid-template-rows: repeat(2, min-content);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
     padding: 5px;
   }
 }

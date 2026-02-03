@@ -16,10 +16,17 @@ figure img {
   border-radius: 10px;
 }
 
+figcaption span {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .gallery-explanation {
-  font-style: italic;
   margin-left: 20px;
-  margin-bottom: 8px;
+  margin-bottom:  15px;
 }
 
 @media screen and (min-width: 576px) {

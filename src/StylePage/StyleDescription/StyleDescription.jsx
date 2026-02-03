@@ -168,7 +168,7 @@ function ParagraphPart({initialText, index, paragraphIndex,}) {
         key={`describing-block-${index + 1}-${paragraphIndex + 1}`} ref={refs.setFloating} style={Object.assign(isMobile ? {width: 0} : {}, floatingStyles)}
         tabIndex={0}
         onBlur={e => {
-          if (!e.relatedTarget?.classList.contains("description-of-tooltip")) {
+          if (!e.relatedTarget?.classList.contains(styles["description-of-tooltip"])) {
             document.getElementById(`describing-block-${index + 1}-${paragraphIndex + 1}`).classList.add(styles.hidden);
           }
         }}>
@@ -185,7 +185,10 @@ function ParagraphPart({initialText, index, paragraphIndex,}) {
           }
         />
         <figcaption key={`caption-${index + 1}`}>
-          <span className={`description-of-tooltip ${isMobile ? "visually-hidden" : ""}`} tabIndex={0}>{markParams.description}</span><br />
+          <span className={`${styles["description-of-tooltip"]} ${isMobile ? "visually-hidden" : ""}`}
+           tabIndex={0}
+           style={{maxWidth: markParams.orientation === "vertical" ? 150 : Math.min(300, innerWidth * 0.9)}}
+           >{markParams.description}</span><br />
         </figcaption>
         </> :
         ""
