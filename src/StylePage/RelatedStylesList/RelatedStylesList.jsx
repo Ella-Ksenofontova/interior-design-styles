@@ -16,11 +16,12 @@ RelatedStylesList.propTypes = {
  * @returns {React.JSX.Element} The rendered RelatedStylesList component.
  */
 
-export default function RelatedStylesList({relatedStyles,}) {
+export default function RelatedStylesList({relatedStyles}) {
   return (
     <div className={styles["related-styles-list"]}>
+      <img src="/interior-design-styles/assets/link.png" alt="" aria-hidden className={styles["list-icon"]} />
       <h2 tabIndex={0}>Связанные стили</h2>
-      <ul>
+      <ul className={styles["related-styles"]}>
         {relatedStyles.sort().map(styleName => <li key={styleName}><Link to={`/interior-design-styles/${STYLES_DATA.find(style => styleName === style.name).path}`}>{styleName}</Link></li>)}
       </ul>
     </div>

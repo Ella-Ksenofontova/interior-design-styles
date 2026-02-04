@@ -33,6 +33,9 @@ export default function CopyrightPage() {
           <li><a href="https://www.flaticon.com/authors/muhammad-usman">Автор иконки галочки</a></li>
           <li><a href="https://www.flaticon.com/authors/inkubators">Автор иконки крестика</a></li>
           <li><a href="https://storyset.com">Источник картинки, использованной на странице 404</a></li>
+          <li><a href="https://www.flaticon.com/authors/creaticca-creative-agency">Автор иконки ссылки</a></li>
+          <li><a href="https://www.flaticon.com/authors/good-ware ">Автор иконки книги</a></li>
+          <li><a href="https://www.flaticon.com/authors/dreamstale">Автор иконки изображения</a></li>
         </ul>
       </main>
       <Footer/>

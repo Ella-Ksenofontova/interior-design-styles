@@ -14,7 +14,22 @@
   background-color: #fce0b5;
 }
 
+.list-icon {
+  float: left;
+  vertical-align: baseline;
+  width: 25px;
+  height: 25px;
+  margin-right: 5px;
+  margin-top: 12.5px;
+}
+
 .explanation {
   display: inline-block;
   margin-bottom: 5px;
+  padding-left: 35px;
+}
+
+.related-styles, 
+.sources {
+  padding-left: 35px;
 }

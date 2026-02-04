@@ -68,12 +68,13 @@ export default function StylePage({styleName, styleOrder,}) {
           {styleData.relatedStyles?.length > 0 ? <RelatedStylesList relatedStyles={styleData.relatedStyles} /> : ""}
 
           {styleData.infoSources?.length > 0 ?
-            <SourcesList title="Источники информации" sources={styleData.infoSources}/> : ""}
+            <SourcesList title="Источники информации" sources={styleData.infoSources} iconSrc="/interior-design-styles/assets/book.png"/> : ""}
 
           {sources.length ?
             <SourcesList title="Источники изображений"
               explanation="Здесь перечислены источники картинок, которые использовались во всплывающих подсказках к следующим словам: "
-              sources={sources}/> : ""}
+              sources={sources}
+              iconSrc="/interior-design-styles/assets/image.png"/> : ""}
         </main>
         <Footer/>
       </>

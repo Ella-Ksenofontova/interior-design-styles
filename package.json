@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@floating-ui/react": "^0.26.12",
-    "better-docs": "^2.7.3",
     "cp": "^0.2.0",
     "eslint": "^9.6.0",
     "eslint-plugin-import": "^2.29.1",
