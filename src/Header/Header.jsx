@@ -1,9 +1,9 @@
-import {useState} from "react";
-import {Link} from "react-router-dom";
-import {bool} from "prop-types";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { bool } from "prop-types";
 
 import styles from "./Header.module.css";
-import  STYLES_DATA from "../styles_data";
+import STYLES_DATA from "../styles_data";
 
 /**
  * The component of website's header.
@@ -27,16 +27,15 @@ export default function Header() {
       </span>
 
       <header>
-        <a href="/interior-design-styles/" id={styles.logo}></a>
-        <InputWithTooltip mobile={false}/>
+        <InputWithTooltip mobile={false} />
         <button id={styles["search-mobile"]}
           onClick={() => document.getElementById(
             styles["search-mobile-dialog"]).showModal()}>
         </button>
-        <Link to="/interior-design-styles/copyright"><div id={styles.copyright} title="Ссылки на авторов стороннего контента"></div></Link>
+        <Link to="/interior-design-styles/copyright" id={styles.copyright}><div className="visually-hidden">Ссылки на авторов стороннего контента</div></Link>
       </header>
 
-      <MobileInputWithTooltip/>
+      <MobileInputWithTooltip />
     </>
   );
 }
@@ -54,11 +53,11 @@ InputWithTooltip.propTypes = {
  * @listens click, input, focus, mouseenter, mouseleave
  */
 
-function InputWithTooltip({mobile,}) {
+function InputWithTooltip({ mobile, }) {
   const [appropriateLinks, setAppropriateLinks,] = useState([]);
   const [listenerAdded, setListenerAdded,] = useState(false);
 
-  const handleInput = function(event) {
+  const handleInput = function (event) {
     const tooltip = mobile ?
       document.querySelector(`.${styles["tooltip-mobile"]}`) :
       document.querySelector(`.${styles.tooltip}`);
@@ -68,27 +67,24 @@ function InputWithTooltip({mobile,}) {
       if (style.name.toLowerCase().startsWith(
         event.target.value.toLowerCase())
         && event.target.value.length > 0) {
-        const linkInfo = {name: style.name,
-          path: style.path,};
+        const linkInfo = {
+          name: style.name,
+          path: style.path,
+        };
         linkInfos.push(linkInfo);
       }
     }
 
     if (linkInfos.length > 0) {
-      if (!mobile) {
-        tooltip.style.top = `${event.target.getBoundingClientRect().bottom + 10}px`;
-        tooltip.style.left = `${event.target.getBoundingClientRect().left}px`;
-      }
-
       const links = linkInfos.map(item => <li
         key={item.name}
         onClick={mobile ? () => {
           setAppropriateLinks([]);
           const inputAndTooltipMobile =
-          document.querySelector(`.${styles["input-and-tooltip-mobile"]}`);
+            document.querySelector(`.${styles["input-and-tooltip-mobile"]}`);
           inputAndTooltipMobile.firstElementChild.value = "";
           document.getElementById(styles["search-mobile-dialog"]).close();
-        } : () => {}}><Link to={`/interior-design-styles/${item.path}`}>{item.name}</Link></li>);
+        } : () => { }}><Link to={`/interior-design-styles/${item.path}`}>{item.name}</Link></li>);
       setAppropriateLinks(links);
     } else {
       tooltip.hidden = true;
@@ -96,7 +92,7 @@ function InputWithTooltip({mobile,}) {
     }
   };
 
-  const handleFocus = function(event) {
+  const handleFocus = function (event) {
     const tooltip = mobile ?
       document.querySelector(`.${styles["tooltip-mobile"]}`) :
       document.querySelector(`.${styles.tooltip}`);
@@ -105,12 +101,6 @@ function InputWithTooltip({mobile,}) {
       if (style.name.toLowerCase().startsWith(event.target.value.toLowerCase())
         && event.target.value.length > 0 && !mobile) {
         tooltip.hidden = false;
-
-        if (!mobile) {
-          tooltip.style.top =
-          `${event.target.getBoundingClientRect().bottom + 10}px`;
-          tooltip.style.left = `${event.target.getBoundingClientRect().left}px`;
-        }
         break;
       }
     }
@@ -121,11 +111,6 @@ function InputWithTooltip({mobile,}) {
           const tooltipSelector = `.${styles.tooltip}`;
           const tooltip = document.querySelector(tooltipSelector);
           const input = document.querySelector("input[type='text']");
-          
-          if (tooltip) {
-            tooltip.style.top = `${input.getBoundingClientRect().bottom + 10}px`;
-            tooltip.style.left = `${input.getBoundingClientRect().left}px`;
-          }
         }
       });
       setListenerAdded(true);
@@ -136,28 +121,31 @@ function InputWithTooltip({mobile,}) {
   return (
     <div className={mobile ?
       styles["input-and-tooltip-mobile"] : styles["input-and-tooltip"]}
-    onMouseLeave={() => document.querySelector(`.${styles.tooltip}`).hidden =
-      true}>
-        <div className={styles["search-field"]}>
-          <input type="text" placeholder="Поиск по сайту"
-            onInput={handleInput}
-            onFocus={handleFocus}
-            onMouseEnter={handleFocus}
-            name={mobile ? "mobileSearchField" : "searchField"}/>
-          <div className={styles["magnifier-decorative"]}
+      onMouseLeave={(event) => {
+        console.log(event.relatedTarget);
+        document.querySelector(`.${styles.tooltip}`).hidden =
+        true
+      }}>
+      <div className={styles["search-field"]}>
+        <input type="text" placeholder="Поиск по сайту"
+          onInput={handleInput}
+          onFocus={handleFocus}
+          onMouseEnter={handleFocus}
+          name={mobile ? "mobileSearchField" : "searchField"} />
+        <div className={styles["magnifier-decorative"]}
           id={mobile ?
             styles["search-icon-mobile-dialog"]
             : styles["search-icon"]}>
-          </div>
         </div>
+      </div>
       <div className={mobile ?
         styles["tooltip-mobile"]
         : styles.tooltip} hidden={!appropriateLinks.length}
-      onMouseLeave={mobile ? event => {
-        if (!event.target.className === styles["input-and-tooltip"]) {
-          document.querySelector(`.${styles.tooltip}`).hidden = true;
-        }
-      } : null}>
+        onMouseLeave={mobile ? event => {
+          if (!event.relatedTarget.className === styles["input-and-tooltip"]) {
+            document.querySelector(`.${styles.tooltip}`).hidden = true;
+          }
+        } : null}>
         <ul>
           {appropriateLinks}
         </ul>
@@ -173,7 +161,7 @@ function InputWithTooltip({mobile,}) {
  * @see {@link InputWithTooltip}
  */
 
-const MobileInputWithTooltip = function() {
+const MobileInputWithTooltip = function () {
   return (
     <dialog id={styles["search-mobile-dialog"]}>
       <div className={styles["dialog-items-container"]}>
@@ -189,7 +177,7 @@ const MobileInputWithTooltip = function() {
           ).innerHTML = "";
         }}>
         </button>
-        <InputWithTooltip mobile={true}/>
+        <InputWithTooltip mobile={true} />
       </div>
     </dialog>
   );

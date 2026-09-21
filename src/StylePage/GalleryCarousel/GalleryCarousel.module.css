@@ -1,6 +1,6 @@
 .gallery-carousel[open] {
   display: grid;
-  grid-template-columns: 5vw 70vw 5vw;
+  grid-template-columns: 5vw 1fr 5vw;
   grid-template-rows: auto auto;
   column-gap: 3vw;
   width: 90vw;
@@ -29,6 +29,7 @@
   background-size: cover;
   transition: all .5s;
   border-radius: 50%;
+  cursor: pointer;
 }
 
 #previous,
@@ -38,6 +39,7 @@
   background-color: transparent;
   background-repeat: no-repeat;
   background-size: contain;
+  cursor: pointer;
 }
 
 #previous {

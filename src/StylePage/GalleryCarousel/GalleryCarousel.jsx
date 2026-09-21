@@ -153,15 +153,15 @@ export default function GalleryCarousel({ imagesData, clickedImage, scrollCallba
 
   if (clickedImage) {
     return (
-      <dialog className={styles["gallery-carousel"]} aria-label={"Карусель с изображениями."} aria-live="assertive">
-        <button id={styles.close}
-          title="Закрыть карусель"
-          onClick={() => {
+      <dialog className={styles["gallery-carousel"]} aria-label={"Карусель с изображениями."} aria-live="assertive" id="gallery-carousel" onClose={() => {
             document.querySelector(`.${styles["gallery-carousel"]}`).close();
             setActiveIndex(null);
             window.removeEventListener("mousewheel", scrollCallback);
             window.removeEventListener("touchmove", scrollCallback);
-          }}
+          }}>
+        <button id={styles.close}
+          title="Закрыть карусель"
+          onClick={() => document.getElementById("gallery-carousel").close()}
         ></button>
         <button
           aria-hidden

@@ -22,7 +22,10 @@ function HomePage() {
   return (
     <>
       <Header />
-      <div className="image-container">
+      <div className="hero">
+        <div className="hero-chip">Добро пожаловать!</div>
+        <h1 className="hero-title">Сайт о стилях в дизайне интерьеров и архитектуре</h1>
+        <p className="hero-info">Сделано на React</p>
       </div>
       <main id="main">
         <p className="info">
@@ -31,8 +34,6 @@ function HomePage() {
           Материал для этого сайта взят с сайта <a href="http://zaholstom.ru/?page_id=1157">zaholstom.ru</a>, однако я исправила
           грамматические ошибки и добавила иллюстрации.
         </p>
-
-        <h2>Список стилей</h2>
         <ControlledStylesList />
       </main>
       <Footer />

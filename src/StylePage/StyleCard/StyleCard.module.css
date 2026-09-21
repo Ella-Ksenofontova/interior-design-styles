@@ -1,19 +1,22 @@
 .style-image {
+  position: relative;
   display: grid;
   grid-template-columns: 100%;
   align-items: center;
   margin-top: 20px;
-  width: 85%;
+  width: 100%;
   min-width: 1px;
-  max-width: 500px;
   height: 45vh;
   min-height: 300px;
   background-color: #f3dab3;
   background-size: cover;
-  border-radius: 50px;
+  border-radius: 30px;
 }
 
 .style-name {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
   width: 50%;
   min-width: -webkit-min-content;
   min-width: -moz-min-content;
@@ -21,9 +24,8 @@
   padding-inline: 15px;
   padding-bottom: 15px;
   margin: auto;
-  background-color: #e9c590;
-  border-radius: 30px;
-  text-align: center;
+  background-color: #ffffffee;
+  border-radius: 15px;
 }
 
 .style-name h2 {

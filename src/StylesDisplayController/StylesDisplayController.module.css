@@ -1,3 +1,14 @@
+.styles-display-controller {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border: 1px solid #c7a065;
+  background-color: #fee6c2;
+  color: #8b795b;
+  border-radius: 10px;
+  padding-block: 10px;
+}
+
 input[type="checkbox"] {
   display: none;
 }
@@ -10,12 +21,21 @@ label {
   display: inline-block;
   width: 15px;
   height: 15px;
-  background-color: #d0ab73;
-  border: 1px solid rgb(169, 102, 35);
+  background-color: #fcdeb1;
+  border: 1px solid rgb(232, 187, 105);
   border-radius: 3px;
+  cursor: pointer;
 }
 
 input[type="checkbox"]:checked + .checkbox {
   background-image: url("/assets/task.png");
-  background-size: cover;
+  background-size: 95%;
+  background-position: center;
+}
+
+@media (min-width: 768px) {
+  .styles-display-controller {
+    flex-direction: row;
+    gap: 7px;
+  }
 }

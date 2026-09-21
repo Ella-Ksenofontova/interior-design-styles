@@ -1,3 +1,21 @@
+.styles-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.styles-list-item {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  width: 100%;
+  padding: 5px 10px;
+  border: 1px solid #c7a065;
+  border-radius: 7px;
+  background-color: #fff3e1;
+}
+
 .classic,
 .modern,
 .ethnic {
@@ -20,4 +38,10 @@
 
 .ethnic {
   background-image: url("/assets/ethnic.png");
+}
+
+@media (min-width: 300px) {
+  .styles-list-item {
+    width: fit-content;
+  }
 }

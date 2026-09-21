@@ -11,13 +11,13 @@ header {
   width: 100%;
   margin: 0;
   display: grid;
-  grid-template-columns: auto 0 auto auto;
+  grid-template-columns: 0 auto 1fr;
   column-gap: 15px;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   padding-top: 20px;
   padding-left: 15px;
-  padding-bottom: 5px;
+  padding-bottom: 10px;
   padding-right: 20px;
   background-color: #cdad7c;
 }
@@ -70,6 +70,7 @@ header {
   background-position: center;
   border-color: transparent;
   border-radius: 40%;
+  cursor: pointer;
 }
 
 #search-mobile:hover,
@@ -80,7 +81,7 @@ header {
 input[type="text"] {
   height: calc(1rem + 10px);
   width: 80%;
-  border-radius: 10px;
+  border-radius: 7px;
   border: 1px solid #d0ab73;
   background-color: #f5e1c5;
   color: #d0ab73;
@@ -137,14 +138,18 @@ dialog input[type="text"] {
 
 .tooltip {
   position: absolute;
-  width: 200px;
+  top: 100%;
+  left: 0;
+  z-index: 100;
   padding: 10px;
+  width: 100%;
   box-sizing: border-box;
   background-color: #fccd87;
-  border-radius: 20px;
+  border-radius: 7px;
 }
 
 #search-icon {
+  cursor: pointer;
   transform: translateX(-25px);
 }
 
@@ -161,6 +166,7 @@ a[href=""] {
 }
 
 #copyright {
+  justify-self: end;
   height: 45px;
   width: 45px;
   background-image: url("/assets/copyright.png");
@@ -226,10 +232,10 @@ input[type="text"]:disabled::placeholder {
 
 @media screen and (min-width: 576px) {
   header {
+    grid-template-columns: repeat(2, auto) 1fr;
     width: 80vw;
     min-width: 500px;
     margin: 0 auto;
-    grid-template-columns: auto 200px 0 auto;
     column-gap: 20px;
   }
 
@@ -249,6 +255,7 @@ input[type="text"]:disabled::placeholder {
   }
 
   .input-and-tooltip {
+    position: relative;
     display: flex;
     height: 100%;
     row-gap: 5px;

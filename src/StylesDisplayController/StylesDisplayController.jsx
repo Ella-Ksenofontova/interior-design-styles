@@ -1,4 +1,4 @@
-import {arrayOf, bool, func} from "prop-types";
+import { arrayOf, bool, func } from "prop-types";
 import styles from "./StylesDisplayController.module.css";
 
 StylesDisplayController.propTypes = {
@@ -16,39 +16,46 @@ StylesDisplayController.propTypes = {
  * @listens click
  */
 
-export default function StylesDisplayController({statesOfCheckboxes, onChangeCallbacks,}) {
+export default function StylesDisplayController({ statesOfCheckboxes, onChangeCallbacks, }) {
   const [classicStylesAreShown, modernStylesAreShown, ethnicStylesAreShown,] = statesOfCheckboxes;
   const [setClassicStylesAreShown, setModernStylesAreShown, setEthnicStylesAreShown,] = onChangeCallbacks;
 
   return (
-    <form>
-      <input type="checkbox" id="classic-styles" checked={classicStylesAreShown} onChange={event => setClassicStylesAreShown(event.target.checked)}></input>
-      <span className={styles.checkbox}
-        tabIndex="0"
-        onClick={event => {
-          const realCheckbox = event.target.previousElementSibling;
-          realCheckbox.checked = !realCheckbox.checked;
-          setClassicStylesAreShown(realCheckbox.checked);
-        }}></span>
-      <label htmlFor="classic-styles">Показать классические стили</label><br/>
-      <input type="checkbox" id="modern-styles" checked={modernStylesAreShown} onChange={event => setModernStylesAreShown(event.target.checked)}></input>
-      <span className={styles.checkbox}
-        tabIndex="0"
-        onClick={event => {
-          const realCheckbox = event.target.previousElementSibling;
-          realCheckbox.checked = !realCheckbox.checked;
-          setModernStylesAreShown(realCheckbox.checked);
-        }}></span>
-      <label htmlFor="modern-styles">Показать современные стили</label><br/>
-      <input type="checkbox" id="ethnic-styles" checked={ethnicStylesAreShown} onChange={event => setEthnicStylesAreShown(event.target.checked)}></input>
-      <span className={styles.checkbox}
-        tabIndex="0"
-        onClick={event => {
-          const realCheckbox = event.target.previousElementSibling;
-          realCheckbox.checked = !realCheckbox.checked;
-          setEthnicStylesAreShown(realCheckbox.checked);
-        }}></span>
-      <label htmlFor="ethnic-styles">Показать этнические стили</label>
+    <form className={styles["styles-display-controller"]}>
+      <div className="filter-name">Стили:</div>
+      <div className="checkbox-wrapper">
+        <input type="checkbox" id="classic-styles" checked={classicStylesAreShown} onChange={event => setClassicStylesAreShown(event.target.checked)}></input>
+        <span className={styles.checkbox}
+          tabIndex="0"
+          onClick={event => {
+            const realCheckbox = event.target.previousElementSibling;
+            realCheckbox.checked = !realCheckbox.checked;
+            setClassicStylesAreShown(realCheckbox.checked);
+          }}></span>
+        <label htmlFor="classic-styles">Классические</label><br />
+      </div>
+      <div className="checkbox-wrapper">
+        <input type="checkbox" id="modern-styles" checked={modernStylesAreShown} onChange={event => setModernStylesAreShown(event.target.checked)}></input>
+        <span className={styles.checkbox}
+          tabIndex="0"
+          onClick={event => {
+            const realCheckbox = event.target.previousElementSibling;
+            realCheckbox.checked = !realCheckbox.checked;
+            setModernStylesAreShown(realCheckbox.checked);
+          }}></span>
+        <label htmlFor="modern-styles">Современные</label><br />
+      </div>
+      <div className="checkbox-wrapper">
+        <input type="checkbox" id="ethnic-styles" checked={ethnicStylesAreShown} onChange={event => setEthnicStylesAreShown(event.target.checked)}></input>
+        <span className={styles.checkbox}
+          tabIndex="0"
+          onClick={event => {
+            const realCheckbox = event.target.previousElementSibling;
+            realCheckbox.checked = !realCheckbox.checked;
+            setEthnicStylesAreShown(realCheckbox.checked);
+          }}></span>
+        <label htmlFor="ethnic-styles">Этнические</label>
+      </div>
     </form>
   );
 }
