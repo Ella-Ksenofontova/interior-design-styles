@@ -10,7 +10,7 @@ function resizeImages(imagesList) {
   for (const image of imagesList) {
     const ratio = image.naturalWidth / image.naturalHeight;
     const maxHeight = innerHeight * 0.8 - 45;
-    const maxWidth = innerWidth * 0.7;
+    const maxWidth = innerWidth * 0.7 - 40;
     let width = 100;
     let height = (1 / ratio) * width;
 
@@ -28,8 +28,6 @@ function resizeImages(imagesList) {
 
     image.width = width;
     image.height = height;
-
-    image.parentElement.style.height = `${image.height}px`;
   }
 }
 
@@ -44,7 +42,7 @@ function resizeImages(imagesList) {
  * @listens touchstart, touchend, pointermove (when user is touching the image), load, click
  */
 
-export default function GalleryCarousel({ imagesData, clickedImage, scrollCallback}) {
+export default function GalleryCarousel({ imagesData, clickedImage, scrollCallback }) {
   const [activeIndex, setActiveIndex,] = useState(null);
 
   window.onresize = () => {
@@ -55,11 +53,6 @@ export default function GalleryCarousel({ imagesData, clickedImage, scrollCallba
     if (imagesSequence) {
       imagesSequence.classList.add(styles["no-smooth-scroll"]);
       imagesSequence.scrollTo(findScrollWidth(activeIndex), 0);
-
-      const allImages = document.querySelectorAll(`.${styles["gallery-carousel"]} img`);
-      const currentImage = allImages[activeIndex];
-
-      imagesSequence.style.height = `${currentImage?.height + 20}px`;
     }
   };
 
@@ -71,11 +64,6 @@ export default function GalleryCarousel({ imagesData, clickedImage, scrollCallba
       imagesSequence.classList.add(styles["no-smooth-scroll"]);
       imagesSequence.scrollTo(findScrollWidth(currentActiveIndex), 0);
       setActiveIndex(currentActiveIndex);
-
-      const allImages = document.querySelectorAll(`.${styles["gallery-carousel"]} img`);
-      const currentImage = allImages[currentActiveIndex];
-      
-      imagesSequence.style.height = `${currentImage.height + 20}px`;
     }
   });
 
@@ -90,7 +78,7 @@ export default function GalleryCarousel({ imagesData, clickedImage, scrollCallba
     let foundScrollWidth = 0;
 
     while (i < currentIndex) {
-      foundScrollWidth += innerWidth * 0.7 + 5;
+      foundScrollWidth += innerWidth * 0.7 - 17.5;
       i++;
     }
 
@@ -115,11 +103,6 @@ export default function GalleryCarousel({ imagesData, clickedImage, scrollCallba
 
     imagesSequence.scrollTo(findScrollWidth(newIndex), 0);
 
-    const allImages = document.querySelectorAll(`.${styles["gallery-carousel"]} img`);
-    const currentImage = allImages[newIndex];
-    
-    imagesSequence.style.height = `${currentImage.height + 20}px`;
-
     description.hidden = false;
   }
 
@@ -143,25 +126,25 @@ export default function GalleryCarousel({ imagesData, clickedImage, scrollCallba
 
     imagesSequence.scrollTo(findScrollWidth(newIndex), 0);
 
-    const allImages = document.querySelectorAll(`.${styles["gallery-carousel"]} img`);
-    const currentImage = allImages[newIndex];
-    
-    imagesSequence.style.height = `${currentImage.height + 20}px`;
-
     setTimeout(() => description.hidden = false, 0);
   }
 
   if (clickedImage) {
     return (
       <dialog className={styles["gallery-carousel"]} aria-label={"Карусель с изображениями."} aria-live="assertive" id="gallery-carousel" onClose={() => {
-            document.querySelector(`.${styles["gallery-carousel"]}`).close();
+        document.querySelector(`.${styles["gallery-carousel"]}`).close();
+        setActiveIndex(null);
+        window.removeEventListener("mousewheel", scrollCallback);
+        window.removeEventListener("touchmove", scrollCallback);
+      }}>
+        <button id={styles.close}
+          title="Закрыть карусель"
+          onClick={() => {
+            document.getElementById("gallery-carousel").close();
             setActiveIndex(null);
             window.removeEventListener("mousewheel", scrollCallback);
             window.removeEventListener("touchmove", scrollCallback);
-          }}>
-        <button id={styles.close}
-          title="Закрыть карусель"
-          onClick={() => document.getElementById("gallery-carousel").close()}
+          }}
         ></button>
         <button
           aria-hidden
@@ -194,11 +177,6 @@ export default function GalleryCarousel({ imagesData, clickedImage, scrollCallba
               const imagesSequence = document.querySelector(`.${styles["images-sequence"]}`);
               imagesSequence.classList.remove(styles["no-smooth-scroll"]);
               imagesSequence.scrollTo(findScrollWidth(activeIndex), 0);
-
-              const allImages = document.querySelectorAll(`.${styles["gallery-carousel"]} img`);
-              const currentImage = allImages[activeIndex];
-
-              imagesSequence.style.height = `${currentImage.height + 20}px`;
             }
           }>
           {imagesData.map((item, index) =>
@@ -217,7 +195,7 @@ export default function GalleryCarousel({ imagesData, clickedImage, scrollCallba
 
                   const ratio = image.naturalWidth / image.naturalHeight;
                   const maxHeight = innerHeight * 0.8 - 45;
-                  const maxWidth = innerWidth * 0.7;
+                  const maxWidth = innerWidth * 0.7 - 40;
                   let width = 100;
                   let height = (1 / ratio) * width;
 
@@ -235,14 +213,8 @@ export default function GalleryCarousel({ imagesData, clickedImage, scrollCallba
 
                   image.width = width;
                   image.height = height;
-
-                  image.parentElement.style.height = `${image.height}px`;
-
-                  const allImages = document.querySelectorAll(`.${styles["gallery-carousel"]} img`);
-                  const currentImage = allImages[activeIndex];
-                  imagesSequence.style.height = `${currentImage ? currentImage.height + 20 : 0}px`;
                 }} />
-                </div>
+            </div>
           )}
         </div>
         <button
