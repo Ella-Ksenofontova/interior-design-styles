@@ -78,7 +78,7 @@ export default function GalleryCarousel({ imagesData, clickedImage, scrollCallba
     let foundScrollWidth = 0;
 
     while (i < currentIndex) {
-      foundScrollWidth += innerWidth * 0.7 - 17.5;
+      foundScrollWidth += innerWidth * 0.7;
       i++;
     }
 
