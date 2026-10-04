@@ -147,7 +147,6 @@ export default function GalleryCarousel({ imagesData, clickedImage, scrollCallba
           }}
         ></button>
         <button
-          aria-hidden
           title="Предыдущее изображение"
           id={styles.previous}
           onClick={goToPreviousImage}
@@ -218,7 +217,6 @@ export default function GalleryCarousel({ imagesData, clickedImage, scrollCallba
           )}
         </div>
         <button
-          aria-hidden
           title="Следующее изображение"
           id={styles.next}
           onClick={goToNextImage}
