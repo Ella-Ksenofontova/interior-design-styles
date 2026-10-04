@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 function resizeImages(imagesList) {
   for (const image of imagesList) {
     const ratio = image.naturalWidth / image.naturalHeight;
-    const maxHeight = innerHeight * 0.8 - 45;
+    const maxHeight = image.parentElement.clientHeight;
     const maxWidth = innerWidth * 0.7 - 40;
     let width = 100;
     let height = (1 / ratio) * width;
