@@ -1,11 +1,31 @@
 import styles from "./GalleryCarousel.module.css";
 import { useState, useEffect } from "react";
 
-/**
- * Changes the dimensions of images. It's a callback in _resize_ event listener.
- * @param {HTMLImageElement[]} imagesList - list of IMG tags which sizes should be changed.
- */
+const GAP = 5;
 
+function resizeImage(image) {
+  if (image.naturalHeight > image.naturalWidth) {
+    const height = Math.min(image.naturalHeight, image.parentElement.parentElement.clientHeight);
+    image.height = height;
+    const width = height * (image.naturalWidth / image.naturalHeight);
+    
+    if (width > image.parentElement.parentElement.clientWidth) {
+      image.width = image.parentElement.parentElement.clientWidth;
+    } else {
+      image.width = width;
+    }
+  } else {
+    const width = Math.min(image.naturalWidth, image.parentElement.parentElement.clientWidth);
+    image.width = width;
+    const height = width * (image.naturalHeight / image.naturalWidth);
+
+    if (height > image.parentElement.parentElement.clientHeight) {
+      image.height = image.parentElement.parentElement.clientHeight;
+    } else {
+      image.height = height;
+    }
+  }
+}
 
 /**
  * The gallery carousel component.
@@ -22,6 +42,11 @@ export default function GalleryCarousel({ imagesData, clickedImage, scrollCallba
   const [activeIndex, setActiveIndex] = useState(null);
 
   window.onresize = () => {
+    const images = document.querySelectorAll(`.${styles["image-wrapper"]} img`);
+    images.forEach(image => {
+      resizeImage(image);
+    });
+
     const imagesSequence = document.querySelector(`.${styles["images-sequence"]}`);
     if (imagesSequence) {
       imagesSequence.classList.add(styles["no-smooth-scroll"]);
@@ -52,8 +77,7 @@ export default function GalleryCarousel({ imagesData, clickedImage, scrollCallba
     let foundScrollWidth = 0;
 
     while (i < currentIndex) {
-      foundScrollWidth += images[i].parentElement.clientWidth;
-      console.log(images[i].parentElement.clientWidth);
+      foundScrollWidth += images[i].parentElement.clientWidth + GAP;
       i++;
     }
 
@@ -158,7 +182,10 @@ export default function GalleryCarousel({ imagesData, clickedImage, scrollCallba
               key={`image-wrapper-${index + 1}`}>
               <img src={item.name}
                 alt={imagesData[index].description}
-                />
+                onLoad={(event) => {
+                  resizeImage(event.target);
+                }}
+              />
             </div>
           )}
         </div>
