@@ -6,30 +6,6 @@ import { useState, useEffect } from "react";
  * @param {HTMLImageElement[]} imagesList - list of IMG tags which sizes should be changed.
  */
 
-function resizeImages(imagesList) {
-  for (const image of imagesList) {
-    const ratio = image.naturalWidth / image.naturalHeight;
-    const maxHeight = image.parentElement.clientHeight;
-    const maxWidth = innerWidth * 0.7 - 40;
-    let width = 100;
-    let height = (1 / ratio) * width;
-
-    while (true) {
-      const newWidth = width + 10;
-      const newHeight = (1 / ratio) * newWidth;
-
-      if (newWidth > maxWidth || newHeight > maxHeight) {
-        break
-      }
-
-      width = newWidth;
-      height = newHeight;
-    }
-
-    image.width = width;
-    image.height = height;
-  }
-}
 
 /**
  * The gallery carousel component.
@@ -43,12 +19,9 @@ function resizeImages(imagesList) {
  */
 
 export default function GalleryCarousel({ imagesData, clickedImage, scrollCallback }) {
-  const [activeIndex, setActiveIndex,] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(null);
 
   window.onresize = () => {
-    const images = document.querySelectorAll(`.${styles["image-wrapper"]} img`);
-    resizeImages(images);
-
     const imagesSequence = document.querySelector(`.${styles["images-sequence"]}`);
     if (imagesSequence) {
       imagesSequence.classList.add(styles["no-smooth-scroll"]);
@@ -74,11 +47,13 @@ export default function GalleryCarousel({ imagesData, clickedImage, scrollCallba
      */
 
   function findScrollWidth(currentIndex) {
+    const images = document.querySelectorAll(`.${styles["image-wrapper"]} img`);
     let i = 0;
     let foundScrollWidth = 0;
 
     while (i < currentIndex) {
-      foundScrollWidth += innerWidth * 0.7;
+      foundScrollWidth += images[i].parentElement.clientWidth;
+      console.log(images[i].parentElement.clientWidth);
       i++;
     }
 
@@ -183,36 +158,7 @@ export default function GalleryCarousel({ imagesData, clickedImage, scrollCallba
               key={`image-wrapper-${index + 1}`}>
               <img src={item.name}
                 alt={imagesData[index].description}
-                onLoad={event => {
-                  const imagesSequence = document.querySelector(`.${styles["images-sequence"]}`);
-                  if (index === imagesData.length - 1) {
-                    imagesSequence.classList.add(styles["no-smooth-scroll"]);
-                    imagesSequence.scrollTo(findScrollWidth(activeIndex), 0);
-                  }
-
-                  const image = event.target;
-
-                  const ratio = image.naturalWidth / image.naturalHeight;
-                  const maxHeight = innerHeight * 0.8 - 45;
-                  const maxWidth = innerWidth * 0.7 - 40;
-                  let width = 100;
-                  let height = (1 / ratio) * width;
-
-                  while (true) {
-                    const newWidth = width + 10;
-                    const newHeight = (1 / ratio) * newWidth;
-
-                    if (newWidth > maxWidth || newHeight > maxHeight) {
-                      break
-                    }
-
-                    width = newWidth;
-                    height = newHeight;
-                  }
-
-                  image.width = width;
-                  image.height = height;
-                }} />
+                />
             </div>
           )}
         </div>
