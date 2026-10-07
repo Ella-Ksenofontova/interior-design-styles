@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 const GAP = 5;
 
 function resizeImage(image) {
-  const MAX_WIDTH = image.parentElement.clientWidth;
-  const MAX_HEIGHT = image.parentElement.clientHeight;
+  const MAX_WIDTH = image.parentElement.parentElement.clientWidth;
+  const MAX_HEIGHT = image.parentElement.parentElement.clientHeight;
 
   let width = 100;
   let height = width * (image.naturalHeight / image.naturalWidth);
