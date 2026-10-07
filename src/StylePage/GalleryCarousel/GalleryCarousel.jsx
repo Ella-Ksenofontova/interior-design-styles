@@ -4,27 +4,25 @@ import { useState, useEffect } from "react";
 const GAP = 5;
 
 function resizeImage(image) {
-  if (image.naturalHeight > image.naturalWidth) {
-    const height = Math.min(image.naturalHeight, image.parentElement.parentElement.clientHeight);
-    image.height = height;
-    const width = height * (image.naturalWidth / image.naturalHeight);
-    
-    if (width > image.parentElement.parentElement.clientWidth) {
-      image.width = image.parentElement.parentElement.clientWidth;
-    } else {
-      image.width = width;
-    }
-  } else {
-    const width = Math.min(image.naturalWidth, image.parentElement.parentElement.clientWidth);
-    image.width = width;
-    const height = width * (image.naturalHeight / image.naturalWidth);
+  const MAX_WIDTH = image.parentElement.clientWidth;
+  const MAX_HEIGHT = image.parentElement.clientHeight;
 
-    if (height > image.parentElement.parentElement.clientHeight) {
-      image.height = image.parentElement.parentElement.clientHeight;
-    } else {
-      image.height = height;
-    }
+  let width = 100;
+  let height = width * (image.naturalHeight / image.naturalWidth);
+
+  while (true) {
+    const newWidth = width + 10;
+    const newHeight = newWidth * (image.naturalHeight / image.naturalWidth);
+
+    if (newWidth > MAX_WIDTH || newHeight > MAX_HEIGHT) break;
+
+    width = newWidth;
+    height = newHeight;
+
   }
+
+  image.width = width;
+  image.height = height;  
 }
 
 /**
