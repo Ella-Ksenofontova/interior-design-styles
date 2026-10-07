@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 const GAP = 5;
 
-function resizeImage(image) {
+function resizeImage(image, activeIndex = null) {
   const MAX_WIDTH = image.parentElement.parentElement.clientWidth;
   const MAX_HEIGHT = image.parentElement.parentElement.clientHeight;
 
@@ -21,8 +21,10 @@ function resizeImage(image) {
 
   }
 
-  image.width = width;
-  image.height = height;  
+  if (activeIndex !== null) {
+    image.width = width;
+    image.height = height;
+  }
 }
 
 /**
@@ -42,7 +44,7 @@ export default function GalleryCarousel({ imagesData, clickedImage, scrollCallba
   window.onresize = () => {
     const images = document.querySelectorAll(`.${styles["image-wrapper"]} img`);
     images.forEach(image => {
-      resizeImage(image);
+      resizeImage(image, activeIndex);
     });
 
     const imagesSequence = document.querySelector(`.${styles["images-sequence"]}`);
@@ -181,7 +183,7 @@ export default function GalleryCarousel({ imagesData, clickedImage, scrollCallba
               <img src={item.name}
                 alt={imagesData[index].description}
                 onLoad={(event) => {
-                  resizeImage(event.target);
+                  resizeImage(event.target, activeIndex);
                 }}
               />
             </div>
